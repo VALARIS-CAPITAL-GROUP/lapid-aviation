@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reference sitemap for lapidaviation.com — reflects the Phase 1 pages built in
+  this design. Regenerate dynamically once the site has a real backend; only
+  include indexable, verified pages (seo.verified = true), per the SEO brief.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.lapidaviation.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.lapidaviation.com/private-jets/</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lapidaviation.com/helicopter-charter/</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lapidaviation.com/business-aviation/</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lapidaviation.com/private-jets/cost/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lapidaviation.com/empty-leg-flights/</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lapidaviation.com/first-time-private-flyers/</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lapidaviation.com/request-charter/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lapidaviation.com/transfers/</loc><priority>0.6</priority></url>
+  <url><loc>https://www.lapidaviation.com/resorts/</loc><priority>0.6</priority></url>
+  <url><loc>https://www.lapidaviation.com/aircraft/</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lapidaviation.com/how-we-vet-operators/</loc><priority>0.6</priority></url>
+  <url><loc>https://www.lapidaviation.com/routes/london-to-geneva/</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lapidaviation.com/about/</loc><priority>0.5</priority></url>
+  <url><loc>https://www.lapidaviation.com/contact/</loc><priority>0.5</priority></url>
+  <url><loc>https://www.lapidaviation.com/terms/</loc><priority>0.2</priority></url>
+  <url><loc>https://www.lapidaviation.com/privacy/</loc><priority>0.2</priority></url>
+</urlset>

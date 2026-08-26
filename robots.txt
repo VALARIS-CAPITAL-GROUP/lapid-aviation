@@ -1,0 +1,7 @@
+# Reference robots.txt for lapidaviation.com — a developer should deploy this at the site root
+# once the design is built into a real multi-page/server-rendered site.
+
+User-agent: *
+Allow: /
+Disallow: /request-charter/thank-you
+Sitemap: https://www.lapidaviation.com/sitemap.xml
