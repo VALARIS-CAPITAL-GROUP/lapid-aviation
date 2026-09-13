@@ -6,6 +6,18 @@
   # Astro 5 needs Node 18.17+; pin to a current LTS so local and CI match.
   NODE_VERSION = "22"
 
+# Persist Astro's encoded-image cache between builds.
+#
+# Without this every deploy re-encodes all 92 AVIF/WebP variants from the
+# source JPEGs, which is roughly 3.5 minutes of the build. The cache is keyed
+# on the source file, so changing or adding a photo re-encodes only that one.
+# Safe to drop: a cold cache just means a slow build, never a wrong one.
+[[plugins]]
+  package = "netlify-plugin-cache"
+
+  [plugins.inputs]
+    paths = ["node_modules/.astro"]
+
 # Build a preview for every pull request.
 [context.deploy-preview]
   command = "npm run build"
