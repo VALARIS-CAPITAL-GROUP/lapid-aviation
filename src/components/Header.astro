@@ -1,0 +1,112 @@
+---
+import { NAV, PAGES } from '~/data/site';
+
+// Trailing-slash-insensitive compare so /private-jets and /private-jets/ both match.
+const here = '/' + Astro.url.pathname.replace(/^\/|\/$/g, '');
+const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-navy/13 bg-sand/93 backdrop-blur-[14px]"
+>
+  <!-- Contact strip -->
+  <div class="bg-navy text-[#c9cfd8]">
+    <div class="shell flex h-[34px] items-center justify-end gap-[22px] text-[11.5px]">
+      <a href="tel:+442000000000" class="transition-colors hover:text-copper-light">Call</a>
+      <a
+        href="https://wa.me/442000000000"
+        rel="noopener"
+        class="transition-colors hover:text-copper-light">WhatsApp</a
+      >
+      <a
+        href="mailto:charter@lapidaviation.com"
+        class="transition-colors hover:text-copper-light">Email</a
+      >
+    </div>
+  </div>
+
+  <!-- Main bar -->
+  <div class="shell flex h-[74px] items-center gap-[clamp(16px,3.5vw,38px)]">
+    <a href="/" class="mr-auto flex flex-col gap-[3px]" aria-label="Lapid Aviation — home">
+      <span class="font-serif text-[23px] leading-none tracking-[0.02em] text-navy">Lapid</span>
+      <span class="text-[8.5px] font-semibold tracking-[0.34em] text-copper">AVIATION</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden lg:block">
+      <ul class="flex items-center gap-[clamp(16px,3.5vw,28px)]">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                class:list={[
+                  'block border-b py-[5px] text-[13px] font-medium transition-colors',
+                  isCurrent(item.href)
+                    ? 'border-copper text-navy'
+                    : 'border-transparent text-slate hover:border-copper hover:text-navy',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a
+      href={PAGES.request.url}
+      class="hidden rounded-[2px] bg-navy px-[clamp(16px,4vw,22px)] py-[13px] text-[11.5px] font-semibold tracking-[0.13em] whitespace-nowrap text-sand uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-copper hover:shadow-[0_10px_22px_rgba(16,27,45,0.22)] sm:block"
+    >
+      Request Charter
+    </a>
+
+    <!-- Mobile menu: a disclosure, so it works with JS disabled -->
+    <details class="group lg:hidden [&[open]_.menu-open]:hidden [&[open]_.menu-close]:block">
+      <summary
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-[2px] border border-navy/15 text-navy [&::-webkit-details-marker]:hidden"
+        aria-label="Open menu"
+      >
+        <svg class="menu-open size-5" viewBox="0 0 20 20" aria-hidden="true" fill="none">
+          <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="menu-close hidden size-5" viewBox="0 0 20 20" aria-hidden="true" fill="none">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+      </summary>
+
+      <nav
+        aria-label="Primary (mobile)"
+        class="absolute inset-x-0 top-full border-b border-navy/13 bg-sand shadow-[0_18px_30px_rgba(16,27,45,0.10)]"
+      >
+        <ul class="shell divide-y divide-navy/10 py-2">
+          {
+            NAV.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  class:list={[
+                    'block py-[14px] text-[15px] font-medium',
+                    isCurrent(item.href) ? 'text-copper' : 'text-slate',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li class="pt-4 pb-3">
+            <a
+              href={PAGES.request.url}
+              class="block rounded-[2px] bg-navy px-5 py-[14px] text-center text-[11.5px] font-semibold tracking-[0.13em] text-sand uppercase"
+            >
+              Request Charter
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>

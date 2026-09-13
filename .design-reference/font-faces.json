@@ -1,0 +1,194 @@
+[
+ {
+  "uuid": "073cf542-1275-4c98-9cde-31c44cb03fb0",
+  "fam": "Archivo",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Archivo-400-073cf542.woff2"
+ },
+ {
+  "uuid": "596f1acb-3eb2-4b4a-9d9e-119908bac2a7",
+  "fam": "Archivo",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Archivo-400-596f1acb.woff2"
+ },
+ {
+  "uuid": "2206462b-5e33-4c51-922b-862e171d820d",
+  "fam": "Archivo",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Archivo-400-2206462b.woff2"
+ },
+ {
+  "uuid": "073cf542-1275-4c98-9cde-31c44cb03fb0",
+  "fam": "Archivo",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Archivo-500-073cf542.woff2"
+ },
+ {
+  "uuid": "596f1acb-3eb2-4b4a-9d9e-119908bac2a7",
+  "fam": "Archivo",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Archivo-500-596f1acb.woff2"
+ },
+ {
+  "uuid": "2206462b-5e33-4c51-922b-862e171d820d",
+  "fam": "Archivo",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Archivo-500-2206462b.woff2"
+ },
+ {
+  "uuid": "073cf542-1275-4c98-9cde-31c44cb03fb0",
+  "fam": "Archivo",
+  "w": "600",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Archivo-600-073cf542.woff2"
+ },
+ {
+  "uuid": "596f1acb-3eb2-4b4a-9d9e-119908bac2a7",
+  "fam": "Archivo",
+  "w": "600",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Archivo-600-596f1acb.woff2"
+ },
+ {
+  "uuid": "2206462b-5e33-4c51-922b-862e171d820d",
+  "fam": "Archivo",
+  "w": "600",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Archivo-600-2206462b.woff2"
+ },
+ {
+  "uuid": "5577c919-f796-4444-b965-11c8f54d1872",
+  "fam": "Spectral",
+  "w": "300",
+  "style": "normal",
+  "rng": "U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, ",
+  "file": "Spectral-300-5577c919.woff2"
+ },
+ {
+  "uuid": "e4dc4855-7a6f-4694-89ca-7e2f6807338d",
+  "fam": "Spectral",
+  "w": "300",
+  "style": "normal",
+  "rng": "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+  "file": "Spectral-300-e4dc4855.woff2"
+ },
+ {
+  "uuid": "c7964c76-8738-4bd1-bb66-fce2702ec003",
+  "fam": "Spectral",
+  "w": "300",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Spectral-300-c7964c76.woff2"
+ },
+ {
+  "uuid": "bddf0f4b-9053-47c5-84b7-7114e3e39ab7",
+  "fam": "Spectral",
+  "w": "300",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Spectral-300-bddf0f4b.woff2"
+ },
+ {
+  "uuid": "5e3fc698-6800-4e44-90d0-63228296cdda",
+  "fam": "Spectral",
+  "w": "300",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Spectral-300-5e3fc698.woff2"
+ },
+ {
+  "uuid": "e0514f51-b14b-413f-813b-b049a02ca7f2",
+  "fam": "Spectral",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, ",
+  "file": "Spectral-400-e0514f51.woff2"
+ },
+ {
+  "uuid": "79770165-6f92-4559-a169-51db22dc45ca",
+  "fam": "Spectral",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+  "file": "Spectral-400-79770165.woff2"
+ },
+ {
+  "uuid": "23244bf1-c752-45cd-91c7-06357764aca2",
+  "fam": "Spectral",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Spectral-400-23244bf1.woff2"
+ },
+ {
+  "uuid": "63af5ae9-6639-450f-8c58-b964f3139fa4",
+  "fam": "Spectral",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Spectral-400-63af5ae9.woff2"
+ },
+ {
+  "uuid": "823afc06-69d8-413c-9c2b-18ededb329c8",
+  "fam": "Spectral",
+  "w": "400",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Spectral-400-823afc06.woff2"
+ },
+ {
+  "uuid": "ca44e60f-ab29-4255-bcd7-90d4392e65ce",
+  "fam": "Spectral",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, ",
+  "file": "Spectral-500-ca44e60f.woff2"
+ },
+ {
+  "uuid": "2bab02a7-7e79-4317-9420-a164c42477df",
+  "fam": "Spectral",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+  "file": "Spectral-500-2bab02a7.woff2"
+ },
+ {
+  "uuid": "143dfccd-5559-481a-a0d2-779934f24fe6",
+  "fam": "Spectral",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-0",
+  "file": "Spectral-500-143dfccd.woff2"
+ },
+ {
+  "uuid": "78f737f6-b6dd-49e3-992d-315e30e47a2c",
+  "fam": "Spectral",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-0",
+  "file": "Spectral-500-78f737f6.woff2"
+ },
+ {
+  "uuid": "9ef427a3-8411-4725-bac5-2154f1c9d143",
+  "fam": "Spectral",
+  "w": "500",
+  "style": "normal",
+  "rng": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02D",
+  "file": "Spectral-500-9ef427a3.woff2"
+ }
+]

@@ -1,0 +1,87 @@
+
+  <div data-screen-label="Cost" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="padding:44px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#6B7483;margin-bottom:44px">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer">Home</span><span>→</span><span sc-camel-on-click="{{ go.jets }}" style="cursor:pointer">Private Jets</span><span>→</span><span style="color:#101B2D">Cost</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:24px">CHARTER COST</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:820px;text-wrap:pretty">What private jet charter costs</h1>
+        <p style="font-size:19px;line-height:1.6;color:#3A4859;max-width:640px;margin:30px 0 0">Charter is priced per flight, not per seat, and quoted for your specific routing and dates. There is no fixed rate card: the same city pair can differ substantially depending on the aircraft, the timing and where that aircraft has to come from.</p>
+      </div>
+    </section>
+
+    <section style="padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">WHAT MOVES THE NUMBER</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.4vw,42px);line-height:1.12;letter-spacing:-0.015em;margin:0 0 44px;max-width:600px">Six factors, in roughly this order</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2px">
+          <sc-for list="{{ costFactors }}" as="f" hint-placeholder-count="6">
+            <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,28px)">
+              <div style="font-family:Spectral,serif;font-size:15px;color:#9A5B33;margin-bottom:12px">{{ f.n }}</div>
+              <div style="font-family:Spectral,serif;font-size:21px;margin-bottom:10px">{{ f.name }}</div>
+              <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">{{ f.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(24px,5.1vw,56px)">
+        <div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:30px;line-height:1.15;margin:0 0 26px">Usually inside the quote</h2>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Aircraft, crew and fuel for the agreed routing</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Standard airport and handling charges at each end</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Positioning of the aircraft to your departure airport</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">In-flight catering at a standard level</div>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:30px;line-height:1.15;margin:0 0 26px">Often outside it</h2>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Ground transport at either end</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Specific catering, wines or special requests</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">De-icing, extended waiting time and overnight crew costs</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;border-bottom:1px solid rgba(16,27,45,0.12);padding-bottom:14px">Changes made after the contract is signed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:28px clamp(19px,4vw,30px);border:1px dashed rgba(154,91,51,0.55);border-radius:3px;margin-bottom:56px;max-width:760px">
+            <div style="font-size:9.5px;font-weight:600;letter-spacing:0.16em;color:#9A5B33;margin-bottom:12px">RESEARCH REQUIRED — INDICATIVE PRICE RANGES</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">A price-range table by aircraft category and sector length belongs here, and will convert well. It stays unpublished until the figures come from real quotes or verified market data.</p>
+          </div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:34px;line-height:1.15;letter-spacing:-0.015em;margin:0">Common questions</h2>
+          <div>
+            <sc-for list="{{ costFaqs }}" as="f" hint-placeholder-count="3">
+              <div sc-camel-on-click="{{ f.toggle }}" style="border-top:1px solid rgba(16,27,45,0.14);padding:24px 0;cursor:pointer">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+                  <div style="font-size:17px;font-weight:500">{{ f.q }}</div>
+                  <div style="font-size:20px;color:#9A5B33;flex-shrink:0">{{ f.sign }}</div>
+                </div>
+                <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:14px 0 0">{{ f.a }}</p>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:520px">A quote takes a route, a date and a passenger count.</h2>
+        <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Request a Charter</span>
+      </div>
+    </section>
+  </div>
+  

@@ -1,0 +1,102 @@
+
+  <div data-screen-label="Private Jets" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="padding:44px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#6B7483;margin-bottom:44px">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer">Home</span><span>→</span><span style="color:#101B2D">Private Jets</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:24px">PRIVATE JET CHARTER</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:800px;text-wrap:pretty">Private jet charter from London</h1>
+        <p style="font-size:19px;line-height:1.6;color:#3A4859;max-width:620px;margin:30px 0 0">Charter is a flight arranged for you alone: your departure time, your passengers, your airport. We source the aircraft from licensed operators and manage the arrangement end to end, from the first enquiry to the arrival transfer.</p>
+        <div style="display:flex;gap:14px;margin-top:38px;flex-wrap:wrap">
+          <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#101B2D;color:#EDE7DC;padding:15px clamp(16px,4vw,26px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:#9A5B33;transform:translateY(-2px);box-shadow:0 10px 22px rgba(16,27,45,0.22)">Request a Charter</span>
+          <span sc-camel-on-click="{{ go.cost }}" style="cursor:pointer;border:1px solid rgba(16,27,45,0.28);padding:15px clamp(16px,4vw,26px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#101B2D" style-hover="border:1px solid #9A5B33;color:#9A5B33;transform:translateY(-2px)">What it costs</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:56px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="border-radius:3px;overflow:hidden;width:100%;height:380px">
+          <image-slot id="jets-hero" shape="rect" placeholder="A light jet on stand at a London airport"></image-slot>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+        <div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:34px;line-height:1.15;letter-spacing:-0.015em;margin:0">Which aircraft, and why it matters</h2>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:20px 0 0">Category determines range, cabin size and luggage more than anything else. The right answer depends on the sector, the group and how much of the day you want back.</p>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ categories }}" as="c" hint-placeholder-count="6">
+            <div sc-camel-on-click="{{ c.toggle }}" style="padding:22px 0;border-bottom:1px solid rgba(16,27,45,0.13);cursor:pointer">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline">
+                <div>
+                  <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:7px">{{ c.name }}</div>
+                  <div style="font-size:14.5px;line-height:1.6;color:#3A4859">{{ c.use }}</div>
+                </div>
+                <div style="text-align:right;font-size:12.5px;color:#6B7483;white-space:nowrap">{{ c.spec }} &nbsp; {{ c.sign }}</div>
+              </div>
+              <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:14px;line-height:1.6;color:#9A5B33;margin:14px 0 0">{{ c.more }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+          <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:22px;padding:16px 18px;border:1px dashed rgba(154,91,51,0.55);border-radius:2px">
+              <div style="font-size:9.5px;font-weight:600;letter-spacing:0.16em;color:#9A5B33;margin-bottom:8px">RESEARCH REQUIRED</div>
+              <p style="font-size:13.5px;line-height:1.6;color:#3A4859;margin:0">Seat counts, range figures and typical baggage volumes to be populated from verified operator and manufacturer data before this page is indexed.</p>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">DEPARTURE AIRPORTS</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.4vw,42px);line-height:1.12;letter-spacing:-0.015em;margin:0 0 16px;max-width:600px">The airport choice is part of the flight</h2>
+        <p style="font-size:16px;line-height:1.65;color:#3A4859;max-width:600px;margin:0 0 40px">Where you leave from changes the ground journey, the handling and sometimes the aircraft available on the day. We weigh all three rather than defaulting to one field.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:24px">
+          <sc-for list="{{ airports }}" as="a" hint-placeholder-count="6">
+            <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(18px,4vw,24px)">
+              <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:8px">{{ a.name }}</div>
+              <div style="font-size:13.5px;line-height:1.6;color:#3A4859">{{ a.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:34px;line-height:1.15;letter-spacing:-0.015em;margin:0">Common questions</h2>
+        <div>
+          <sc-for list="{{ jetFaqs }}" as="f" hint-placeholder-count="4">
+            <div sc-camel-on-click="{{ f.toggle }}" style="border-top:1px solid rgba(16,27,45,0.14);padding:24px 0;cursor:pointer">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+                <div style="font-size:17px;font-weight:500">{{ f.q }}</div>
+                <div style="font-size:20px;color:#9A5B33;flex-shrink:0">{{ f.sign }}</div>
+              </div>
+              <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:14px 0 0">{{ f.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:520px">Tell us the route and the day.</h2>
+          <p style="font-size:15.5px;color:#A9B2BF;margin:16px 0 0;max-width:480px">We will come back with the aircraft that fit, and the ones that do not.</p>
+        </div>
+        <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Request a Charter</span>
+      </div>
+    </section>
+  </div>
+  
