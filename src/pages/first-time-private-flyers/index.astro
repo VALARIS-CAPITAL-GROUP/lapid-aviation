@@ -1,12 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { BEFORE_DAY, ON_DAY } from '~/data/content';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/cabin-work.jpg';
 
 const meta = PAGES.firsttime;
 
@@ -19,14 +20,16 @@ const questions = [
 ---
 
 <Layout meta={meta}>
-  <Breadcrumb trail={[{ name: 'First time flying private', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="A passenger working at a table in a private jet cabin"
     eyebrow="First-time flyers"
     heading="Your first private flight, made simple"
     standfirst="Most of what people expect from flying does not apply. There is no check-in hall, no gate, and very little waiting. This is what actually happens, from enquiry to arrival."
     primary={{ label: 'Speak to a broker', href: PAGES.contact.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'First time flying private', url: meta.url }]} />
 
   <Section
     surface="cream"

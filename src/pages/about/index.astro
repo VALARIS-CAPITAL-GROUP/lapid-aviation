@@ -1,10 +1,11 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/hangar.jpg';
 
 const meta = PAGES.about;
 
@@ -33,13 +34,15 @@ const principles = [
 ---
 
 <Layout meta={meta}>
-  <Breadcrumb trail={[{ name: 'About', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="Private jets inside a hangar"
     eyebrow="About Lapid Aviation"
     heading="An independent broker, not an operator"
     standfirst="Lapid Aviation arranges private jet and helicopter charter from London through appropriately licensed third-party operators. We own no aircraft, so there is no fleet steering the advice you get — only the route, the group and the day."
   />
+
+  <Breadcrumb trail={[{ name: 'About', url: meta.url }]} />
 
   <Section surface="cream" eyebrow="The team" heading="Who you will be speaking to">
     <ul class="grid gap-6 sm:grid-cols-3">

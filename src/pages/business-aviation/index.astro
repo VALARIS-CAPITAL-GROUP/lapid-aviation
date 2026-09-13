@@ -1,13 +1,14 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import DisclosureList from '~/components/DisclosureList.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { SECTORS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { serviceSchema } from '~/lib/schema';
+import heroImage from '~/assets/business-hero.jpg';
 
 const meta = PAGES.business;
 
@@ -57,14 +58,16 @@ const schema = [
 ---
 
 <Layout meta={meta} schema={schema}>
-  <Breadcrumb trail={[{ name: 'Business aviation', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="Two business travellers meeting in a private jet cabin"
     eyebrow="Business aviation"
     heading="Three meetings. Three cities. One working day."
     standfirst="Corporate charter is a scheduling instrument. It puts the aircraft where your business needs to be, on the day it needs to be there, and gives you back the hours that connections and overnight stays take away."
     primary={{ label: 'Discuss business travel', href: PAGES.contact.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'Business aviation', url: meta.url }]} />
 
   <Section surface="cream" heading="Where the time comes back">
     <ul class="grid gap-x-10 gap-y-9 lg:grid-cols-3">

@@ -1,16 +1,21 @@
 ---
-import { Picture } from 'astro:assets';
 import Layout from '~/layouts/Layout.astro';
+import Hero from '~/components/Hero.astro';
+import Split from '~/components/Split.astro';
 import Section from '~/components/Section.astro';
 import QuoteBar from '~/components/QuoteBar.astro';
+import CtaBand from '~/components/CtaBand.astro';
 import { AIRPORTS, JOURNEY, ROUTES } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { serviceSchema } from '~/lib/schema';
-import heroImage from '~/assets/home-hero.png';
+import homeHero from '~/assets/home-hero.jpg';
+import cabinWork from '~/assets/cabin-work.jpg';
+import hangar from '~/assets/hangar.jpg';
+import londonHero from '~/assets/london-hero.jpg';
+import jetsHero from '~/assets/jets-hero.jpg';
 
 const meta = PAGES.home;
 
-// "Three ways to charter" — the honest-comparison section.
 const alternatives = [
   {
     kicker: 'Book direct with an operator',
@@ -27,25 +32,6 @@ const alternatives = [
     title: 'A broker with no fleet to defend',
     body: 'We hold no aircraft, so we have no reason to steer you. We search the market for your specific flight, present the options with their drawbacks stated, and stay on the line when the plan changes.',
     highlight: true,
-  },
-];
-
-const differentiators = [
-  {
-    title: 'You speak to the person doing the work',
-    body: 'Not a switchboard, not a shared inbox. The broker who quoted your flight is the one who answers on the morning of departure.',
-  },
-  {
-    title: 'Options, not a single price',
-    body: 'You see the shortlist with what each aircraft and airport costs you in time, money and comfort, so the decision is yours on the facts.',
-  },
-  {
-    title: 'Built around your day',
-    body: 'The departure time, the airport, the aircraft — all chosen to fit your schedule, not the other way round.',
-  },
-  {
-    title: 'Every operator checked first',
-    body: 'Flights are operated by appropriately licensed third-party operators, reviewed before an option reaches you rather than after.',
   },
 ];
 
@@ -72,33 +58,28 @@ const standard = [
 const services = [
   {
     title: 'Private jet charter',
-    body: 'Point-to-point flights from the London airports, sized to the group and the distance — from short European hops to ultra-long-range sectors.',
+    body: 'Point-to-point flights from the London airports, sized to the group and the distance.',
     href: PAGES.jets.url,
-    cta: 'Private jets',
   },
   {
     title: 'Helicopter charter',
     body: 'Transfers, events and estate arrivals in and around London, including connections onto a waiting jet.',
     href: PAGES.helicopter.url,
-    cta: 'Helicopters',
   },
   {
     title: 'Business aviation',
-    body: 'Recurring corporate travel, multi-city itineraries and roadshows, handled as a standing arrangement rather than one-off bookings.',
+    body: 'Recurring corporate travel, multi-city itineraries and roadshows, as a standing arrangement.',
     href: PAGES.business.url,
-    cta: 'Business aviation',
   },
   {
     title: 'Airport transfers',
-    body: 'Chauffeur cars timed to your flight, at either end of the journey, arranged through licensed partners.',
+    body: 'Chauffeur cars timed to your flight, at either end of the journey, through licensed partners.',
     href: PAGES.transfers.url,
-    cta: 'Transfers',
   },
   {
     title: 'Resorts, villas & hotels',
-    body: "Introductions to where you're staying, for the trip either side of the flight, through trusted destination partners.",
+    body: "Introductions to where you're staying, for the trip either side of the flight.",
     href: PAGES.resorts.url,
-    cta: 'Resorts & villas',
   },
 ];
 
@@ -123,8 +104,6 @@ const journal = [
   },
 ];
 
-// Only Geneva has a full route page in this phase; the rest route to the
-// jets page rather than to a 404.
 const routeHref = (route: (typeof ROUTES)[number]) =>
   route.key === 'geneva' ? PAGES.routeGeneva.url : PAGES.jets.url;
 
@@ -138,56 +117,59 @@ const schema = [
 ---
 
 <Layout meta={meta} schema={schema}>
-  <!-- Hero -->
-  <section class="pt-[clamp(40px,6vw,76px)]">
+  <Hero
+    image={homeHero}
+    alt="A line of private jets on the apron at dusk"
+    eyebrow="London private aviation"
+    heading="Your schedule should belong to you."
+    standfirst="Lapid Aviation arranges private jet and helicopter charter from London. One broker, the right aircraft for the route, and a departure that fits the day you actually need to fly."
+    size="full"
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    secondary={{ label: 'What charter costs', href: PAGES.cost.url }}
+  />
+
+  <!-- Enquiry opener, lifted over the hero edge -->
+  <section class="relative z-10 -mt-10 lg:-mt-14">
     <div class="shell">
-      <div class="grid items-center gap-[clamp(32px,5vw,64px)] lg:grid-cols-[1.05fr_1fr]">
-        <div>
-          <p class="eyebrow">London private aviation</p>
-          <h1 class="mt-6 text-display">Your schedule should belong to you.</h1>
-          <p class="mt-7 max-w-measure text-[19px] leading-[1.6] text-muted">
-            Lapid Aviation arranges private jet and helicopter charter from London. One broker,
-            the right aircraft for the route, and a departure that fits the day you actually
-            need to fly.
-          </p>
-        </div>
-        <Picture
-          src={heroImage}
-          alt="A private jet on the tarmac at a London airport at dusk"
-          widths={[480, 760, 1100]}
-          sizes="(min-width: 1024px) 46vw, 100vw"
-          formats={['avif']}
-          fallbackFormat="webp"
-          loading="eager"
-          fetchpriority="high"
-          class="aspect-3/2 w-full rounded-[3px] object-cover"
-        />
+      <div class="shadow-[0_24px_60px_rgba(16,27,45,0.18)]">
+        <QuoteBar />
       </div>
     </div>
   </section>
 
-  <!-- Enquiry opener -->
-  <section class="pt-[clamp(36px,5vw,52px)]">
-    <div class="shell">
-      <QuoteBar />
-    </div>
-  </section>
-
-  <!-- Why Lapid -->
-  <Section
+  <Split
+    image={cabinWork}
+    alt="Two passengers working at a table in a private jet cabin"
     eyebrow="Why Lapid"
     heading="There are three ways to charter a jet. Only one of them works for you."
-    standfirst="We would rather explain the trade-offs than pretend they do not exist. Here is what the alternatives get right, and where they leave you."
+    surface="sand"
+    flip
   >
+    <p>
+      We would rather explain the trade-offs than pretend they do not exist. We hold no aircraft,
+      so we have no reason to steer you toward one.
+    </p>
+    <p>
+      You see the shortlist with what each aircraft and airport costs you in time, money and
+      comfort — and the broker who quoted your flight is the one who answers on the morning of
+      departure.
+    </p>
+    <a
+      href={PAGES.about.url}
+      class="inline-block border-b border-copper/40 pb-px text-[13.5px] font-medium text-copper transition-colors hover:border-copper hover:text-navy"
+    >
+      How we work &rarr;
+    </a>
+  </Split>
+
+  <Section surface="cream" heading="The alternatives, honestly">
     <ul class="grid gap-5 lg:grid-cols-3">
       {
         alternatives.map((item) => (
           <li
             class:list={[
-              'rounded-[3px] border p-[clamp(22px,2.6vw,30px)]',
-              item.highlight
-                ? 'border-copper/40 bg-cream'
-                : 'border-navy/12 bg-transparent',
+              'rounded-[3px] border p-[clamp(22px,2.6vw,32px)]',
+              item.highlight ? 'border-copper/45 bg-white' : 'border-navy/12',
             ]}
           >
             <p class:list={['eyebrow', !item.highlight && '!text-faint']}>{item.kicker}</p>
@@ -197,71 +179,156 @@ const schema = [
         ))
       }
     </ul>
+  </Section>
 
-    <ul class="mt-5 grid gap-x-10 gap-y-8 border-t border-line pt-10 sm:grid-cols-2">
+  <!-- The seven stages, over the hangar frame -->
+  <section class="relative isolate overflow-hidden bg-navy">
+    <img
+      src={hangar.src}
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 -z-20 size-full object-cover opacity-25"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="shell py-[clamp(56px,8vw,112px)]">
+      <p class="eyebrow !text-copper-light">From this page to the aircraft</p>
+      <h2 class="mt-4 max-w-[24ch] text-heading !text-sand">
+        Seven stages. You're involved in three.
+      </h2>
+      <p class="mt-5 max-w-[56ch] text-[16px] leading-[1.65] text-[#a9b2bf]">
+        Charter goes wrong in the gaps between people. This is the whole sequence, and who is
+        holding it at each point.
+      </p>
+
+      <ol class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          JOURNEY.map((step) => {
+            const yours = step.who === 'YOU' || step.who === 'YOU DECIDE';
+            return (
+              <li
+                class:list={[
+                  'border-t pt-5',
+                  yours ? 'border-copper-light/70' : 'border-white/18',
+                ]}
+              >
+                <div class="flex items-baseline justify-between gap-3">
+                  <span class="font-serif text-[15px] tabular-nums" style={`color:${step.colour}`}>
+                    {step.n}
+                  </span>
+                  <span
+                    class:list={[
+                      'text-[9px] font-semibold tracking-[0.16em] uppercase',
+                      yours ? 'text-copper-light' : 'text-faint',
+                    ]}
+                  >
+                    {yours ? 'Your move' : 'We handle it'}
+                  </span>
+                </div>
+                <h3 class="mt-3 font-serif text-[19px] leading-[1.3] !text-sand">{step.title}</h3>
+                <p class="mt-2 text-[13.5px] leading-[1.6] text-[#a9b2bf]">{step.body}</p>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </div>
+  </section>
+
+  <Section eyebrow="What we arrange" heading="Five ways we take care of the journey.">
+    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-3">
       {
-        differentiators.map((item) => (
-          <li>
-            <h3 class="font-serif text-[20px] leading-[1.3]">{item.title}</h3>
-            <p class="mt-2 max-w-measure text-[14.5px] leading-[1.65] text-muted">{item.body}</p>
+        services.map((service) => (
+          <li class="bg-sand">
+            <a
+              href={service.href}
+              class="group flex h-full flex-col p-[clamp(22px,2.6vw,32px)] transition-colors hover:bg-cream"
+            >
+              <h3 class="font-serif text-[21px] leading-[1.25]">{service.title}</h3>
+              <p class="mt-3 flex-1 text-[14.5px] leading-[1.65] text-muted">{service.body}</p>
+              <span class="mt-6 text-[12px] font-semibold tracking-[0.13em] text-copper uppercase">
+                Explore
+                <span
+                  class="inline-block transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  &nbsp;&rarr;
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+      <!--
+        Sixth tile. The hairline grid uses gap-px over a `bg-line` container,
+        so five services in a three-column grid left the empty cell rendering
+        as a solid rule-coloured block. This fills it and adds a CTA.
+      -->
+      <li class="bg-cream">
+        <a
+          href={PAGES.request.url}
+          class="group flex h-full flex-col justify-between p-[clamp(22px,2.6vw,32px)] transition-colors hover:bg-white"
+        >
+          <h3 class="font-serif text-[21px] leading-[1.25]">
+            Not sure which fits? Tell us the trip.
+          </h3>
+          <span class="mt-6 text-[12px] font-semibold tracking-[0.13em] text-copper uppercase">
+            Request a charter
+            <span
+              class="inline-block transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              &nbsp;&rarr;
+            </span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </Section>
+
+  <Split
+    image={londonHero}
+    alt="The London skyline and the River Thames"
+    eyebrow="Departure points"
+    heading="Six ways out of the city."
+    surface="cream"
+  >
+    <p>
+      Where you leave from changes the ground journey, the handling and sometimes the aircraft
+      available on the day. We weigh all three rather than defaulting to one field.
+    </p>
+    <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-[14.5px] text-navy">
+      {AIRPORTS.map((airport) => <li>{airport.name}</li>)}
+    </ul>
+    <a
+      href={PAGES.airportsHub.url}
+      class="inline-block border-b border-copper/40 pb-px text-[13.5px] font-medium text-copper transition-colors hover:border-copper hover:text-navy"
+    >
+      All airports &rarr;
+    </a>
+  </Split>
+
+  <Section eyebrow="Routes" heading="Where we fly most.">
+    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {
+        ROUTES.map((route) => (
+          <li class="bg-sand">
+            <a
+              href={routeHref(route)}
+              class="group block h-full p-6 transition-colors hover:bg-cream"
+            >
+              <p class="eyebrow !text-faint">{route.cat}</p>
+              <h3 class="mt-3 font-serif text-[20px]">London &rarr; {route.to}</h3>
+              <p class="mt-2 text-[13px] text-copper">{route.aircraft}</p>
+              <p class="mt-3 text-[13.5px] leading-[1.6] text-muted">{route.note}</p>
+            </a>
           </li>
         ))
       }
     </ul>
   </Section>
 
-  <!-- The journey -->
-  <Section
-    surface="navy"
-    eyebrow="From this page to the aircraft"
-    heading="Seven stages. You're involved in three."
-    standfirst="Charter goes wrong in the gaps between people. This is the whole sequence, and who is holding it at each point."
-  >
-    <ol class="border-t border-white/12">
-      {
-        JOURNEY.map((step) => {
-          const yours = step.who === 'YOU' || step.who === 'YOU DECIDE';
-          return (
-            <li class="border-b border-white/12">
-              <details class="group">
-                <summary
-                  class="grid cursor-pointer list-none grid-cols-[auto_1fr_auto] items-start gap-x-5 gap-y-2 py-6 [&::-webkit-details-marker]:hidden sm:grid-cols-[auto_1fr_auto_auto]"
-                >
-                  <span
-                    class="font-serif text-[15px] tabular-nums"
-                    style={`color:${step.colour}`}
-                    aria-hidden="true"
-                  >
-                    {step.n}
-                  </span>
-                  <span class="font-serif text-[20px] leading-[1.3] text-sand">{step.title}</span>
-                  <span
-                    class:list={[
-                      'hidden text-[9.5px] font-semibold tracking-[0.16em] uppercase sm:block',
-                      yours ? 'text-copper-light' : 'text-faint',
-                    ]}
-                  >
-                    {yours ? 'Your move' : 'We handle it'}
-                  </span>
-                  <span
-                    class="shrink-0 text-[18px] leading-none text-copper-light transition-transform duration-200 group-open:rotate-45"
-                    aria-hidden="true">+</span
-                  >
-                </summary>
-                <div class="col-start-2 max-w-measure pb-7 sm:pl-10">
-                  <p class="text-[15px] leading-[1.68] text-[#a9b2bf]">{step.body}</p>
-                  <p class="mt-3 text-[14px] leading-[1.65] text-faint">{step.more}</p>
-                </div>
-              </details>
-            </li>
-          );
-        })
-      }
-    </ol>
-  </Section>
-
-  <!-- The Lapid standard -->
-  <Section surface="cream" eyebrow="The Lapid standard" heading="What every enquiry is built on">
+  <Section surface="cream" heading="What every enquiry is built on" eyebrow="The Lapid standard">
     <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
       {
         standard.map((item) => (
@@ -282,85 +349,7 @@ const schema = [
     </ul>
   </Section>
 
-  <!-- What we arrange -->
-  <!-- The design's heading said "Four ways" above five cards; corrected to five. -->
-  <Section eyebrow="What we arrange" heading="Five ways we take care of the journey.">
-    <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        services.map((service) => (
-          <li>
-            <a
-              href={service.href}
-              class="group flex h-full flex-col rounded-[3px] border border-navy/12 p-[clamp(22px,2.6vw,30px)] transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[3px] hover:border-copper/40 hover:bg-cream hover:shadow-[0_14px_28px_rgba(16,27,45,0.08)]"
-            >
-              <h3 class="font-serif text-[22px] leading-[1.25]">{service.title}</h3>
-              <p class="mt-3 flex-1 text-[14.5px] leading-[1.65] text-muted">{service.body}</p>
-              <span class="mt-5 text-[13px] font-medium text-copper">
-                {service.cta}
-                <span
-                  class="inline-block transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                >
-                  &nbsp;&rarr;
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <!-- Departure points -->
-  <Section eyebrow="Departure points" heading="Six ways out of the city." surface="cream">
-    <ul class="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        AIRPORTS.map((airport) => (
-          <li class="border-t border-navy/15 pt-5">
-            <h3 class="font-serif text-[20px]">{airport.name}</h3>
-            <p class="mt-2 text-[14.5px] leading-[1.65] text-muted">{airport.note}</p>
-          </li>
-        ))
-      }
-    </ul>
-    <a
-      href={PAGES.airportsHub.url}
-      class="mt-10 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
-    >
-      All airports &rarr;
-    </a>
-  </Section>
-
-  <!-- Routes -->
   <Section
-    eyebrow="Routes"
-    heading="Where we fly most."
-    standfirst="Distances and flight times are published only once verified against operator data."
-  >
-    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        ROUTES.map((route) => (
-          <li>
-            <a
-              href={routeHref(route)}
-              class="group block h-full rounded-[3px] border border-navy/12 p-6 transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[3px] hover:border-copper/40 hover:bg-cream"
-            >
-              <p class="eyebrow !text-faint">{route.cat}</p>
-              <h3 class="mt-3 font-serif text-[21px]">
-                London &rarr; {route.to}
-              </h3>
-              <p class="mt-2 text-[13.5px] text-muted">{route.aircraft}</p>
-              <p class="mt-3 text-[13.5px] leading-[1.6] text-muted">{route.note}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <!-- Journal -->
-  <Section
-    surface="cream"
     eyebrow="Journal"
     heading="Straight answers to the questions people actually ask before their first charter."
   >
@@ -370,7 +359,7 @@ const schema = [
           <li>
             <a
               href={entry.href}
-              class="group flex h-full flex-col rounded-[3px] border border-navy/12 bg-sand p-[clamp(22px,2.6vw,30px)] transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[3px] hover:border-copper/40"
+              class="group flex h-full flex-col border-t-2 border-navy/15 pt-6 transition-colors hover:border-copper"
             >
               <p class="eyebrow">{entry.kicker}</p>
               <h3 class="mt-4 font-serif text-[21px] leading-[1.28]">{entry.title}</h3>
@@ -383,23 +372,10 @@ const schema = [
     </ul>
   </Section>
 
-  <!-- Closing CTA -->
-  <Section narrow={false}>
-    <div
-      class="rounded-[3px] bg-navy px-[clamp(24px,4vw,56px)] py-[clamp(36px,5vw,64px)] text-center"
-    >
-      <h2 class="mx-auto max-w-[620px] text-heading !text-sand">
-        Tell us the route and the day.
-      </h2>
-      <p class="mx-auto mt-5 max-w-[520px] text-[15.5px] leading-[1.65] text-[#a9b2bf]">
-        No commitment. We reply with options, not a hard sell.
-      </p>
-      <a
-        href={PAGES.request.url}
-        class="mt-8 inline-block rounded-[2px] bg-copper px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-copper-light hover:shadow-[0_10px_22px_rgba(0,0,0,0.3)]"
-      >
-        Request a charter
-      </a>
-    </div>
-  </Section>
+  <CtaBand
+    image={jetsHero}
+    alt="Private jets parked on an open apron"
+    heading="Tell us the route and the day."
+    body="No commitment. We reply with options, not a hard sell."
+  />
 </Layout>

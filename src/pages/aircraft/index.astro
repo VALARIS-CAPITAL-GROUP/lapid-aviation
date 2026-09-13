@@ -1,13 +1,14 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import DisclosureList from '~/components/DisclosureList.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { CATEGORIES } from '~/data/content';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/jets-apron.jpg';
 
 const meta = PAGES.aircraft;
 
@@ -20,13 +21,15 @@ const categories = CATEGORIES.map((category) => ({
 ---
 
 <Layout meta={meta}>
-  <Breadcrumb trail={[{ name: 'Aircraft', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="Private jets of several categories on the apron"
     eyebrow="Aircraft categories"
     heading="Every category we can source"
     standfirst="We don't own any of these — each is sourced from a licensed operator for the specific flight. The right category depends on the sector, the group and the luggage, not just the destination."
   />
+
+  <Breadcrumb trail={[{ name: 'Aircraft', url: meta.url }]} />
 
   <Section surface="cream" heading="Jet categories">
     <DisclosureList items={categories} />

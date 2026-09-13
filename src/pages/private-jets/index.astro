@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import DisclosureList from '~/components/DisclosureList.astro';
 import Faq from '~/components/Faq.astro';
@@ -10,6 +10,7 @@ import ResearchNote from '~/components/ResearchNote.astro';
 import { AIRPORTS, CATEGORIES, JET_FAQS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
+import heroImage from '~/assets/jets-hero.jpg';
 
 const meta = PAGES.jets;
 
@@ -31,15 +32,17 @@ const schema = [
 ---
 
 <Layout meta={meta} schema={schema}>
-  <Breadcrumb trail={[{ name: 'Private jets', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="A row of private jets parked on an open apron"
     eyebrow="Private jet charter"
     heading="Private jet charter from London"
     standfirst="Charter is a flight arranged for you alone: your departure time, your passengers, your airport. We source the aircraft from licensed operators and manage the arrangement end to end, from the first enquiry to the arrival transfer."
     primary={{ label: 'Request a charter', href: PAGES.request.url }}
     secondary={{ label: 'What it costs', href: PAGES.cost.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'Private jets', url: meta.url }]} />
 
   <Section
     surface="cream"

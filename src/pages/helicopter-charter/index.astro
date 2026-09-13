@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
@@ -9,6 +9,7 @@ import ResearchNote from '~/components/ResearchNote.astro';
 import { HELI_FAQS, HELI_USES } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
+import heroImage from '~/assets/heli-hero.jpg';
 
 const meta = PAGES.helicopter;
 
@@ -38,14 +39,16 @@ const schema = [
 ---
 
 <Layout meta={meta} schema={schema}>
-  <Breadcrumb trail={[{ name: 'Helicopter charter', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="A helicopter and a private jet in a hangar at sunset"
     eyebrow="Helicopter charter"
     heading="Helicopter charter in and around London"
     standfirst="A helicopter solves the part of the journey a jet cannot: the ground. Short sectors, private landing sites and connections onto a waiting aircraft, arranged through licensed operators."
     primary={{ label: 'Request a helicopter', href: PAGES.request.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'Helicopter charter', url: meta.url }]} />
 
   <Section surface="cream" heading="What a helicopter is for">
     <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">

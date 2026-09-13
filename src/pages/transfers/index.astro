@@ -1,12 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { PAGES } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
+import heroImage from '~/assets/transfers-hero.jpg';
 
 const meta = PAGES.transfers;
 
@@ -43,15 +44,17 @@ const schema = [
 ---
 
 <Layout meta={meta} schema={schema}>
-  <Breadcrumb trail={[{ name: 'Transfers & access', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="A chauffeur holding open the door of an executive car"
     eyebrow="Airport transfers"
     heading="Chauffeur transfers, to and from the aircraft"
     standfirst="A car booked to meet the aircraft, or to take you to it, timed against your actual flight rather than a fixed slot. Arranged through licensed chauffeur partners — we do not own the vehicles."
     primary={{ label: 'Request a charter', href: PAGES.request.url }}
     secondary={{ label: 'Looking for accommodation instead? See resorts, villas & hotels', href: PAGES.resorts.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'Transfers & access', url: meta.url }]} />
 
   <Section surface="cream" heading="How the timing works">
     <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">

@@ -1,11 +1,12 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { LONDON_AREAS } from '~/data/content';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/london-hero.jpg';
 
 const meta = PAGES.londonHub;
 
@@ -14,13 +15,15 @@ const areaHref = (name: string) => (name === 'Mayfair' ? PAGES.mayfair.url : nul
 ---
 
 <Layout meta={meta} noindex>
-  <Breadcrumb trail={[{ name: 'London', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="An aerial view of London and the River Thames"
     eyebrow="London private aviation"
     heading="Private jet charter, by area"
     standfirst="Where you're based shapes which airport and ground transfer makes sense. Full detail is published once verified — Mayfair is live now."
   />
+
+  <Breadcrumb trail={[{ name: 'London', url: meta.url }]} />
 
   <Section surface="cream" heading="Areas we cover">
     <ul class="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
