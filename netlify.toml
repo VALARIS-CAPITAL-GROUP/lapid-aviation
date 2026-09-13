@@ -1,0 +1,36 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 5 needs Node 18.17+; pin to a current LTS so local and CI match.
+  NODE_VERSION = "22"
+
+# Build a preview for every pull request.
+[context.deploy-preview]
+  command = "npm run build"
+
+# Long-cache the hashed build assets (fonts, images, CSS). Filenames change
+# when contents change, so these are safe to cache indefinitely.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML must revalidate, or content edits won't show up.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
