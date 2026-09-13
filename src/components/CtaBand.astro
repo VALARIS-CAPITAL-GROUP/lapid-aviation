@@ -1,0 +1,39 @@
+---
+import { PAGES } from '~/data/site';
+
+/** The closing call-to-action band that ends most pages. */
+interface Props {
+  heading: string;
+  body?: string;
+  cta?: { label: string; href: string };
+}
+
+const {
+  heading,
+  body,
+  cta = { label: 'Request a charter', href: PAGES.request.url },
+}: Props = Astro.props;
+---
+
+<section class="py-[clamp(52px,7vw,96px)]">
+  <div class="shell">
+    <div
+      class="rounded-[3px] bg-navy px-[clamp(24px,4vw,56px)] py-[clamp(36px,5vw,64px)] text-center"
+    >
+      <h2 class="mx-auto max-w-[620px] text-heading !text-sand">{heading}</h2>
+      {
+        body && (
+          <p class="mx-auto mt-5 max-w-[520px] text-[15.5px] leading-[1.65] text-[#a9b2bf]">
+            {body}
+          </p>
+        )
+      }
+      <a
+        href={cta.href}
+        class="mt-8 inline-block rounded-[2px] bg-copper px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-copper-light hover:shadow-[0_10px_22px_rgba(0,0,0,0.3)]"
+      >
+        {cta.label}
+      </a>
+    </div>
+  </div>
+</section>

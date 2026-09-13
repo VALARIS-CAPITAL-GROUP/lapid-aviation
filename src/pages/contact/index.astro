@@ -1,0 +1,59 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ResearchNote from '~/components/ResearchNote.astro';
+import { PAGES } from '~/data/site';
+
+const meta = PAGES.contact;
+
+// Deliberately not invented. The design carried "to be confirmed" against all
+// three, flagged as RESEARCH · CONTACT DETAIL. Fill these in and the header
+// strip and footer can point at them directly.
+const channels = [
+  { label: 'Phone', value: 'Number to be confirmed', href: null },
+  { label: 'WhatsApp', value: 'Number to be confirmed', href: null },
+  { label: 'Email', value: 'Address to be confirmed', href: null },
+];
+---
+
+<Layout meta={meta}>
+  <Breadcrumb trail={[{ name: 'Contact', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="Contact"
+    heading="Speak to a broker"
+    standfirst="Call, message or send a written enquiry. For an urgent departure, calling is faster than the form."
+  />
+
+  <section class="pb-[clamp(52px,7vw,84px)]">
+    <div class="shell">
+      <ul class="grid gap-6 sm:grid-cols-3">
+        {
+          channels.map((channel) => (
+            <li class="rounded-[3px] border border-navy/12 p-7">
+              <p class="eyebrow">{channel.label}</p>
+              {channel.href ? (
+                <a
+                  href={channel.href}
+                  class="mt-4 block font-serif text-[21px] text-copper transition-colors hover:text-navy"
+                >
+                  {channel.value}
+                </a>
+              ) : (
+                <p class="mt-4 font-serif text-[21px] text-faint">{channel.value}</p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+      <ResearchNote>
+        Phone, WhatsApp and email all still read "to be confirmed" in the approved design. Supply
+        the real details and wire them here, in the header contact strip, and in the footer.
+      </ResearchNote>
+    </div>
+  </section>
+
+  <CtaBand heading="Or start with the route and the day." />
+</Layout>

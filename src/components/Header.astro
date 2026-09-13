@@ -12,16 +12,11 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
   <!-- Contact strip -->
   <div class="bg-navy text-[#c9cfd8]">
     <div class="shell flex h-[34px] items-center justify-end gap-[22px] text-[11.5px]">
-      <a href="tel:+442000000000" class="transition-colors hover:text-copper-light">Call</a>
-      <a
-        href="https://wa.me/442000000000"
-        rel="noopener"
-        class="transition-colors hover:text-copper-light">WhatsApp</a
-      >
-      <a
-        href="mailto:charter@lapidaviation.com"
-        class="transition-colors hover:text-copper-light">Email</a
-      >
+      <!-- Real phone/WhatsApp/email are still "to be confirmed" in the design,
+           so these point at the contact page rather than to invented details. -->
+      <a href="/contact/" class="transition-colors hover:text-copper-light">Call</a>
+      <a href="/contact/" class="transition-colors hover:text-copper-light">WhatsApp</a>
+      <a href="/contact/" class="transition-colors hover:text-copper-light">Email</a>
     </div>
   </div>
 

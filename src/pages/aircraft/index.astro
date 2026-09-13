@@ -1,0 +1,52 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import DisclosureList from '~/components/DisclosureList.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ResearchNote from '~/components/ResearchNote.astro';
+import { CATEGORIES } from '~/data/content';
+import { PAGES } from '~/data/site';
+
+const meta = PAGES.aircraft;
+
+const categories = CATEGORIES.map((category) => ({
+  name: category.name,
+  line: category.use,
+  more: category.more,
+  tag: category.spec,
+}));
+---
+
+<Layout meta={meta}>
+  <Breadcrumb trail={[{ name: 'Aircraft', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="Aircraft categories"
+    heading="Every category we can source"
+    standfirst="We don't own any of these — each is sourced from a licensed operator for the specific flight. The right category depends on the sector, the group and the luggage, not just the destination."
+  />
+
+  <Section surface="cream" heading="Jet categories">
+    <DisclosureList items={categories} />
+    <ResearchNote>
+      Individual aircraft pages (Citation, Gulfstream, Global, Phenom and others) will be added
+      once specifications are verified against operator and manufacturer data.
+    </ResearchNote>
+  </Section>
+
+  <Section heading="Helicopters">
+    <p class="max-w-measure text-[16px] leading-[1.7] text-slate">
+      Short sectors, private landing sites and connections onto a waiting jet.
+    </p>
+    <a
+      href={PAGES.helicopter.url}
+      class="mt-6 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+    >
+      See helicopter charter &rarr;
+    </a>
+  </Section>
+
+  <CtaBand heading="Not sure which category fits? Tell us the trip." />
+</Layout>

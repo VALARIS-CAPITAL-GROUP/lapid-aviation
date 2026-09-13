@@ -9,6 +9,19 @@ export default defineConfig({
   build: { format: 'directory' },
   integrations: [
     sitemap({
+      // Pages marked `noindex` are excluded, so the sitemap and the robots
+      // meta tag never disagree. These are the four location pages whose
+      // facts are still unverified, plus the two legal pages awaiting review
+      // — exactly the set the design's reference sitemap left out.
+      filter: (page) =>
+        ![
+          '/airports/',
+          '/airports/farnborough-airport/',
+          '/london/',
+          '/london/mayfair-private-jet-charter/',
+          '/terms/',
+          '/privacy/',
+        ].includes(new URL(page).pathname),
       // Mirrors the priorities in the hand-written reference sitemap.
       serialize(item) {
         const path = new URL(item.url).pathname;

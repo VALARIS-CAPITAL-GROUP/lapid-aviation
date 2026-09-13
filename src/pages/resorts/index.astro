@@ -1,0 +1,50 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { PAGES } from '~/data/site';
+import { faqSchema } from '~/lib/schema';
+
+const meta = PAGES.resorts;
+
+const faqs = [
+  {
+    q: 'Do you book the property directly?',
+    a: 'We make the introduction; the booking and its terms sit between you and the property or its agent.',
+  },
+  {
+    q: 'Can this be arranged alongside the flight?',
+    a: 'Yes — tell us both when you enquire and we coordinate timing between the two.',
+  },
+];
+
+const schema = [faqSchema(faqs)];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Breadcrumb trail={[{ name: 'Resorts, villas & hotels', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="Exclusive access"
+    heading="Introductions to resorts, villas and hotels"
+    standfirst="For the stay either side of the flight, we can introduce you to villas, chalets and hotels at the destinations we fly to most. We pass the request to a trusted partner and stay involved until it is confirmed. We do not own or operate any property."
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    secondary={{ label: 'Need a car at either end instead? See airport transfers', href: PAGES.transfers.url }}
+  />
+
+  <Section surface="cream" heading="What we do, and what we do not">
+    <p class="max-w-[760px] text-[16px] leading-[1.7] text-slate">
+      Availability, pricing and terms are set by the property or its agent, not by Lapid Aviation.
+      We make the introduction and stay reachable if anything needs coordinating with your flight.
+    </p>
+  </Section>
+
+  <Section heading="Common questions">
+    <Faq items={faqs} />
+  </Section>
+
+  <CtaBand heading="Tell us the flight, and where you'd like to stay." />
+</Layout>

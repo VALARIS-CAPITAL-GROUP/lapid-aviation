@@ -1,0 +1,109 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ResearchNote from '~/components/ResearchNote.astro';
+import { PAGES } from '~/data/site';
+import { faqSchema } from '~/lib/schema';
+
+const meta = PAGES.farnborough;
+
+const reasons = [
+  {
+    title: 'Why travellers use it',
+    body: 'A dedicated business aviation terminal means no scheduled passenger traffic to queue behind, and handling built around private flights rather than accommodating them.',
+  },
+  {
+    title: 'Business travel',
+    body: 'The most requested departure point for corporate flights, given its proximity to west London and the M3 corridor.',
+  },
+  {
+    title: 'Leisure travel',
+    body: 'A straightforward, low-fuss start to a European or long-haul leisure trip, without the scale of a commercial airport.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is Farnborough only for business jets?',
+    a: "No — it's used for leisure charter too. It simply doesn't handle scheduled airline traffic, so it suits any private flight regardless of purpose.",
+  },
+  {
+    q: 'How does it compare to Biggin Hill?',
+    a: 'Both are dedicated private aviation airports; the better choice usually comes down to which side of London you are travelling to or from. We confirm the better option for your specific trip.',
+  },
+];
+
+const schema = [faqSchema(faqs)];
+---
+
+<Layout meta={meta} noindex schema={schema}>
+  <Breadcrumb
+    trail={[
+      { name: 'Airports', url: PAGES.airportsHub.url },
+      { name: 'Farnborough', url: meta.url },
+    ]}
+  />
+
+  <PageHero
+    eyebrow="Farnborough Airport"
+    heading="Private jet charter from Farnborough Airport"
+    standfirst="Farnborough is a dedicated business aviation airport south-west of London, used almost exclusively for private and corporate flights rather than scheduled traffic."
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+  />
+
+  <Section surface="cream" heading="What the airport suits">
+    <ul class="grid gap-x-10 gap-y-9 lg:grid-cols-3">
+      {
+        reasons.map((reason) => (
+          <li class="border-t border-navy/15 pt-5">
+            <h3 class="font-serif text-[21px] leading-[1.3]">{reason.title}</h3>
+            <p class="mt-3 text-[14.5px] leading-[1.65] text-muted">{reason.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section heading="Aircraft and ground transfer">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="border-t border-line pt-5">
+        <h3 class="font-serif text-[21px]">Suitable aircraft</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-muted">
+          Farnborough handles everything from light jets to large long-range aircraft.
+        </p>
+        <a
+          href={PAGES.aircraft.url}
+          class="mt-3 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+        >
+          See categories &rarr;
+        </a>
+      </div>
+      <div class="border-t border-line pt-5">
+        <h3 class="font-serif text-[21px]">Ground transfer</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-muted">
+          Farnborough sits close to the M3, with routes into central and west London.
+        </p>
+        <a
+          href={PAGES.transfers.url}
+          class="mt-3 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+        >
+          See our airport transfer service &rarr;
+        </a>
+      </div>
+    </div>
+    <ResearchNote>
+      Exact drive times to central London and specific terminal facilities to be verified before
+      publishing figures.
+    </ResearchNote>
+  </Section>
+
+  <Section surface="cream" heading="Common questions">
+    <Faq items={faqs} />
+  </Section>
+
+  <CtaBand heading="Departing from Farnborough?" />
+</Layout>

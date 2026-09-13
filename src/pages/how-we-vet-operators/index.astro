@@ -1,0 +1,96 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { PAGES } from '~/data/site';
+
+const meta = PAGES.vetting;
+
+const checks = [
+  {
+    n: '01',
+    title: 'Licence and certification',
+    body: 'We confirm the operator holds a valid Air Operator Certificate for the aircraft and route in question, issued by the relevant civil aviation authority.',
+  },
+  {
+    n: '02',
+    title: 'Independent safety audits',
+    body: 'We check whether the operator holds a current rating from an independent aviation safety auditor, such as ARGUS or IS-BAO, and review when it was last renewed.',
+  },
+  {
+    n: '03',
+    title: 'Insurance',
+    body: 'We confirm the operator carries liability insurance appropriate to the aircraft type and the flight, before it is offered as an option.',
+  },
+  {
+    n: '04',
+    title: 'Aircraft age and maintenance',
+    body: 'We ask when the specific aircraft was last inspected and what maintenance programme it sits under, not just what category it belongs to.',
+  },
+  {
+    n: '05',
+    title: 'Crew experience',
+    body: 'We ask about crew hours and experience on the specific aircraft type, particularly for longer or more demanding sectors.',
+  },
+  {
+    n: '06',
+    title: 'Ongoing review',
+    body: 'Operators are not checked once and forgotten. Certifications and ratings are re-confirmed on a regular basis, not only when a booking is made.',
+  },
+];
+
+const questions = [
+  'Which operator is flying this specific aircraft, and under which licence?',
+  'Does the operator hold an independent safety rating, and when was it last renewed?',
+  'How experienced is the crew on this aircraft type?',
+];
+---
+
+<Layout meta={meta}>
+  <Breadcrumb trail={[{ name: 'How we vet operators', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="Safety &amp; vetting"
+    heading="How we vet an operator before it reaches you"
+    standfirst="We do not own the aircraft, which means checking who does is the most important thing we do. Every operator behind an option we send you has been through the same checks first."
+  />
+
+  <Section surface="cream" eyebrow="Before an operator is ever offered" heading="The six checks">
+    <ol class="grid gap-x-12 gap-y-9 sm:grid-cols-2">
+      {
+        checks.map((check) => (
+          <li class="border-t border-navy/15 pt-5">
+            <p class="text-[13px] tabular-nums text-copper">{check.n}</p>
+            <h3 class="mt-2 font-serif text-[21px] leading-[1.3]">{check.title}</h3>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-muted">{check.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section heading="What you can ask us">
+    <ol class="border-t border-line">
+      {
+        questions.map((question) => (
+          <li class="border-b border-line py-5">
+            <p class="font-serif text-[19px] leading-[1.4] text-navy">{question}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-8 max-w-[760px] text-[14.5px] leading-[1.7] text-muted">
+      We are a broker, not a regulator. Final responsibility for the aircraft's airworthiness and
+      the flight itself sits with the operator and its licensing authority. Our role is to check
+      before we recommend, ask the questions above on your behalf, and tell you plainly if
+      something does not check out.
+    </p>
+  </Section>
+
+  <CtaBand
+    heading="Ask us anything about an operator before you fly."
+    cta={{ label: 'Contact us', href: PAGES.contact.url }}
+  />
+</Layout>

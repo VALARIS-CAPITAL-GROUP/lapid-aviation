@@ -1,0 +1,39 @@
+---
+import LegalPage from '~/components/LegalPage.astro';
+import { PAGES } from '~/data/site';
+
+const sections = [
+  {
+    heading: '1. Who we are',
+    body: 'Lapid Aviation ("we", "us") is a private jet and helicopter charter broker based in London. Company registration number and registered office to be confirmed.',
+  },
+  {
+    heading: '2. Our role',
+    body: 'We act as a broker, arranging charter flights on your behalf through appropriately licensed third-party aircraft operators. We do not own or operate aircraft. The contract of carriage for each flight is between you and the operator; our terms of engagement as your broker will be set out separately when you book.',
+  },
+  {
+    heading: '3. Enquiries and quotes',
+    body: 'Submitting an enquiry through this site does not create a booking or a contract. Quotes are indicative until confirmed in writing and are subject to aircraft and operator availability.',
+  },
+  {
+    heading: '4. Cancellations and changes',
+    body: 'Cancellation and amendment terms are set by the operator for each specific flight and will be provided before you confirm a booking.',
+  },
+  {
+    heading: '5. Liability',
+    body: 'To the extent permitted by law, our liability is limited to our role as broker. Liability for the operation of the aircraft and the flight itself sits with the operator. This section requires legal drafting specific to UK law before publication.',
+  },
+  {
+    heading: '6. Governing law',
+    body: 'These terms are governed by the laws of England and Wales, subject to confirmation on legal review.',
+  },
+];
+---
+
+<LegalPage
+  meta={PAGES.terms}
+  title="Terms &amp; Conditions"
+  notice="This page is a structural placeholder, not a substitute for legal advice. It should be reviewed and completed by a solicitor before the site goes live, and updated with the company's registered details."
+  sections={sections}
+  seeAlso={{ label: 'Privacy Policy', href: PAGES.privacy.url }}
+/>

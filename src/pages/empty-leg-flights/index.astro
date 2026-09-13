@@ -1,0 +1,87 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { PAGES } from '~/data/site';
+import { faqSchema } from '~/lib/schema';
+
+const meta = PAGES.emptylegs;
+
+const tradeoffs = [
+  {
+    title: "Why they're cheaper",
+    body: 'The aircraft is flying that route regardless. Filling the seats offsets a cost the operator would otherwise absorb, so the price reflects that, not the full charter rate.',
+  },
+  {
+    title: 'Fixed route and timing',
+    body: "You take the route and departure window the aircraft is already flying. There's no negotiating the airport or the time, the way there is on a standard charter.",
+  },
+  {
+    title: 'Can be cancelled',
+    body: 'If the original charter that created the empty leg changes or is cancelled, the empty leg usually goes with it. It suits flexible plans, not fixed ones.',
+  },
+  {
+    title: 'Short notice',
+    body: 'Empty legs are usually confirmed a few days out at most, sometimes less. They suit travellers who can move on short notice.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How much cheaper is an empty leg?',
+    a: "It varies by route and operator. We don't publish a fixed discount because it isn't one — each empty leg is priced on its own terms.",
+  },
+  {
+    q: 'Can I change the date once booked?',
+    a: 'Usually not, or only within narrow limits. The date is fixed to the original charter creating the leg.',
+  },
+];
+
+const schema = [faqSchema(faqs)];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Breadcrumb
+    trail={[
+      { name: 'Private jets', url: PAGES.jets.url },
+      { name: 'Empty legs', url: meta.url },
+    ]}
+  />
+
+  <PageHero
+    eyebrow="Empty leg flights"
+    heading="Private jet empty leg flights"
+    standfirst="An empty leg is a flight an aircraft is already making without passengers — repositioning after a charter, or returning to base. Sold at a reduced rate, with less flexibility than booking the route from scratch."
+    primary={{ label: 'Register your dates', href: PAGES.request.url }}
+  />
+
+  <Section surface="cream" heading="The trade-offs, stated plainly">
+    <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+      {
+        tradeoffs.map((item) => (
+          <li class="border-t border-navy/15 pt-5">
+            <h3 class="font-serif text-[21px] leading-[1.3]">{item.title}</h3>
+            <p class="mt-3 text-[14.5px] leading-[1.65] text-muted">{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section heading="How to hear about them">
+    <p class="max-w-[760px] text-[16px] leading-[1.7] text-slate">
+      Tell us your rough dates and the routes you'd consider, and we'll flag suitable empty legs
+      as operators release them. Nothing is published on a fixed schedule — availability changes
+      by the day.
+    </p>
+  </Section>
+
+  <Section surface="cream" heading="Common questions">
+    <Faq items={faqs} />
+  </Section>
+
+  <CtaBand heading="Tell us dates you can move on." />
+</Layout>
