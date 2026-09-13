@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { LONDON_AREAS } from '~/data/content';
+import { PAGES } from '~/data/site';
+
+const meta = PAGES.londonHub;
+
+// Only Mayfair has a verified page of its own so far.
+const areaHref = (name: string) => (name === 'Mayfair' ? PAGES.mayfair.url : null);
+---
+
+<Layout meta={meta} noindex>
+  <Breadcrumb trail={[{ name: 'London', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="London private aviation"
+    heading="Private jet charter, by area"
+    standfirst="Where you're based shapes which airport and ground transfer makes sense. Full detail is published once verified — Mayfair is live now."
+  />
+
+  <Section surface="cream" heading="Areas we cover">
+    <ul class="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        LONDON_AREAS.map((area) => {
+          const href = areaHref(area);
+          return (
+            <li class="border-t border-navy/15 pt-4">
+              {href ? (
+                <a
+                  href={href}
+                  class="font-serif text-[19px] text-navy transition-colors hover:text-copper"
+                >
+                  {area} &rarr;
+                </a>
+              ) : (
+                <span class="font-serif text-[19px] text-faint">{area}</span>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </Section>
+
+  <CtaBand
+    heading="Tell us where you are starting from."
+    body="We will confirm the nearest realistic airport and what the ground journey adds."
+  />
+</Layout>

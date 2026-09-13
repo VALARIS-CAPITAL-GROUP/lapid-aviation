@@ -1,0 +1,27 @@
+---
+/**
+ * Editorial flag carried over from the design's "RESEARCH REQUIRED" callouts.
+ *
+ * These are notes to ourselves about figures that must be verified against
+ * operator or manufacturer data before they are published — they are not
+ * customer-facing copy, so they render in development only. The pages whose
+ * facts are still unverified are also marked `noindex`, matching the design's
+ * `seo.verified` rule.
+ */
+interface Props {
+  children?: unknown;
+}
+---
+
+{
+  import.meta.env.DEV && (
+    <aside class="shell my-8">
+      <div class="rounded-[3px] border border-dashed border-copper/50 bg-copper/5 p-5">
+        <p class="eyebrow">Research required &mdash; dev only</p>
+        <p class="mt-3 max-w-measure text-[13.5px] leading-[1.6] text-slate">
+          <slot />
+        </p>
+      </div>
+    </aside>
+  )
+}

@@ -1,0 +1,35 @@
+---
+import LegalPage from '~/components/LegalPage.astro';
+import { PAGES } from '~/data/site';
+
+const sections = [
+  {
+    heading: '1. What we collect',
+    body: 'When you submit an enquiry, we collect the details you provide: route, dates, passenger numbers, and your contact information. We do not collect passport or payment details through this website.',
+  },
+  {
+    heading: '2. How we use it',
+    body: 'Your details are used to respond to your enquiry and, where relevant, to pass necessary flight information to a prospective operator. We do not sell personal data to third parties.',
+  },
+  {
+    heading: '3. Cookies',
+    body: 'This site uses essential cookies required for it to function. If analytics or marketing cookies are enabled in future, this section will list them individually along with how to opt out.',
+  },
+  {
+    heading: '4. Your rights',
+    body: 'Under UK data protection law you can ask what personal data we hold about you, request a correction, or ask us to delete it. Contact details for data requests to be confirmed.',
+  },
+  {
+    heading: '5. Data retention',
+    body: 'We keep enquiry data only as long as needed to respond to you and meet any legal or accounting requirement. Specific retention periods to be confirmed on legal review.',
+  },
+];
+---
+
+<LegalPage
+  meta={PAGES.privacy}
+  title="Privacy Policy"
+  notice="This page is a structural placeholder. It should be reviewed against actual data practices (forms, analytics, cookies used) and UK GDPR requirements before publication, including ICO registration details once obtained. Note that the enquiry form posts to a third-party form service, which must be named here once chosen."
+  sections={sections}
+  seeAlso={{ label: 'Terms & Conditions', href: PAGES.terms.url }}
+/>

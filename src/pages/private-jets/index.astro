@@ -1,0 +1,93 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import PageHero from '~/components/PageHero.astro';
+import Section from '~/components/Section.astro';
+import DisclosureList from '~/components/DisclosureList.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ResearchNote from '~/components/ResearchNote.astro';
+import { AIRPORTS, CATEGORIES, JET_FAQS } from '~/data/content';
+import { PAGES } from '~/data/site';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const meta = PAGES.jets;
+
+const categories = CATEGORIES.map((category) => ({
+  name: category.name,
+  line: category.use,
+  more: category.more,
+  tag: category.spec,
+}));
+
+const schema = [
+  serviceSchema({
+    name: 'Private jet charter from London',
+    description: meta.desc,
+    serviceType: 'Private jet charter',
+  }),
+  faqSchema(JET_FAQS),
+];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Breadcrumb trail={[{ name: 'Private jets', url: meta.url }]} />
+
+  <PageHero
+    eyebrow="Private jet charter"
+    heading="Private jet charter from London"
+    standfirst="Charter is a flight arranged for you alone: your departure time, your passengers, your airport. We source the aircraft from licensed operators and manage the arrangement end to end, from the first enquiry to the arrival transfer."
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    secondary={{ label: 'What it costs', href: PAGES.cost.url }}
+  />
+
+  <Section
+    surface="cream"
+    heading="Which aircraft, and why it matters"
+    standfirst="Category determines range, cabin size and luggage more than anything else. The right answer depends on the sector, the group and how much of the day you want back."
+  >
+    <DisclosureList items={categories} />
+    <ResearchNote>
+      Seat counts, range figures and typical baggage volumes to be populated from verified
+      operator and manufacturer data before this page is indexed.
+    </ResearchNote>
+    <a
+      href={PAGES.aircraft.url}
+      class="mt-8 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+    >
+      Every category we can source &rarr;
+    </a>
+  </Section>
+
+  <Section
+    eyebrow="Departure airports"
+    heading="The airport choice is part of the flight"
+    standfirst="Where you leave from changes the ground journey, the handling and sometimes the aircraft available on the day. We weigh all three rather than defaulting to one field."
+  >
+    <ul class="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        AIRPORTS.map((airport) => (
+          <li class="border-t border-line pt-5">
+            <h3 class="font-serif text-[20px]">{airport.name}</h3>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-muted">{airport.note}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      href={PAGES.airportsHub.url}
+      class="mt-10 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+    >
+      All airports &rarr;
+    </a>
+  </Section>
+
+  <Section surface="cream" heading="Common questions">
+    <Faq items={JET_FAQS} />
+  </Section>
+
+  <CtaBand
+    heading="Tell us the route and the day."
+    body="We will come back with the aircraft that fit, and the ones that do not."
+  />
+</Layout>

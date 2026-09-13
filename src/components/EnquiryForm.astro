@@ -1,0 +1,208 @@
+---
+/**
+ * The full charter enquiry form.
+ *
+ * Posts to `PUBLIC_ENQUIRY_ENDPOINT` so the site stays a static build — most
+ * form services (Formspark, Formspree, Basin, Netlify Forms) accept a plain
+ * POST of form-encoded fields. Swap that env var and nothing here changes.
+ * If we later move to a server adapter, this becomes an Astro action.
+ *
+ * Pre-fills from the query string so the four-field opener on the home page
+ * carries straight through. That has to happen client-side: this is a static
+ * build, so `Astro.url.searchParams` is empty at render time. The inline
+ * script at the bottom is the whole of it — without JS the form simply starts
+ * empty, which is a fine fallback.
+ */
+import { PAGES } from '~/data/site';
+
+const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT;
+
+const fieldClass =
+  'min-h-11 w-full border-0 border-b border-navy/28 bg-transparent py-[9px] text-[16px] text-navy outline-none focus:border-copper';
+const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-muted uppercase';
+---
+
+<form
+  method="POST"
+  action={endpoint}
+  class="rounded-[3px] border border-navy/14 bg-cream p-[clamp(20px,3vw,34px)]"
+>
+  <h2 class="font-serif text-[24px] text-navy">Your flight</h2>
+  <p class="mt-2 text-[13.5px] text-muted">The four fields we need. Contact details after.</p>
+
+  <fieldset class="mt-7 mb-6 flex gap-[6px]">
+    <legend class="sr-only">Trip type</legend>
+    {
+      [
+        { value: 'return', label: 'Return', checked: true },
+        { value: 'oneway', label: 'One-way', checked: false },
+      ].map((option) => (
+        <div>
+          <input
+            type="radio"
+            name="trip"
+            id={`req-trip-${option.value}`}
+            value={option.value}
+            checked={option.checked}
+            class="peer sr-only"
+          />
+          <label
+            for={`req-trip-${option.value}`}
+            class="block cursor-pointer rounded-[20px] px-[14px] py-[6px] text-[11.5px] font-semibold text-muted transition-colors peer-checked:bg-navy peer-checked:text-sand peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-copper peer-focus-visible:outline-offset-2"
+          >
+            {option.label}
+          </label>
+        </div>
+      ))
+    }
+  </fieldset>
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-from">From</label>
+      <input
+        id="req-from"
+        name="from"
+        placeholder="London"
+        required
+        class={fieldClass}
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-to">To</label>
+      <input
+        id="req-to"
+        name="to"
+        placeholder="Geneva"
+        required
+        class={fieldClass}
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-date">Date</label>
+      <input id="req-date" name="date" type="date" class={fieldClass} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-pax">Passengers</label>
+      <input
+        id="req-pax"
+        name="pax"
+        type="number"
+        min="1"
+        max="19"
+        inputmode="numeric"
+        placeholder="4"
+        class={fieldClass}
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-name">Name</label>
+      <input
+        id="req-name"
+        name="name"
+        autocomplete="name"
+        placeholder="Your name"
+        required
+        class={fieldClass}
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="req-contact">Email or phone</label>
+      <input
+        id="req-contact"
+        name="contact"
+        autocomplete="email"
+        placeholder="How to reach you"
+        required
+        class={fieldClass}
+      />
+    </div>
+  </div>
+
+  <details class="group mt-7">
+    <summary
+      class="inline-flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-copper [&::-webkit-details-marker]:hidden"
+    >
+      <span class="group-open:hidden">Add return legs, luggage, anything unusual</span>
+      <span class="hidden group-open:inline">Hide extra detail</span>
+      <span class="transition-transform group-open:rotate-45" aria-hidden="true">&#43;</span>
+    </summary>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <label class={labelClass} for="req-legs">Return or onward legs</label>
+        <input
+          id="req-legs"
+          name="legs"
+          placeholder="Same-day return, or add a city"
+          class={fieldClass}
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class={labelClass} for="req-notes">Luggage, pets, anything unusual</label>
+        <input
+          id="req-notes"
+          name="notes"
+          placeholder="Skis, a dog, an early meeting"
+          class={fieldClass}
+        />
+      </div>
+    </div>
+  </details>
+
+  <button
+    type="submit"
+    disabled={!endpoint}
+    class="mt-9 w-full cursor-pointer rounded-[2px] bg-navy px-8 py-[17px] text-[11.5px] font-semibold tracking-[0.13em] text-sand uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-copper hover:shadow-[0_10px_22px_rgba(16,27,45,0.22)] disabled:pointer-events-none disabled:opacity-40 sm:w-auto"
+  >
+    Request Charter
+  </button>
+
+  <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-muted">
+    No commitment. We reply with options, not a hard sell.
+  </p>
+
+  {
+    /* Shown in production too, not just dev. Without an endpoint the form
+       would POST to its own URL and silently lose the enquiry, so say so
+       loudly and disable submit rather than appear to work. */
+    !endpoint && (
+      <p class="mt-4 rounded-[3px] border border-copper/50 bg-copper/6 p-4 text-[12.5px] leading-[1.6] text-slate">
+        <strong>This form is not connected yet.</strong> Set
+        <code>PUBLIC_ENQUIRY_ENDPOINT</code> to a form endpoint (see
+        <code>.env.example</code>) and rebuild. In the meantime, please
+        <a href={PAGES.contact.url} class="text-copper underline">
+          contact a broker directly
+        </a>
+        .
+      </p>
+    )
+  }
+</form>
+
+<script>
+  // Carry the home page's four-field opener through to this form. Static
+  // build, so this has to read the query string in the browser.
+  const params = new URLSearchParams(location.search);
+  const setField = (id: string, key: string) => {
+    const value = params.get(key);
+    const el = document.getElementById(id);
+    if (value && el instanceof HTMLInputElement) el.value = value;
+  };
+
+  setField('req-from', 'from');
+  setField('req-to', 'to');
+  setField('req-date', 'date');
+  setField('req-pax', 'pax');
+
+  if (params.get('trip') === 'oneway') {
+    const oneway = document.getElementById('req-trip-oneway');
+    if (oneway instanceof HTMLInputElement) oneway.checked = true;
+  }
+
+  const from = params.get('from');
+  const to = params.get('to');
+  const hint = document.getElementById('enquiry-hint');
+  if (from && to && hint) {
+    hint.textContent = `${from} to ${to}. A broker will reply with the options that fit.`;
+  }
+</script>
