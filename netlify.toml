@@ -8,9 +8,10 @@
 
 # Persist Astro's encoded-image cache between builds.
 #
-# Without this every deploy re-encodes all 92 AVIF/WebP variants from the
-# source JPEGs, which is roughly 3.5 minutes of the build. The cache is keyed
-# on the source file, so changing or adding a photo re-encodes only that one.
+# Without this, every deploy re-encodes every responsive variant from the
+# source JPEGs. Measured cold on this project: 598s when AVIF was still being
+# generated, which is why the site now ships WebP only. The cache is keyed on
+# the source file, so changing or adding a photo re-encodes only that one.
 # Safe to drop: a cold cache just means a slow build, never a wrong one.
 [[plugins]]
   package = "netlify-plugin-cache"
