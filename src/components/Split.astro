@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 /**
@@ -42,13 +42,12 @@ const dark = surface === 'navy';
         flip && 'lg:order-2',
       ]}
     >
-      <Picture
+      <Image
         src={image}
         alt={alt}
         widths={[640, 1024, 1400]}
         sizes="(min-width: 1024px) 50vw, 100vw"
-        formats={['avif']}
-        fallbackFormat="webp"
+        format="webp"
         loading="lazy"
         data-zoom
         class="absolute inset-0 size-full object-cover"
