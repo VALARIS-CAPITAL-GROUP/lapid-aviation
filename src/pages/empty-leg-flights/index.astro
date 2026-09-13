@@ -1,12 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
+import heroImage from '~/assets/jets-hero.jpg';
 
 const meta = PAGES.emptylegs;
 
@@ -44,18 +45,20 @@ const schema = [faqSchema(faqs)];
 ---
 
 <Layout meta={meta} schema={schema}>
+  <Hero
+    image={heroImage}
+    alt="Private jets parked on an open apron"
+    eyebrow="Empty leg flights"
+    heading="Private jet empty leg flights"
+    standfirst="An empty leg is a flight an aircraft is already making without passengers — repositioning after a charter, or returning to base. Sold at a reduced rate, with less flexibility than booking the route from scratch."
+    primary={{ label: 'Register your dates', href: PAGES.request.url }}
+  />
+
   <Breadcrumb
     trail={[
       { name: 'Private jets', url: PAGES.jets.url },
       { name: 'Empty legs', url: meta.url },
     ]}
-  />
-
-  <PageHero
-    eyebrow="Empty leg flights"
-    heading="Private jet empty leg flights"
-    standfirst="An empty leg is a flight an aircraft is already making without passengers — repositioning after a charter, or returning to base. Sold at a reduced rate, with less flexibility than booking the route from scratch."
-    primary={{ label: 'Register your dates', href: PAGES.request.url }}
   />
 
   <Section surface="cream" heading="The trade-offs, stated plainly">

@@ -1,0 +1,107 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Full-bleed image hero. The image carries the page; type sits over a gradient
+ * scrim so contrast holds regardless of what the photograph is doing underneath.
+ *
+ * `size` controls the height: `full` for the home page, `page` for interiors.
+ */
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  eyebrow: string;
+  heading: string;
+  standfirst?: string;
+  size?: 'full' | 'page';
+  as?: 'h1' | 'h2';
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  /** Shift the visible crop when the subject is not centred. */
+  position?: string;
+}
+
+const {
+  image,
+  alt,
+  eyebrow,
+  heading,
+  standfirst,
+  size = 'page',
+  as: Heading = 'h1',
+  primary,
+  secondary,
+  position = 'center',
+}: Props = Astro.props;
+
+const heights =
+  size === 'full'
+    ? 'min-h-[min(88svh,860px)] py-[clamp(80px,14vh,160px)]'
+    : 'min-h-[min(58svh,560px)] py-[clamp(56px,9vh,104px)]';
+---
+
+<section class:list={['relative isolate flex items-end overflow-hidden bg-navy', heights]}>
+  <Picture
+    src={image}
+    alt={alt}
+    widths={[640, 1024, 1600, 2200]}
+    sizes="100vw"
+    formats={['avif']}
+    fallbackFormat="webp"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 size-full object-cover"
+    style={`object-position:${position}`}
+  />
+
+  <!--
+    Scrim: dark at the bottom where the type sits, clearing toward the top.
+    Weighted heavily enough that the copper eyebrow still reads against a
+    bright sky — a bare gradient left it washed out over pale cloud.
+  -->
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-t from-navy/95 via-navy/75 to-navy/35"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="shell w-full">
+    <p class="eyebrow !text-copper-light">{eyebrow}</p>
+    <Heading
+      class:list={[
+        'mt-5 max-w-[15ch] text-balance !text-white',
+        size === 'full' ? 'text-display' : 'text-heading',
+      ]}
+    >
+      {heading}
+    </Heading>
+    {
+      standfirst && (
+        <p class="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-white/78">{standfirst}</p>
+      )
+    }
+    {
+      (primary || secondary) && (
+        <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+          {primary && (
+            <a
+              href={primary.href}
+              class="rounded-[2px] bg-copper px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-white hover:text-navy hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+            >
+              {primary.label}
+            </a>
+          )}
+          {secondary && (
+            <a
+              href={secondary.href}
+              class="border-b border-white/40 pb-px text-[13.5px] font-medium text-white transition-colors hover:border-copper-light hover:text-copper-light"
+            >
+              {secondary.label} &rarr;
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>

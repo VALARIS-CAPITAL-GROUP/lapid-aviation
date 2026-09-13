@@ -1,10 +1,11 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/london-hero.jpg';
 
 const meta = PAGES.contact;
 
@@ -19,13 +20,15 @@ const channels = [
 ---
 
 <Layout meta={meta}>
-  <Breadcrumb trail={[{ name: 'Contact', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="The London skyline and the River Thames"
     eyebrow="Contact"
     heading="Speak to a broker"
     standfirst="Call, message or send a written enquiry. For an urgent departure, calling is faster than the form."
   />
+
+  <Breadcrumb trail={[{ name: 'Contact', url: meta.url }]} />
 
   <section class="pb-[clamp(52px,7vw,84px)]">
     <div class="shell">

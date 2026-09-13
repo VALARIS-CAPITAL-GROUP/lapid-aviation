@@ -1,13 +1,14 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
+import heroImage from '~/assets/jets-apron.jpg';
 
 const meta = PAGES.farnborough;
 
@@ -41,18 +42,20 @@ const schema = [faqSchema(faqs)];
 ---
 
 <Layout meta={meta} noindex schema={schema}>
+  <Hero
+    image={heroImage}
+    alt="Private jets on the apron at a business aviation airport"
+    eyebrow="Farnborough Airport"
+    heading="Private jet charter from Farnborough Airport"
+    standfirst="Farnborough is a dedicated business aviation airport south-west of London, used almost exclusively for private and corporate flights rather than scheduled traffic."
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+  />
+
   <Breadcrumb
     trail={[
       { name: 'Airports', url: PAGES.airportsHub.url },
       { name: 'Farnborough', url: meta.url },
     ]}
-  />
-
-  <PageHero
-    eyebrow="Farnborough Airport"
-    heading="Private jet charter from Farnborough Airport"
-    standfirst="Farnborough is a dedicated business aviation airport south-west of London, used almost exclusively for private and corporate flights rather than scheduled traffic."
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
   />
 
   <Section surface="cream" heading="What the airport suits">

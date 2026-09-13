@@ -1,12 +1,13 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
+import heroImage from '~/assets/resorts-hero.jpg';
 
 const meta = PAGES.resorts;
 
@@ -25,15 +26,17 @@ const schema = [faqSchema(faqs)];
 ---
 
 <Layout meta={meta} schema={schema}>
-  <Breadcrumb trail={[{ name: 'Resorts, villas & hotels', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="An infinity pool and terrace overlooking a lake at sunset"
     eyebrow="Exclusive access"
     heading="Introductions to resorts, villas and hotels"
     standfirst="For the stay either side of the flight, we can introduce you to villas, chalets and hotels at the destinations we fly to most. We pass the request to a trusted partner and stay involved until it is confirmed. We do not own or operate any property."
     primary={{ label: 'Request a charter', href: PAGES.request.url }}
     secondary={{ label: 'Need a car at either end instead? See airport transfers', href: PAGES.transfers.url }}
   />
+
+  <Breadcrumb trail={[{ name: 'Resorts, villas & hotels', url: meta.url }]} />
 
   <Section surface="cream" heading="What we do, and what we do not">
     <p class="max-w-[760px] text-[16px] leading-[1.7] text-slate">

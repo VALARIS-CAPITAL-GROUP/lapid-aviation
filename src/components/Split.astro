@@ -1,0 +1,76 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Image-and-text half split. The main rhythm device of the redesign: breaks up
+ * runs of text sections without needing a full-bleed image every time.
+ *
+ * `flip` puts the image on the right. `surface` sets the text side's background.
+ */
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  eyebrow?: string;
+  heading: string;
+  flip?: boolean;
+  surface?: 'sand' | 'cream' | 'navy';
+  position?: string;
+}
+
+const {
+  image,
+  alt,
+  eyebrow,
+  heading,
+  flip = false,
+  surface = 'cream',
+  position = 'center',
+}: Props = Astro.props;
+
+const surfaces = { sand: 'bg-sand', cream: 'bg-cream', navy: 'bg-navy' } as const;
+const dark = surface === 'navy';
+---
+
+<section class:list={[surfaces[surface], 'overflow-hidden']}>
+  <div class="grid items-stretch lg:grid-cols-2">
+    <div
+      class:list={[
+        'relative min-h-[300px] lg:min-h-[clamp(440px,46vw,620px)]',
+        flip && 'lg:order-2',
+      ]}
+    >
+      <Picture
+        src={image}
+        alt={alt}
+        widths={[640, 1024, 1400]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        formats={['avif']}
+        fallbackFormat="webp"
+        loading="lazy"
+        class="absolute inset-0 size-full object-cover"
+        style={`object-position:${position}`}
+      />
+    </div>
+
+    <div
+      class:list={[
+        'flex items-center px-[clamp(22px,5vw,72px)] py-[clamp(44px,6vw,88px)]',
+        flip && 'lg:order-1',
+      ]}
+    >
+      <div class="max-w-[54ch]">
+        {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
+        <h2 class:list={['mt-4 text-heading', dark && '!text-sand']}>{heading}</h2>
+        <div
+          class:list={[
+            'mt-6 space-y-5 text-[15.5px] leading-[1.72]',
+            dark ? 'text-[#a9b2bf]' : 'text-slate',
+          ]}
+        >
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

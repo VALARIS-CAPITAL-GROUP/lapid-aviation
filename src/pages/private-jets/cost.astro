@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
@@ -9,6 +9,7 @@ import ResearchNote from '~/components/ResearchNote.astro';
 import { COST_FACTORS, COST_FAQS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
+import heroImage from '~/assets/hangar.jpg';
 
 const meta = PAGES.cost;
 
@@ -33,18 +34,20 @@ const schema = [faqSchema(COST_FAQS)];
 ---
 
 <Layout meta={meta} schema={schema}>
+  <Hero
+    image={heroImage}
+    alt="Private jets inside a maintenance hangar"
+    eyebrow="Charter cost"
+    heading="What private jet charter costs"
+    standfirst="Charter is priced per flight, not per seat, and quoted for your specific routing and dates. There is no fixed rate card: the same city pair can differ substantially depending on the aircraft, the timing and where that aircraft has to come from."
+    primary={{ label: 'Request a quote', href: PAGES.request.url }}
+  />
+
   <Breadcrumb
     trail={[
       { name: 'Private jets', url: PAGES.jets.url },
       { name: 'Cost', url: meta.url },
     ]}
-  />
-
-  <PageHero
-    eyebrow="Charter cost"
-    heading="What private jet charter costs"
-    standfirst="Charter is priced per flight, not per seat, and quoted for your specific routing and dates. There is no fixed rate card: the same city pair can differ substantially depending on the aircraft, the timing and where that aircraft has to come from."
-    primary={{ label: 'Request a quote', href: PAGES.request.url }}
   />
 
   <Section

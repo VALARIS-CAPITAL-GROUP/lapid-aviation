@@ -1,13 +1,14 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
+import heroImage from '~/assets/geneva-hero.jpg';
 
 const meta = PAGES.routeGeneva;
 
@@ -58,18 +59,20 @@ const schema = [faqSchema(faqs)];
 ---
 
 <Layout meta={meta} schema={schema}>
+  <Hero
+    image={heroImage}
+    alt="An aerial view of the Alps above a misty lake"
+    eyebrow="European route"
+    heading="Private jet charter from London to Geneva"
+    standfirst="Geneva is one of the busiest private aviation routes in Europe, used for banking meetings, ski connections and onward travel into the Alps. Charter removes the layover through Zurich or Basel that scheduled airlines often add, and lets you choose the airport at either end."
+    primary={{ label: 'Request this route', href: PAGES.request.url }}
+  />
+
   <Breadcrumb
     trail={[
       { name: 'Routes', url: PAGES.jets.url },
       { name: 'London to Geneva', url: meta.url },
     ]}
-  />
-
-  <PageHero
-    eyebrow="European route"
-    heading="Private jet charter from London to Geneva"
-    standfirst="Geneva is one of the busiest private aviation routes in Europe, used for banking meetings, ski connections and onward travel into the Alps. Charter removes the layover through Zurich or Basel that scheduled airlines often add, and lets you choose the airport at either end."
-    primary={{ label: 'Request this route', href: PAGES.request.url }}
   />
 
   <Section surface="cream" eyebrow="Journey overview" heading="The route at a glance">

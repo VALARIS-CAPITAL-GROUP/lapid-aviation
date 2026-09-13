@@ -1,11 +1,12 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
-import PageHero from '~/components/PageHero.astro';
+import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { AIRPORTS } from '~/data/content';
 import { PAGES } from '~/data/site';
+import heroImage from '~/assets/london-hero.jpg';
 
 const meta = PAGES.airportsHub;
 
@@ -15,13 +16,15 @@ const airportHref = (name: string) =>
 ---
 
 <Layout meta={meta} noindex>
-  <Breadcrumb trail={[{ name: 'Airports', url: meta.url }]} />
-
-  <PageHero
+  <Hero
+    image={heroImage}
+    alt="The London skyline and the River Thames"
     eyebrow="London private aviation airports"
     heading="Airports we use around London"
     standfirst="The right airport depends on where you're starting from, the aircraft, and how the ground journey compares to the time in the air. Full detail is published once verified — Farnborough is live now."
   />
+
+  <Breadcrumb trail={[{ name: 'Airports', url: meta.url }]} />
 
   <Section surface="cream" heading="The six fields">
     <ul class="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
