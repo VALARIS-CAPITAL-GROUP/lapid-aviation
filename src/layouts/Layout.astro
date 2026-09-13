@@ -12,7 +12,7 @@ interface Props {
   schema?: unknown[];
 }
 
-const { meta, noindex, schema } = Astro.props;
+const { meta, noindex, schema }: Props = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +20,10 @@ const { meta, noindex, schema } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101B2D" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <Seo
       title={meta.title}
       description={meta.desc}
@@ -28,6 +31,14 @@ const { meta, noindex, schema } = Astro.props;
       noindex={noindex}
       schema={schema}
     />
+    <script is:inline>
+      // Mark the document before first paint so reveal targets start hidden.
+      // Without JS the class is never added and everything renders visible,
+      // so content is never gated behind an observer that may not run.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-reveal');
+      }
+    </script>
   </head>
   <body class="flex min-h-screen flex-col overflow-x-hidden">
     <a
@@ -41,5 +52,50 @@ const { meta, noindex, schema } = Astro.props;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      /*
+       * Reveal-on-scroll.
+       *
+       * Deliberately a rAF-throttled sweep rather than an IntersectionObserver.
+       * An observer only fires on threshold crossings, so a section that moves
+       * from below the viewport to above it between two samples — a fast
+       * scroll, an anchor jump, a restored scroll position — never reports as
+       * intersecting and stays invisible permanently. This instead asks "is it
+       * above the reveal line?", which is true for anything already scrolled
+       * past, so content cannot get stuck hidden.
+       */
+      const pending = Array.from(document.querySelectorAll('[data-reveal], [data-reveal-group]'));
+      let queued = false;
+
+      function sweep() {
+        queued = false;
+        const line = window.innerHeight * 0.88;
+        for (let i = pending.length - 1; i >= 0; i--) {
+          if (pending[i].getBoundingClientRect().top < line) {
+            pending[i].classList.add('is-in');
+            pending.splice(i, 1);
+          }
+        }
+        if (!pending.length) {
+          window.removeEventListener('scroll', request);
+          window.removeEventListener('resize', request);
+        }
+      }
+
+      function request() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(sweep);
+      }
+
+      if (pending.length) {
+        window.addEventListener('scroll', request, { passive: true });
+        window.addEventListener('resize', request, { passive: true });
+        // Late-loading images change layout, so re-check once everything settles.
+        window.addEventListener('load', request);
+        sweep();
+      }
+    </script>
   </body>
 </html>

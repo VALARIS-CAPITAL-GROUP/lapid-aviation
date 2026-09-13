@@ -186,3 +186,135 @@
 @utility rule-top {
   border-top: 1px solid var(--color-line);
 }
+
+/* ---------------------------------------------------------------------------
+   Motion
+
+   Two mechanisms, both opt-in per element:
+
+   - `[data-reveal]` fades and lifts on entering the viewport. A ~600 byte
+     IntersectionObserver in Layout.astro adds `.is-in`. Because the initial
+     hidden state is applied by that same script (`.js-reveal` on <html>),
+     content stays visible if JavaScript never runs.
+   - `[data-animate]` runs a named entrance on load, for above-the-fold
+     content that needs no observer.
+
+   Everything here collapses under prefers-reduced-motion, including the
+   hero's slow pan, which is the one piece of continuous motion on the site.
+   --------------------------------------------------------------------------- */
+
+@layer components {
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 18px));
+    transition:
+      opacity 0.7s var(--ease-out-expo) var(--reveal-delay, 0ms),
+      transform 0.7s var(--ease-out-expo) var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .js-reveal [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Stagger children of a revealed group without per-element inline styles. */
+  .js-reveal [data-reveal-group] > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.65s var(--ease-out-expo),
+      transform 0.65s var(--ease-out-expo);
+  }
+
+  .js-reveal [data-reveal-group].is-in > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js-reveal [data-reveal-group].is-in > *:nth-child(1) { transition-delay: 0ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(2) { transition-delay: 70ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(3) { transition-delay: 140ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(4) { transition-delay: 210ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(5) { transition-delay: 280ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(6) { transition-delay: 350ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(7) { transition-delay: 420ms; }
+  .js-reveal [data-reveal-group].is-in > *:nth-child(n + 8) { transition-delay: 490ms; }
+
+  /* Slow zoom-out on an image inside a revealed block (the Split sections). */
+  .js-reveal [data-reveal] [data-zoom] {
+    transform: scale(1.07);
+    transition: transform 1.8s var(--ease-out-expo);
+  }
+
+  .js-reveal [data-reveal].is-in [data-zoom] {
+    transform: none;
+  }
+
+  /* Above-the-fold entrances, no observer needed. */
+  [data-animate='rise'] {
+    animation: rise 0.9s var(--ease-out-expo) both;
+    animation-delay: var(--animate-delay, 0ms);
+  }
+
+  /* Slow continuous pan on hero photography. */
+  [data-animate='pan'] {
+    animation: pan 26s ease-in-out infinite alternate both;
+  }
+
+  /* Native <details> open/close, where the browser supports it. */
+  @supports selector(::details-content) {
+    details::details-content {
+      transition:
+        content-visibility 0.32s allow-discrete,
+        opacity 0.32s var(--ease-out-expo),
+        block-size 0.32s var(--ease-out-expo);
+      opacity: 0;
+      block-size: 0;
+      overflow: clip;
+    }
+    details[open]::details-content {
+      opacity: 1;
+      block-size: auto;
+    }
+    /* interpolate-size lets block-size animate to/from `auto`. */
+    :root {
+      interpolate-size: allow-keywords;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pan {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-1.5%, -1.2%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  .js-reveal [data-reveal],
+  .js-reveal [data-reveal] [data-zoom],
+  .js-reveal [data-reveal-group] > * {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  details::details-content {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Lapid Aviation",
+  "short_name": "Lapid",
+  "description": "Independent private jet and helicopter charter broker, London.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EDE7DC",
+  "theme_color": "#101B2D",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

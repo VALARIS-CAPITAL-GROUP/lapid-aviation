@@ -39,18 +39,24 @@ const heights =
   size === 'full'
     ? 'min-h-[min(88svh,860px)] py-[clamp(80px,14vh,160px)]'
     : 'min-h-[min(58svh,560px)] py-[clamp(56px,9vh,104px)]';
+
+// The hero is always the LCP element. It is the first thing in <body>, eager
+// and fetchpriority=high, so the browser starts it immediately — a separate
+// <link rel="preload"> would only risk a srcset mismatch and double download.
+const widths = [640, 1024, 1600, 2200];
 ---
 
 <section class:list={['relative isolate flex items-end overflow-hidden bg-navy', heights]}>
   <Picture
     src={image}
     alt={alt}
-    widths={[640, 1024, 1600, 2200]}
+    widths={widths}
     sizes="100vw"
     formats={['avif']}
     fallbackFormat="webp"
     loading="eager"
     fetchpriority="high"
+    data-animate="pan"
     class="absolute inset-0 -z-20 size-full object-cover"
     style={`object-position:${position}`}
   />
@@ -67,8 +73,10 @@ const heights =
   </div>
 
   <div class="shell w-full">
-    <p class="eyebrow !text-copper-light">{eyebrow}</p>
+    <p class="eyebrow !text-copper-light" data-animate="rise">{eyebrow}</p>
     <Heading
+      data-animate="rise"
+      style="--animate-delay:110ms"
       class:list={[
         'mt-5 max-w-[15ch] text-balance !text-white',
         size === 'full' ? 'text-display' : 'text-heading',
@@ -78,12 +86,22 @@ const heights =
     </Heading>
     {
       standfirst && (
-        <p class="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-white/78">{standfirst}</p>
+        <p
+          data-animate="rise"
+          style="--animate-delay:220ms"
+          class="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-white/78"
+        >
+          {standfirst}
+        </p>
       )
     }
     {
       (primary || secondary) && (
-        <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <div
+          class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4"
+          data-animate="rise"
+          style="--animate-delay:330ms"
+        >
           {primary && (
             <a
               href={primary.href}

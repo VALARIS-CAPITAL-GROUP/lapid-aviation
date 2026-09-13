@@ -35,8 +35,10 @@ const dark = surface === 'navy';
 <section class:list={[surfaces[surface], 'overflow-hidden']}>
   <div class="grid items-stretch lg:grid-cols-2">
     <div
+      data-reveal
+      style="--reveal-y:0px"
       class:list={[
-        'relative min-h-[300px] lg:min-h-[clamp(440px,46vw,620px)]',
+        'relative min-h-[300px] overflow-hidden lg:min-h-[clamp(440px,46vw,620px)]',
         flip && 'lg:order-2',
       ]}
     >
@@ -48,6 +50,7 @@ const dark = surface === 'navy';
         formats={['avif']}
         fallbackFormat="webp"
         loading="lazy"
+        data-zoom
         class="absolute inset-0 size-full object-cover"
         style={`object-position:${position}`}
       />
@@ -59,7 +62,7 @@ const dark = surface === 'navy';
         flip && 'lg:order-1',
       ]}
     >
-      <div class="max-w-[54ch]">
+      <div class="max-w-[54ch]" data-reveal style="--reveal-delay:120ms">
         {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
         <h2 class:list={['mt-4 text-heading', dark && '!text-sand']}>{heading}</h2>
         <div

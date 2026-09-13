@@ -1,0 +1,76 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import { NAV, PAGES, SITE } from '~/data/site';
+import heroImage from '~/assets/jets-apron.jpg';
+
+// Not a real route, so it carries its own meta rather than a PAGES entry.
+const meta = {
+  title: `Page not found | ${SITE.name}`,
+  url: '/404/',
+  desc: 'That page does not exist. Start a charter enquiry, or pick up from one of the main sections.',
+  intent: 'n/a · error',
+};
+
+const popular = [
+  { label: 'Private jet charter', href: PAGES.jets.url },
+  { label: 'Helicopter charter', href: PAGES.helicopter.url },
+  { label: 'What charter costs', href: PAGES.cost.url },
+  { label: 'Request a charter', href: PAGES.request.url },
+  { label: 'How we vet operators', href: PAGES.vetting.url },
+  { label: 'Contact a broker', href: PAGES.contact.url },
+];
+---
+
+<Layout meta={meta} noindex>
+  <Hero
+    image={heroImage}
+    alt="Private jets parked on the apron at dusk"
+    eyebrow="Error 404"
+    heading="That page has already departed."
+    standfirst="The link is wrong or the page has moved. Everything below is still where it should be."
+    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    secondary={{ label: 'Back to the home page', href: '/' }}
+  />
+
+  <Section heading="Where you were probably going">
+    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-3">
+      {
+        popular.map((item) => (
+          <li class="bg-sand">
+            <a
+              href={item.href}
+              class="group flex h-full items-center justify-between gap-4 p-6 transition-colors hover:bg-cream"
+            >
+              <span class="font-serif text-[19px] text-navy">{item.label}</span>
+              <span
+                class="text-copper transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section surface="cream" heading="Or start from the top">
+    <ul class="flex flex-wrap gap-x-8 gap-y-3">
+      {
+        NAV.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="border-b border-copper/30 pb-px text-[15px] text-copper transition-colors hover:border-copper hover:text-navy"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+</Layout>
