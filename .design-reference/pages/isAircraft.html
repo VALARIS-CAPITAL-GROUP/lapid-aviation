@@ -1,0 +1,52 @@
+
+  <div data-screen-label="Aircraft" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="padding:44px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#6B7483;margin-bottom:44px">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer">Home</span><span>→</span><span style="color:#101B2D">Aircraft</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:24px">AIRCRAFT CATEGORIES</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:740px;text-wrap:pretty">Every category we can source</h1>
+        <p style="font-size:19px;line-height:1.6;color:#3A4859;max-width:620px;margin:30px 0 0">We don't own any of these — each is sourced from a licensed operator for the specific flight. The right category depends on the sector, the group and the luggage, not just the destination.</p>
+      </div>
+    </section>
+
+    <section style="padding:clamp(42px,7.5vw,70px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ categories2 }}" as="c" hint-placeholder-count="6">
+            <div sc-camel-on-click="{{ c.toggle }}" style="padding:26px 0;border-top:1px solid rgba(16,27,45,0.13);cursor:pointer">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline">
+                <div>
+                  <div style="font-family:Spectral,serif;font-size:24px;margin-bottom:8px">{{ c.name }}</div>
+                  <div style="font-size:15px;line-height:1.6;color:#3A4859;max-width:640px">{{ c.use }}</div>
+                </div>
+                <div style="text-align:right;font-size:12.5px;color:#6B7483;white-space:nowrap">{{ c.sign }}</div>
+              </div>
+              <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:14px;line-height:1.6;color:#9A5B33;margin:14px 0 0">{{ c.more }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+          <div style="padding:26px 0;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:24px;margin-bottom:8px">Helicopters</div>
+            <div style="font-size:15px;line-height:1.6;color:#3A4859;max-width:640px">Short sectors, private landing sites and connections onto a waiting jet. <span sc-camel-on-click="{{ go.helicopter }}" style="cursor:pointer;color:#9A5B33">See helicopter charter →</span></div>
+          </div>
+        </div>
+        <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:32px;padding:18px 20px;border:1px dashed rgba(154,91,51,0.55);border-radius:2px;max-width:760px">
+            <div style="font-size:9.5px;font-weight:600;letter-spacing:0.16em;color:#9A5B33;margin-bottom:8px">RESEARCH REQUIRED</div>
+            <p style="font-size:13.5px;line-height:1.6;color:#3A4859;margin:0">Individual aircraft pages (Citation, Gulfstream, Global, Phenom and others) will be added once specifications are verified against operator and manufacturer data.</p>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:520px">Not sure which category fits? Tell us the trip.</h2>
+        <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Request a Charter</span>
+      </div>
+    </section>
+  </div>
+  

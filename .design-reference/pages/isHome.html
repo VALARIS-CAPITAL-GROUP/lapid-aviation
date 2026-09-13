@@ -1,0 +1,295 @@
+
+  <div data-screen-label="Home" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="position:relative;min-height:min(640px,80vh);display:flex;align-items:flex-end;overflow:hidden">
+      <div style="position:absolute;inset:0">
+        <image-slot id="home-hero" shape="rect" placeholder="Private jet on the tarmac, London" src="10e69c26-ade9-4748-9dd2-150930045ea6"></image-slot>
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,27,45,0.1) 0%, rgba(16,27,45,0.82) 100%);pointer-events:none"></div>
+      <div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:clamp(72px,10vw,100px) clamp(18px,4.6vw,40px) clamp(40px,6vw,64px);width:100%">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#C08A5F;margin-bottom:26px">LONDON PRIVATE AVIATION</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(33px,6.2vw,82px);line-height:1.02;letter-spacing:-0.02em;margin:0;max-width:880px;text-wrap:pretty;color:#EDE7DC">Your schedule should belong to you.</h1>
+        <p style="font-size:19px;line-height:1.6;color:#C9CFD8;max-width:600px;margin:32px 0 0;text-wrap:pretty">Lapid Aviation arranges private jet and helicopter charter from London. One broker, the right aircraft for the route, and a departure that fits the day you actually need to fly.</p>
+      </div>
+    </section>
+    <section style="padding:52px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.14);border-radius:3px;padding:26px clamp(17px,4vw,28px)">
+          <div style="display:flex;gap:6px;margin-bottom:18px">
+            <span sc-camel-on-click="{{ setTripReturn }}" style="cursor:pointer;padding:6px 14px;border-radius:20px;font-size:11.5px;font-weight:600;background:{{ returnBg }};color:{{ returnColor }}">Return</span>
+            <span sc-camel-on-click="{{ setTripOneway }}" style="cursor:pointer;padding:6px 14px;border-radius:20px;font-size:11.5px;font-weight:600;background:{{ onewayBg }};color:{{ onewayColor }}">One-way</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr));gap:20px;align-items:end">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">FROM</label>
+              <input value="{{ q.from }}" sc-camel-on-change="{{ setFrom }}" placeholder="London" style="border:none;border-bottom:1px solid rgba(16,27,45,0.28);background:transparent;padding:9px 0;font-size:16px;color:#101B2D;outline:none;min-height:44px">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">TO</label>
+              <input value="{{ q.to }}" sc-camel-on-change="{{ setTo }}" placeholder="Geneva" style="border:none;border-bottom:1px solid rgba(16,27,45,0.28);background:transparent;padding:9px 0;font-size:16px;color:#101B2D;outline:none;min-height:44px">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">DATE</label>
+              <input type="date" value="{{ q.date }}" sc-camel-on-change="{{ setDate }}" style="border:none;border-bottom:1px solid rgba(16,27,45,0.28);background:transparent;padding:9px 0;font-size:16px;color:#101B2D;outline:none;min-height:44px">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">PASSENGERS</label>
+              <input value="{{ q.pax }}" sc-camel-on-change="{{ setPax }}" placeholder="4" style="border:none;border-bottom:1px solid rgba(16,27,45,0.28);background:transparent;padding:9px 0;font-size:16px;color:#101B2D;outline:none;min-height:44px">
+            </div>
+            <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#101B2D;color:#EDE7DC;padding:16px 20px;border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center" style-hover="background:#9A5B33;transform:translateY(-2px);box-shadow:0 10px 22px rgba(16,27,45,0.22)">Request Charter</span>
+          </div>
+          <p style="font-size:12.5px;color:#6B7483;margin:20px 0 0">Four fields to open an enquiry. Everything else is handled in conversation, not in a form.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY LAPID: honest comparison -->
+    <section style="padding:clamp(58px,8.7vw,96px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">WHY LAPID</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(25px,3.6vw,46px);line-height:1.1;letter-spacing:-0.015em;margin:0 0 16px;max-width:660px">There are three ways to charter a jet. Only one of them works for you.</h2>
+        <p style="font-size:16px;line-height:1.65;color:#3A4859;max-width:600px;margin:0 0 48px">We would rather explain the trade-offs than pretend they do not exist. Here is what the alternatives get right, and where they leave you.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2px">
+          <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:32px clamp(17px,4vw,28px);display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">BOOK DIRECT WITH AN OPERATOR</div>
+            <div style="font-family:Spectral,serif;font-size:24px;line-height:1.2">Their fleet, their answer</div>
+            <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">An operator will always recommend an aircraft it owns. If the right one for your sector is parked with somebody else, you will not hear about it.</p>
+          </div>
+          <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:32px clamp(17px,4vw,28px);display:flex;flex-direction:column;gap:14px">
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#6B7483">AN ONLINE BOOKING PLATFORM</div>
+            <div style="font-family:Spectral,serif;font-size:24px;line-height:1.2">Fast until something moves</div>
+            <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">Instant pricing is a real advantage. Then the meeting shifts, the aircraft goes technical, or the luggage does not fit, and there is nobody who knows your trip.</p>
+          </div>
+          <div style="background:#101B2D;color:#EDE7DC;border:1px solid #101B2D;padding:32px clamp(17px,4vw,28px);display:flex;flex-direction:column;gap:14px;position:relative">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#C08A5F"></div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;color:#C08A5F">LAPID AVIATION</div>
+            <div style="font-family:Spectral,serif;font-size:24px;line-height:1.2">A broker with no fleet to defend</div>
+            <p style="font-size:14.5px;line-height:1.65;color:#A9B2BF;margin:0">We hold no aircraft, so we have no reason to steer you. We search the market for your specific flight, present the options with their drawbacks stated, and stay on the line when the plan changes.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(16px,3.5vw,32px);margin-top:56px;border-top:1px solid rgba(16,27,45,0.14);padding-top:38px">
+          <div>
+            <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">You speak to the person doing the work</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#3A4859;margin:0">Not a switchboard, not a shared inbox. The broker who quoted your flight is the one who answers on the morning of departure.</p>
+          </div>
+          <div>
+            <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Options, not a single price</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#3A4859;margin:0">You see the shortlist with what each aircraft and airport costs you in time, money and comfort, so the decision is yours on the facts.</p>
+          </div>
+          <div>
+            <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Built around your day</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#3A4859;margin:0">The departure time, the airport, the aircraft — all chosen to fit your schedule, not the other way round.</p>
+          </div>
+          <div>
+            <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Every operator checked first</div>
+            <p style="font-size:14.5px;line-height:1.6;color:#3A4859;margin:0">Flights are operated by appropriately licensed third-party operators, reviewed before an option reaches you rather than after.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEBSITE TO BOARDING -->
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(60px,9.1vw,100px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+        <div style="position:sticky;top:110px">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#C08A5F;margin-bottom:20px">FROM THIS PAGE TO THE AIRCRAFT STEPS</div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3vw,38px);line-height:1.15;letter-spacing:-0.015em;margin:0 0 20px">Seven stages. You're involved in three.</h2>
+          <p style="font-size:15.5px;line-height:1.65;color:#A9B2BF;margin:0 0 26px">Charter goes wrong in the gaps between people. This is the whole sequence, and who is holding it at each point.</p>
+          <span sc-camel-on-click="{{ toggleShowMine }}" style="cursor:pointer;font-size:13px;font-weight:600;color:#C08A5F;border-bottom:1px solid rgba(192,138,95,0.5)" style-hover="border-bottom:1px solid #C08A5F">{{ showMineLabel }}</span>
+        </div>
+        <div>
+          <sc-for list="{{ journey }}" as="j" hint-placeholder-count="7">
+            <sc-if value="{{ j.isYou }}" hint-placeholder-val="{{ false }}">
+              <div sc-camel-on-click="{{ j.toggle }}" style="cursor:pointer;opacity:{{ j.dim }};position:relative;padding-left:40px;padding-bottom:34px;border-left:1px solid rgba(192,138,95,0.4)" class="m-rail">
+                <div style="position:absolute;left:-7px;top:2px;width:13px;height:13px;border-radius:50%;background:#C08A5F;border:3px solid #101B2D"></div>
+                <div style="background:rgba(237,231,220,0.05);border:1px solid rgba(237,231,220,0.12);border-radius:3px;padding:22px clamp(16px,4vw,24px)">
+                  <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+                    <span style="font-family:Spectral,serif;font-size:13px;color:#C08A5F">{{ j.n }}</span>
+                    <span style="font-family:Spectral,serif;font-size:22px;font-weight:400">{{ j.title }}</span>
+                    <span style="font-size:9.5px;font-weight:600;letter-spacing:0.14em;color:#C08A5F;margin-left:auto">YOUR MOVE &nbsp;{{ j.sign }}</span>
+                  </div>
+                  <p style="font-size:15px;line-height:1.65;color:#EDE7DC;margin:0">{{ j.body }}</p>
+                  <sc-if value="{{ j.open }}" hint-placeholder-val="{{ false }}">
+                    <p style="font-size:14px;line-height:1.6;color:#C9CFD8;margin:14px 0 0;border-top:1px solid rgba(237,231,220,0.12);padding-top:14px">{{ j.more }}</p>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ j.isUs }}" hint-placeholder-val="{{ true }}">
+              <div sc-camel-on-click="{{ j.toggle }}" style="cursor:pointer;opacity:{{ j.dim }};position:relative;padding-left:40px;padding-bottom:30px;border-left:1px solid rgba(237,231,220,0.16)" class="m-rail">
+                <div style="position:absolute;left:-5px;top:5px;width:9px;height:9px;border-radius:50%;background:#7C879A;border:2px solid #101B2D"></div>
+                <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+                  <span style="font-family:Spectral,serif;font-size:13px;color:#7C879A">{{ j.n }}</span>
+                  <span style="font-size:15.5px;font-weight:500;color:#C9CFD8">{{ j.title }}</span>
+                  <span style="font-size:9px;font-weight:600;letter-spacing:0.14em;color:#7C879A;margin-left:auto">US &nbsp;{{ j.sign }}</span>
+                </div>
+                <p style="font-size:14px;line-height:1.6;color:#8792A2;margin:0;max-width:560px">{{ j.body }}</p>
+                <sc-if value="{{ j.open }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:13.5px;line-height:1.6;color:#A9B2BF;margin:10px 0 0">{{ j.more }}</p>
+                </sc-if>
+              </div>
+            </sc-if>
+          </sc-for>
+          <div style="margin-top:8px;padding-top:34px;border-top:1px solid rgba(237,231,220,0.2);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,32px);flex-wrap:wrap">
+            <p style="font-family:Spectral,serif;font-size:20px;line-height:1.4;color:#EDE7DC;margin:0;max-width:480px">You give us the route and the day. We handle everything in between.</p>
+            <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Start an enquiry</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">THE LAPID STANDARD</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.4vw,42px);line-height:1.12;letter-spacing:-0.015em;margin:0 0 44px;max-width:600px">What every enquiry is built on</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:2px">
+          <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,26px)">
+            <div style="font-family:Spectral,serif;font-size:19px;margin-bottom:10px">Personal review</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">Every enquiry is read and answered by a person, not routed through a quote engine.</p>
+          </div>
+          <div sc-camel-on-click="{{ go.vetting }}" style="cursor:pointer;background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,26px)" style-hover="border:1px solid #9A5B33">
+            <div style="font-family:Spectral,serif;font-size:19px;margin-bottom:10px">Licensed operators only</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">Every option comes from an appropriately licensed third-party operator, checked before it reaches you. <span style="color:#9A5B33">See how we vet →</span></p>
+          </div>
+          <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,26px)">
+            <div style="font-family:Spectral,serif;font-size:19px;margin-bottom:10px">One person, start to finish</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">The broker who quotes your flight stays on it through to boarding and back.</p>
+          </div>
+          <div style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,26px)">
+            <div style="font-family:Spectral,serif;font-size:19px;margin-bottom:10px">Discreet by default</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">Your details, your itinerary and your preferences are handled in confidence, not shared beyond what a flight requires.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(58px,8.7vw,96px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">WHAT WE ARRANGE</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(25px,3.6vw,46px);line-height:1.1;letter-spacing:-0.015em;margin:0 0 48px;max-width:620px">Four ways we take care of the journey.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+          <div sc-camel-on-click="{{ go.jets }}" style="cursor:pointer;background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:14px" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:26px">Private jet charter</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0;flex:1">Point-to-point flights from the London airports, sized to the group and the distance — from short European hops to ultra-long-range sectors.</p>
+            <span style="font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">Private jets →</span>
+          </div>
+          <div sc-camel-on-click="{{ go.helicopter }}" style="cursor:pointer;background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:14px" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:26px">Helicopter charter</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0;flex:1">Transfers, events and estate arrivals in and around London, including connections onto a waiting jet.</p>
+            <span style="font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">Helicopters →</span>
+          </div>
+          <div sc-camel-on-click="{{ go.business }}" style="cursor:pointer;background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:14px" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:26px">Business aviation</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0;flex:1">Recurring corporate travel, multi-city itineraries and roadshows, handled as a standing arrangement rather than one-off bookings.</p>
+            <span style="font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">Business aviation →</span>
+          </div>
+          <div sc-camel-on-click="{{ go.transfers }}" style="cursor:pointer;background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:14px" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:26px">Airport transfers</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0;flex:1">Chauffeur cars timed to your flight, at either end of the journey, arranged through licensed partners.</p>
+            <span style="font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">Transfers →</span>
+          </div>
+          <div sc-camel-on-click="{{ go.resorts }}" style="cursor:pointer;background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);border-radius:3px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:14px" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+            <div style="font-family:Spectral,serif;font-size:26px">Resorts, villas &amp; hotels</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0;flex:1">Introductions to where you're staying, for the trip either side of the flight, through trusted destination partners.</p>
+            <span style="font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">Resorts &amp; villas →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 0 clamp(58px,8.7vw,96px)">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+          <div>
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">DEPARTURE POINTS</div>
+            <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(25px,3.6vw,46px);line-height:1.1;letter-spacing:-0.015em;margin:0">Six ways out of the city.</h2>
+          </div>
+          <span sc-camel-on-click="{{ go.airportsHub }}" style="cursor:pointer;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#9A5B33">All airports →</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:rgba(16,27,45,0.14);border:1px solid rgba(16,27,45,0.14)">
+          <sc-for list="{{ airportsWithLinks }}" as="a" hint-placeholder-count="6">
+            <div sc-camel-on-click="{{ a.on }}" style="cursor:pointer;background:#EDE7DC;padding:26px clamp(16px,4vw,24px);display:flex;flex-direction:column;gap:8px" style-hover="background:#F6F2EA">
+              <div style="font-family:Spectral,serif;font-size:21px">{{ a.name }}</div>
+              <div style="font-size:13.5px;line-height:1.6;color:#3A4859">{{ a.note }}</div>
+              <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+                <span style="align-self:flex-start;margin-top:6px;padding:3px 8px;border:1px dashed rgba(154,91,51,0.6);color:#9A5B33;font-size:9.5px;font-weight:600;letter-spacing:0.14em;border-radius:2px">RESEARCH · OPERATING DETAIL</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 0 clamp(58px,8.7vw,96px)">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">ROUTES</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(25px,3.6vw,46px);line-height:1.1;letter-spacing:-0.015em;margin:0 0 16px;max-width:620px">Your journey, visualised.</h2>
+        <p style="font-size:16px;line-height:1.65;color:#3A4859;max-width:560px;margin:0 0 40px">Pick a route to see it take shape. Distances and flight times are published only once verified against operator data.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:10px;margin-bottom:36px">
+          <sc-for list="{{ routes }}" as="r" hint-placeholder-count="8">
+            <div sc-camel-on-click="{{ r.play }}" style="border:1px solid rgba(16,27,45,0.14);border-radius:2px;padding:16px 18px;cursor:pointer;background:#F6F2EA" style-hover="border-color:#9A5B33;transform:translateY(-3px)">
+              <div style="font-family:Spectral,serif;font-size:19px;margin-bottom:4px">{{ r.to }}</div>
+              <div style="font-size:11.5px;color:#6B7483;letter-spacing:0.04em">{{ r.cat }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#101B2D;color:#EDE7DC;border-radius:3px;padding:clamp(22px,4vw,36px);display:grid;grid-template-columns:auto 1fr 1fr 1fr auto;gap:clamp(16px,3.5vw,28px);align-items:center" class="m-strip">
+          <div style="width:78px;height:78px;position:relative;flex-shrink:0" aria-hidden="true">
+            <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(237,231,220,0.3)"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;animation:globeSpin 9s linear infinite;transform-style:preserve-3d">
+              <div style="width:78px;height:78px;border-radius:50%;border:1px solid rgba(237,231,220,0.22)"></div>
+            </div>
+            <div style="position:absolute;top:0;left:9px;right:9px;bottom:0;border-radius:50%/50%;border:1px solid rgba(237,231,220,0.16)"></div>
+            <div style="position:absolute;top:9px;left:0;right:0;bottom:9px;border-radius:50%/50%;border-top:1px solid rgba(237,231,220,0.16);border-bottom:1px solid rgba(237,231,220,0.16)"></div>
+            <div style="position:absolute;left:16px;top:28px;width:6px;height:6px;border-radius:50%;background:#C08A5F;box-shadow:0 0 6px 1px rgba(192,138,95,0.6)"></div>
+            <div style="position:absolute;right:14px;top:40px;width:6px;height:6px;border-radius:50%;background:#EDE7DC"></div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;color:#7C879A;margin-bottom:8px">ROUTE</div>
+            <div style="font-family:Spectral,serif;font-size:22px">London → {{ selectedRoute.to }}</div>
+            <div style="font-size:12px;color:#8792A2;margin-top:6px">London {{ londonTime }} &nbsp;·&nbsp; {{ selectedRoute.to }} {{ destTime }}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;color:#7C879A;margin-bottom:8px">SUITABLE AIRCRAFT</div>
+            <div style="font-size:15px">{{ selectedRoute.aircraft }}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;color:#7C879A;margin-bottom:8px">GOOD TO KNOW</div>
+            <div style="font-size:13.5px;line-height:1.5;color:#C9CFD8">{{ selectedRoute.note }}</div>
+          </div>
+          <sc-if value="{{ hasFullPage }}" hint-placeholder-val="{{ false }}">
+            <span sc-camel-on-click="{{ selectedRoute.on }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:14px 20px;border-radius:2px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px)">Full route guide</span>
+          </sc-if>
+          <sc-if value="{{ noFullPage }}" hint-placeholder-val="{{ true }}">
+            <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:14px 20px;border-radius:2px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px)">Request this route</span>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 0 clamp(62px,9.5vw,104px)">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="border-top:1px solid rgba(16,27,45,0.14);padding-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(16px,3.5vw,32px)">
+          <div>
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:18px">JOURNAL</div>
+            <p style="font-family:Spectral,serif;font-size:24px;line-height:1.35;margin:0">Straight answers to the questions people actually ask before their first charter.</p>
+          </div>
+          <div sc-camel-on-click="{{ go.cost }}" style="cursor:pointer">
+            <div style="font-size:11px;color:#6B7483;letter-spacing:0.1em;margin-bottom:12px">COST</div>
+            <div style="font-family:Spectral,serif;font-size:21px;line-height:1.3;margin-bottom:10px">How much does it cost to charter a private jet?</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">What actually moves the number, and why charter is quoted per flight rather than per seat.</p>
+          </div>
+          <div sc-camel-on-click="{{ go.firsttime }}" style="cursor:pointer">
+            <div style="font-size:11px;color:#6B7483;letter-spacing:0.1em;margin-bottom:12px">GUIDE</div>
+            <div style="font-family:Spectral,serif;font-size:21px;line-height:1.3;margin-bottom:10px">First time flying private</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">What happens from the moment you arrive at the terminal, and what nobody tells you in advance.</p>
+          </div>
+          <div sc-camel-on-click="{{ go.business }}" style="cursor:pointer">
+            <div style="font-size:11px;color:#6B7483;letter-spacing:0.1em;margin-bottom:12px">BUSINESS</div>
+            <div style="font-family:Spectral,serif;font-size:21px;line-height:1.3;margin-bottom:10px">How private aviation saves executives time</div>
+            <p style="font-size:14px;line-height:1.6;color:#3A4859;margin:0">Where the hours come back, and how to tell whether a schedule justifies the aircraft.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

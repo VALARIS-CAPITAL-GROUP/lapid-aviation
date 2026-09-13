@@ -1,0 +1,87 @@
+---
+import { PAGES } from '~/data/site';
+
+/**
+ * The four-field enquiry opener from the design.
+ *
+ * A real GET form pointing at the enquiry page, so it works with no
+ * JavaScript and arrives with the fields pre-filled. The trip-type segmented
+ * control is a radio group styled with peer-checked — also zero JS.
+ */
+const fieldClass =
+  'min-h-11 border-0 border-b border-navy/28 bg-transparent py-[9px] text-[16px] text-navy outline-none focus:border-copper';
+const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-muted uppercase';
+---
+
+<form
+  method="get"
+  action={PAGES.request.url}
+  class="rounded-[3px] border border-navy/14 bg-cream p-[26px_clamp(17px,4vw,28px)]"
+>
+  <fieldset class="mb-[18px] flex gap-[6px]">
+    <legend class="sr-only">Trip type</legend>
+    {
+      [
+        { value: 'return', label: 'Return', checked: true },
+        { value: 'oneway', label: 'One-way', checked: false },
+      ].map((option) => (
+        <div>
+          <input
+            type="radio"
+            name="trip"
+            id={`trip-${option.value}`}
+            value={option.value}
+            checked={option.checked}
+            class="peer sr-only"
+          />
+          <label
+            for={`trip-${option.value}`}
+            class="block cursor-pointer rounded-[20px] px-[14px] py-[6px] text-[11.5px] font-semibold text-muted transition-colors peer-checked:bg-navy peer-checked:text-sand peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-copper peer-focus-visible:outline-offset-2"
+          >
+            {option.label}
+          </label>
+        </div>
+      ))
+    }
+  </fieldset>
+
+  <div
+    class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,148px),1fr))] items-end gap-5"
+  >
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="q-from">From</label>
+      <input id="q-from" name="from" placeholder="London" autocomplete="off" class={fieldClass} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="q-to">To</label>
+      <input id="q-to" name="to" placeholder="Geneva" autocomplete="off" class={fieldClass} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="q-date">Date</label>
+      <input id="q-date" name="date" type="date" class={fieldClass} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class={labelClass} for="q-pax">Passengers</label>
+      <input
+        id="q-pax"
+        name="pax"
+        type="number"
+        min="1"
+        max="19"
+        inputmode="numeric"
+        placeholder="4"
+        class={fieldClass}
+      />
+    </div>
+    <button
+      type="submit"
+      class="flex min-h-12 cursor-pointer items-center justify-center rounded-[2px] bg-navy px-5 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-sand uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-copper hover:shadow-[0_10px_22px_rgba(16,27,45,0.22)]"
+    >
+      Request Charter
+    </button>
+  </div>
+
+  <p class="mt-5 text-[12.5px] text-muted">
+    Four fields to open an enquiry. Everything else is handled in conversation, not in a form.
+  </p>
+</form>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /request-charter/thank-you/
+
+Sitemap: https://www.lapidaviation.com/sitemap-index.xml

@@ -1,0 +1,72 @@
+---
+/**
+ * The page section wrapper used throughout the design: optional eyebrow label,
+ * heading, and standfirst, on one of three surfaces.
+ */
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  standfirst?: string;
+  /** Surface colour. `navy` inverts the type colours. */
+  surface?: 'sand' | 'cream' | 'navy';
+  /** Heading level — only one h1 per page. */
+  as?: 'h1' | 'h2';
+  /** Constrain the heading block to a readable measure. */
+  narrow?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const surfaces = {
+  sand: 'bg-sand',
+  cream: 'bg-cream',
+  navy: 'bg-navy',
+} as const;
+
+const {
+  eyebrow,
+  heading,
+  standfirst,
+  surface = 'sand',
+  as: Heading = 'h2',
+  narrow = true,
+  id,
+  class: className,
+}: Props = Astro.props;
+
+const dark = surface === 'navy';
+---
+
+<section id={id} class:list={[surfaces[surface], 'py-[clamp(52px,7vw,96px)]', className]}>
+  <div class="shell">
+    {
+      (eyebrow || heading || standfirst) && (
+        <div class:list={['max-w-[760px]', narrow && 'mb-[clamp(32px,4vw,56px)]']}>
+          {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
+          {heading && (
+            <Heading
+              class:list={[
+                'mt-4',
+                Heading === 'h1' ? 'text-display' : 'text-heading',
+                dark && '!text-sand',
+              ]}
+            >
+              {heading}
+            </Heading>
+          )}
+          {standfirst && (
+            <p
+              class:list={[
+                'mt-5 max-w-measure text-[17px] leading-[1.62]',
+                dark ? 'text-[#a9b2bf]' : 'text-muted',
+              ]}
+            >
+              {standfirst}
+            </p>
+          )}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,90 @@
+
+  <div data-screen-label="Business Aviation" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(29px,7.5vw,44px) 0 clamp(58px,8.7vw,96px)">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#8792A2;margin-bottom:44px">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer;color:#8792A2">Home</span><span>→</span><span style="color:#EDE7DC">Business Aviation</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#C08A5F;margin-bottom:24px">BUSINESS AVIATION</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:860px;text-wrap:pretty">Three meetings. Three cities. One working day.</h1>
+        <p style="font-size:19px;line-height:1.6;color:#A9B2BF;max-width:620px;margin:30px 0 0">Corporate charter is a scheduling instrument. It puts the aircraft where your business needs to be, on the day it needs to be there, and gives you back the hours that connections and overnight stays take away.</p>
+        <div style="margin-top:38px">
+          <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:15px clamp(16px,4vw,26px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Discuss Business Travel</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:56px 0 0;background:#EDE7DC">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="border-radius:3px;overflow:hidden;width:100%;height:380px">
+          <image-slot id="business-hero" shape="rect" placeholder="Executives boarding a private jet"></image-slot>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(16px,3.5vw,36px)">
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">The day, not the flight</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">Departure times are set around the meeting, not the timetable. A morning in one city and an afternoon in another stops being a two-day trip.</p>
+        </div>
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">Work in transit</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">A private cabin is a working room. Conversations that cannot happen in a lounge or an airline seat happen in the air instead.</p>
+        </div>
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">Fewer moving parts</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">One point of contact for aircraft, airports and ground transfers across an itinerary, and one set of paperwork at the end of it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">WHO WE WORK WITH</div>
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.4vw,42px);line-height:1.12;letter-spacing:-0.015em;margin:0 0 44px;max-width:600px">Different businesses, different reasons to fly</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:2px">
+          <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="8">
+            <div sc-camel-on-click="{{ s.toggle }}" style="background:#EDE7DC;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,24px);cursor:pointer" style-hover="border:1px solid #9A5B33;transform:translateY(-4px);box-shadow:0 16px 30px rgba(16,27,45,0.13)">
+              <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:8px">{{ s.name }}</div>
+              <div style="font-size:13.5px;line-height:1.6;color:#3A4859">{{ s.line }}</div>
+              <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;line-height:1.6;color:#9A5B33;margin-top:12px;padding-top:12px;border-top:1px solid rgba(16,27,45,0.1)">{{ s.more }}</div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+        <div>
+          <h2 style="font-family:Spectral,serif;font-weight:300;font-size:34px;line-height:1.15;letter-spacing:-0.015em;margin:0">Multi-city and roadshows</h2>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:20px 0 0">Several cities in a fixed window is where charter earns its keep, and where planning matters most.</p>
+        </div>
+        <div>
+          <div style="border-top:1px solid rgba(16,27,45,0.14);padding:22px 0">
+            <div style="font-size:17px;font-weight:500;margin-bottom:8px">Built backwards from the diary</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">We start with the meetings that cannot move and work outwards, rather than fitting the schedule to a convenient aircraft.</p>
+          </div>
+          <div style="border-top:1px solid rgba(16,27,45,0.14);padding:22px 0">
+            <div style="font-size:17px;font-weight:500;margin-bottom:8px">Honest about what will not fly</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">Crew duty limits, airport hours and slots put real boundaries on an itinerary. We tell you where a plan breaks before it is agreed with anyone else.</p>
+          </div>
+          <div style="border-top:1px solid rgba(16,27,45,0.14);border-bottom:1px solid rgba(16,27,45,0.14);padding:22px 0">
+            <div style="font-size:17px;font-weight:500;margin-bottom:8px">One aircraft or several</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">Holding one aircraft across a tour is sometimes the cheaper answer and sometimes not. We show the comparison rather than assuming.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:560px">Send us next quarter's travel and we will tell you what is worth flying privately.</h2>
+        <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Discuss Business Travel</span>
+      </div>
+    </section>
+  </div>
+  

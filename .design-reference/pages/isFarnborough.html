@@ -1,0 +1,71 @@
+
+  <div data-screen-label="Farnborough Airport" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="padding:44px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#6B7483;margin-bottom:44px;flex-wrap:wrap">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer">Home</span><span>→</span><span sc-camel-on-click="{{ go.airportsHub }}" style="cursor:pointer">Airports</span><span>→</span><span style="color:#101B2D">Farnborough</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:24px">FARNBOROUGH AIRPORT</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:740px;text-wrap:pretty">Private jet charter from Farnborough Airport</h1>
+        <p style="font-size:19px;line-height:1.6;color:#3A4859;max-width:620px;margin:30px 0 0">Farnborough is a dedicated business aviation airport south-west of London, used almost exclusively for private and corporate flights rather than scheduled traffic.</p>
+      </div>
+    </section>
+
+    <section style="padding:clamp(42px,7.5vw,70px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:2px">
+        <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,28px)">
+          <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Why travellers use it</div>
+          <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">A dedicated business aviation terminal means no scheduled passenger traffic to queue behind, and handling built around private flights rather than accommodating them.</p>
+        </div>
+        <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,28px)">
+          <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Business travel</div>
+          <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">The most requested departure point for corporate flights, given its proximity to west London and the M3 corridor.</p>
+        </div>
+        <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,28px)">
+          <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Leisure travel</div>
+          <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">A straightforward, low-fuss start to a European or long-haul leisure trip, without the scale of a commercial airport.</p>
+        </div>
+        <div style="background:#F6F2EA;border:1px solid rgba(16,27,45,0.13);padding:clamp(18px,4vw,28px)">
+          <div style="font-family:Spectral,serif;font-size:20px;margin-bottom:10px">Suitable aircraft</div>
+          <p style="font-size:14.5px;line-height:1.65;color:#3A4859;margin:0">Farnborough handles everything from light jets to large long-range aircraft. <span sc-camel-on-click="{{ go.aircraft }}" style="cursor:pointer;color:#9A5B33">See categories →</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(42px,7.5vw,70px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:20px">GROUND TRANSFER</div>
+        <p style="font-size:16px;line-height:1.65;color:#3A4859;max-width:700px;margin:0 0 20px">Farnborough sits close to the M3, with routes into central and west London. <span sc-camel-on-click="{{ go.transfers }}" style="cursor:pointer;color:#9A5B33">See our airport transfer service →</span></p>
+        <sc-if value="{{ flags }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:16px 18px;border:1px dashed rgba(154,91,51,0.55);border-radius:2px;max-width:700px;margin-top:16px">
+            <div style="font-size:9.5px;font-weight:600;letter-spacing:0.16em;color:#9A5B33;margin-bottom:8px">RESEARCH REQUIRED</div>
+            <p style="font-size:13.5px;line-height:1.6;color:#3A4859;margin:0">Exact drive times to central London and specific terminal facilities to be verified before publishing figures.</p>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section style="padding:clamp(42px,7.5vw,70px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(27px,5.8vw,64px);align-items:start" class="m-stack">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:34px;line-height:1.15;letter-spacing:-0.015em;margin:0">Common questions</h2>
+        <div>
+          <div style="border-top:1px solid rgba(16,27,45,0.14);padding:24px 0">
+            <div style="font-size:17px;font-weight:500;margin-bottom:10px">Is Farnborough only for business jets?</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">No — it's used for leisure charter too. It simply doesn't handle scheduled airline traffic, so it suits any private flight regardless of purpose.</p>
+          </div>
+          <div style="border-top:1px solid rgba(16,27,45,0.14);border-bottom:1px solid rgba(16,27,45,0.14);padding:24px 0">
+            <div style="font-size:17px;font-weight:500;margin-bottom:10px">How does it compare to Biggin Hill?</div>
+            <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">Both are dedicated private aviation airports; the better choice usually comes down to which side of London you're travelling to or from. We confirm the better option for your specific journey.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:520px">Departing from Farnborough?</h2>
+        <span sc-camel-on-click="{{ go.request }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Request a Charter</span>
+      </div>
+    </section>
+  </div>
+  

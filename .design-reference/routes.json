@@ -1,0 +1,128 @@
+{
+ "home": {
+  "title": "Private Jet Charter London | Lapid Aviation",
+  "url": "/",
+  "kw": "private jet charter London \u00b7 transactional",
+  "desc": "Private jet and helicopter charter from London, arranged by an independent broker. Tell us the route and the day and we will return the aircraft that fit."
+ },
+ "jets": {
+  "title": "Private Jet Charter London | Lapid Aviation",
+  "url": "/private-jets/",
+  "kw": "private jet charter London \u00b7 transactional",
+  "desc": "Private jet charter from Farnborough, Biggin Hill, Luton, London City, Stansted and Northolt. Aircraft categories, airport choice and how charter works."
+ },
+ "helicopter": {
+  "title": "Helicopter Charter London | Lapid Aviation",
+  "url": "/helicopter-charter/",
+  "kw": "helicopter charter London \u00b7 transactional",
+  "desc": "Helicopter charter in and around London: airport transfers, business travel, events and private landing sites, arranged through licensed operators."
+ },
+ "business": {
+  "title": "Corporate Private Jet Charter | Lapid Aviation",
+  "url": "/business-aviation/",
+  "kw": "corporate private jet charter \u00b7 transactional",
+  "desc": "Business aviation for executive teams, family offices and investment firms. Multi-city itineraries and roadshows arranged around the diary."
+ },
+ "cost": {
+  "title": "Private Jet Charter Cost UK | Lapid Aviation",
+  "url": "/private-jets/cost/",
+  "kw": "private jet charter cost UK \u00b7 commercial investigation",
+  "desc": "What drives the cost of chartering a private jet: aircraft category, flight time, positioning, airports, timing and routing. No rate card, no invented prices."
+ },
+ "firsttime": {
+  "title": "First Time Flying Private | Lapid Aviation",
+  "url": "/first-time-private-flyers/",
+  "kw": "first time flying private \u00b7 informational",
+  "desc": "What actually happens on your first private flight, from enquiry to arrival, and the four questions worth asking any charter broker."
+ },
+ "request": {
+  "title": "Request a Private Jet Charter | Lapid Aviation",
+  "url": "/request-charter/",
+  "kw": "request private jet charter \u00b7 transactional",
+  "desc": "Start a charter enquiry with four fields. A broker replies with the realistic options for your route and date."
+ },
+ "transfers": {
+  "title": "Private Jet Airport Transfers | Lapid Aviation",
+  "url": "/transfers/",
+  "kw": "private jet airport transfer London \u00b7 transactional",
+  "desc": "Chauffeur transfers to and from the aircraft, timed to your flight and arranged through licensed ground transport partners."
+ },
+ "resorts": {
+  "title": "Resorts, Villas & Hotels | Lapid Aviation",
+  "url": "/resorts/",
+  "kw": "private jet resort access \u00b7 commercial investigation",
+  "desc": "Introductions to villas, chalets and hotels at the destinations we fly to most, arranged through trusted destination partners."
+ },
+ "about": {
+  "title": "About Lapid Aviation | Private Jet Charter Broker",
+  "url": "/about/",
+  "kw": "private jet broker London \u00b7 navigational",
+  "desc": "Lapid Aviation is an independent private jet and helicopter charter broker in London. We own no aircraft and arrange flights through licensed operators."
+ },
+ "contact": {
+  "title": "Contact Lapid Aviation | Private Jet Charter",
+  "url": "/contact/",
+  "kw": "contact private jet broker London \u00b7 navigational",
+  "desc": "Speak to a broker about a private jet or helicopter charter from London."
+ },
+ "routeGeneva": {
+  "title": "Private Jet London to Geneva | Lapid Aviation",
+  "url": "/routes/london-to-geneva/",
+  "kw": "private jet London to Geneva \u00b7 transactional",
+  "desc": "Private jet charter from London to Geneva. Departure airports, suitable aircraft, and what shapes the cost of the route."
+ },
+ "vetting": {
+  "title": "How We Vet Operators | Lapid Aviation",
+  "url": "/how-we-vet-operators/",
+  "kw": "private jet operator safety vetting \u00b7 trust",
+  "desc": "How Lapid Aviation checks an operator before offering it as an option, and what you can ask us to confirm before you fly."
+ },
+ "emptylegs": {
+  "title": "Private Jet Empty Leg Flights | Lapid Aviation",
+  "url": "/empty-leg-flights/",
+  "kw": "private jet empty leg flights \u00b7 transactional",
+  "desc": "Empty leg flights from London: repositioning flights at a reduced rate, with the trade-offs explained plainly."
+ },
+ "aircraft": {
+  "title": "Private Jet & Helicopter Categories | Lapid Aviation",
+  "url": "/aircraft/",
+  "kw": "private jet categories \u00b7 informational",
+  "desc": "An overview of the aircraft and helicopter categories Lapid Aviation can source, from very light jets to ultra-long-range."
+ },
+ "terms": {
+  "title": "Terms & Conditions | Lapid Aviation",
+  "url": "/terms/",
+  "kw": "n/a \u00b7 legal",
+  "desc": "Terms and conditions for enquiries and charter arrangements made through Lapid Aviation."
+ },
+ "privacy": {
+  "title": "Privacy Policy | Lapid Aviation",
+  "url": "/privacy/",
+  "kw": "n/a \u00b7 legal",
+  "desc": "How Lapid Aviation collects, uses and protects personal data submitted through this website."
+ },
+ "airportsHub": {
+  "title": "London Private Jet Airports | Lapid Aviation",
+  "url": "/airports/",
+  "kw": "private jet airports London \u00b7 informational",
+  "desc": "The airports Lapid Aviation uses for private jet charter around London, with full detail available for Farnborough."
+ },
+ "farnborough": {
+  "title": "Farnborough Private Jet Charter | Lapid Aviation",
+  "url": "/airports/farnborough-airport/",
+  "kw": "Farnborough private jet charter \u00b7 transactional",
+  "desc": "Private jet charter from Farnborough Airport: why travellers use it, suitable aircraft, and ground transfer considerations."
+ },
+ "londonHub": {
+  "title": "Private Jet Charter by London Area | Lapid Aviation",
+  "url": "/london/",
+  "kw": "private jet London areas \u00b7 informational",
+  "desc": "Private jet charter across London, with full detail available for Mayfair."
+ },
+ "mayfair": {
+  "title": "Private Jet Charter Mayfair | Lapid Aviation",
+  "url": "/london/mayfair-private-jet-charter/",
+  "kw": "private jet Mayfair \u00b7 transactional",
+  "desc": "Private jet charter for Mayfair: suitable airports, ground transfer, and typical traveller profile."
+ }
+}

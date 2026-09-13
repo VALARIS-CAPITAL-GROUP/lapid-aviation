@@ -1,0 +1,69 @@
+
+  <div data-screen-label="About" style="animation:pageFadeIn .5s cubic-bezier(.16,1,.3,1)">
+    <section style="padding:44px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="display:flex;gap:10px;font-size:12px;color:#6B7483;margin-bottom:44px">
+          <span sc-camel-on-click="{{ go.home }}" style="cursor:pointer">Home</span><span>→</span><span style="color:#101B2D">About</span>
+        </div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:24px">ABOUT LAPID AVIATION</div>
+        <h1 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(29px,5.2vw,68px);line-height:1.05;letter-spacing:-0.02em;margin:0;max-width:760px;text-wrap:pretty">An independent broker, not an operator</h1>
+        <p style="font-size:19px;line-height:1.6;color:#3A4859;max-width:620px;margin:30px 0 0">Lapid Aviation arranges private jet and helicopter charter from London through appropriately licensed third-party operators. We own no aircraft, so there is no fleet steering the advice you get — only the route, the group and the day.</p>
+      </div>
+    </section>
+
+    <section style="padding:56px 0 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="border-radius:3px;overflow:hidden;width:100%;height:400px">
+          <image-slot id="about-hero" shape="rect" placeholder="The Lapid Aviation team, or a London airport exterior"></image-slot>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#F6F2EA;border-top:1px solid rgba(16,27,45,0.13);border-bottom:1px solid rgba(16,27,45,0.13);padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.22em;color:#9A5B33;margin-bottom:28px">THE TEAM</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:clamp(16px,3.5vw,28px)">
+          <div>
+            <div style="border-radius:2px;overflow:hidden;width:100%;height:180px;margin-bottom:14px"><image-slot id="team-1" shape="rect" placeholder="Team photo"></image-slot></div>
+            <div style="font-family:Spectral,serif;font-size:17px">Managing Director</div>
+            <div style="font-size:12.5px;color:#9A5B33">To be introduced</div>
+          </div>
+          <div>
+            <div style="border-radius:2px;overflow:hidden;width:100%;height:180px;margin-bottom:14px"><image-slot id="team-2" shape="rect" placeholder="Team photo"></image-slot></div>
+            <div style="font-family:Spectral,serif;font-size:17px">Private Aviation Broker</div>
+            <div style="font-size:12.5px;color:#9A5B33">To be introduced</div>
+          </div>
+          <div>
+            <div style="border-radius:2px;overflow:hidden;width:100%;height:180px;margin-bottom:14px"><image-slot id="team-3" shape="rect" placeholder="Team photo"></image-slot></div>
+            <div style="font-family:Spectral,serif;font-size:17px">Private Aviation Broker</div>
+            <div style="font-size:12.5px;color:#9A5B33">To be introduced</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:clamp(53px,8vw,88px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(16px,3.5vw,36px)">
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">What a broker does</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">We take a brief, search the market, check the operator, and manage the arrangement from enquiry to arrival. The aircraft is never ours — it belongs to the operator flying it.</p>
+        </div>
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">Why that matters</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">An operator recommends its own aircraft. We have none to recommend, so the shortlist we send you is built around your flight, not our fleet.</p>
+        </div>
+        <div>
+          <div style="font-family:Spectral,serif;font-size:22px;margin-bottom:12px">Who you deal with</div>
+          <p style="font-size:15px;line-height:1.65;color:#3A4859;margin:0">The broker who quotes your flight stays on it through to boarding. Company registration and regulatory details are published here once confirmed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#101B2D;color:#EDE7DC;padding:clamp(48px,7.5vw,80px) 0">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,4.6vw,40px);display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3.5vw,36px);flex-wrap:wrap">
+        <h2 style="font-family:Spectral,serif;font-weight:300;font-size:clamp(23px,3.2vw,40px);line-height:1.12;margin:0;max-width:520px">Questions before your first enquiry?</h2>
+        <span sc-camel-on-click="{{ go.contact }}" style="cursor:pointer;background:#EDE7DC;color:#101B2D;padding:17px clamp(19px,4vw,30px);border-radius:2px;font-size:11.5px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap" style-hover="background:#C08A5F;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,0.28)">Contact us</span>
+      </div>
+    </section>
+  </div>
+  
