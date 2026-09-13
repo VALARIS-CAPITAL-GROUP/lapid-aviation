@@ -41,7 +41,7 @@ const dark = surface === 'navy';
   <div class="shell">
     {
       (eyebrow || heading || standfirst) && (
-        <div class:list={['max-w-[760px]', narrow && 'mb-[clamp(32px,4vw,56px)]']}>
+        <div data-reveal class:list={['max-w-[760px]', narrow && 'mb-[clamp(32px,4vw,56px)]']}>
           {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
           {heading && (
             <Heading
@@ -67,6 +67,8 @@ const dark = surface === 'navy';
         </div>
       )
     }
-    <slot />
+    <div data-reveal style="--reveal-delay:90ms">
+      <slot />
+    </div>
   </div>
 </section>

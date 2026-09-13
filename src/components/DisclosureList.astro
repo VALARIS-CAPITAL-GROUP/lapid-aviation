@@ -20,7 +20,7 @@ interface Props {
 const { items }: Props = Astro.props;
 ---
 
-<div class="border-t border-line">
+<div data-reveal-group class="border-t border-line">
   {
     items.map((item) => (
       <details class="group border-b border-line">

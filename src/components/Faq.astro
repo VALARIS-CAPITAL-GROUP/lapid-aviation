@@ -14,7 +14,7 @@ const { items, surface = 'light' } = Astro.props;
 const dark = surface === 'navy';
 ---
 
-<div class:list={['border-t', dark ? 'border-white/12' : 'border-line']}>
+<div data-reveal-group class:list={['border-t', dark ? 'border-white/12' : 'border-line']}>
   {
     items.map((item) => (
       <details class:list={['group border-b', dark ? 'border-white/12' : 'border-line']}>

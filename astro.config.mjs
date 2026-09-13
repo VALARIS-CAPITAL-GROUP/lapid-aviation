@@ -13,8 +13,10 @@ export default defineConfig({
       // meta tag never disagree. These are the four location pages whose
       // facts are still unverified, plus the two legal pages awaiting review
       // — exactly the set the design's reference sitemap left out.
+      lastmod: new Date(),
       filter: (page) =>
         ![
+          '/404/',
           '/airports/',
           '/airports/farnborough-airport/',
           '/london/',
