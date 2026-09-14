@@ -52,11 +52,8 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
       </ul>
     </nav>
 
-    <a
-      href={PAGES.request.url}
-      class="hidden rounded-[1px] border border-gold/70 px-6 py-3.5 text-[10.5px] font-semibold tracking-[0.18em] whitespace-nowrap text-gold-light uppercase transition-all duration-500 ease-(--ease-out-expo) hover:border-gold hover:bg-gold hover:text-white sm:block"
-    >
-      Request Charter
+    <a href={PAGES.request.url} class="cta-ghost hidden !px-6 !py-3.5 sm:block">
+      Request a Charter
     </a>
 
     <!-- Mobile menu: a disclosure, so it works with JS disabled -->
@@ -95,11 +92,8 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
             ))
           }
           <li class="pt-5 pb-4">
-            <a
-              href={PAGES.request.url}
-              class="block rounded-[1px] bg-gold px-5 py-4 text-center text-[10.5px] font-semibold tracking-[0.18em] text-white uppercase"
-            >
-              Request Charter
+            <a href={PAGES.request.url} class="cta block w-full text-center">
+              Request a Charter
             </a>
           </li>
         </ul>

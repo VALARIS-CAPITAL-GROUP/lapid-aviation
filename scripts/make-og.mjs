@@ -26,8 +26,12 @@ const PAGES = {
   'business-aviation': ['business-hero', 'Business aviation for executive teams'],
   'first-time-private-flyers': ['cabin-work', 'Your first private flight, made simple'],
   'request-charter': ['jets-apron', 'Request a private jet charter'],
-  transfers: ['transfers-hero', 'Chauffeur transfers to the aircraft'],
-  resorts: ['resorts-hero', 'Resorts, villas and hotels'],
+  transfers: ['transfers-hero', 'Chauffeur and ground transport'],
+  vehicles: ['transfers-hero', 'Luxury and performance vehicles'],
+  hotels: ['resorts-hero', 'A collection, not a catalogue'],
+  experiences: ['resorts-hero', 'Nobody remembers the aircraft'],
+  'private-world': ['hangar', 'One relationship. The whole journey.'],
+  resorts: ['resorts-hero', 'Bespoke resorts and private villas'],
   about: ['hangar', 'An independent broker, not an operator'],
   contact: ['london-hero', 'Speak to a broker'],
   'routes-london-to-geneva': ['geneva-hero', 'Private jet: London to Geneva'],
@@ -77,9 +81,9 @@ function overlay(title) {
   </linearGradient></defs>
   <rect width="1200" height="630" fill="url(#g)"/>
   <text x="72" y="96" font-family="Georgia, serif" font-size="42" fill="#FAFAF9">Lapid</text>
-  <text x="72" y="126" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="7" fill="#D4A04A">AVIATION</text>
+  <text x="72" y="126" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="7" fill="#CDB389">AVIATION</text>
   <text y="${firstBaseline}" font-family="Georgia, serif" font-size="54" fill="#FFFFFF">${tspans}</text>
-  <rect x="72" y="${ruleY}" width="64" height="3" fill="#A16207"/>
+  <rect x="72" y="${ruleY}" width="64" height="2" fill="#9C7C4A"/>
   <text x="72" y="${ruleY + 52}" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#A8A29E">Independent charter broker &#183; lapidaviation.com</text>
 </svg>`);
 }

@@ -74,13 +74,19 @@
   --color-ink: #0c0a09; /* primary text on light */
   --color-ink-soft: #57534e; /* secondary text on light */
 
-  /* Accent */
-  --color-gold: #a16207; /* CTAs, links, rules */
-  --color-gold-light: #d4a04a; /* accent on very dark surfaces */
+  /* Accent — restrained brass rather than a saturated gold. Used for rules,
+     eyebrows and hairlines, never as a large glowing fill: the brief calls for
+     the site to read expensive through restraint, and warns specifically
+     against cheap-looking gold. The primary CTA is bone-on-ink instead, which
+     is both quieter and a far better contrast ratio than white on brass. */
+  --color-gold: #9c7c4a; /* rules, hairlines, small accents */
+  --color-gold-light: #cdb389; /* champagne — accent text on dark */
 
   /* Lines */
   --color-hair: #292524; /* hairline on dark */
   --color-hair-light: #ddd8d0; /* hairline on light */
+  --color-line: #292524; /* grid separators — alias of hair, kept because
+                            several hairline grids reference `bg-line` */
 
   /* Type */
   --font-display: 'Playfair Display', ui-serif, Georgia, serif;
@@ -198,12 +204,111 @@
   color: var(--color-gold-light);
 }
 
-/* A short gold rule, used under eyebrows and headings. */
+/* A short brass rule, used under eyebrows and headings. 1px, not 2px — at two
+   it started to read as a highlighter stripe rather than a hairline. */
 @utility gold-rule {
   display: block;
-  width: 56px;
-  height: 2px;
+  width: 64px;
+  height: 1px;
   background: var(--color-gold);
+}
+
+/* ---------------------------------------------------------------------------
+   Calls to action
+
+   Three levels, defined once. Previously every page re-specified its own
+   button classes inline, which is how one of them ended up with a hover state
+   that put near-white text on a near-white background.
+
+   `cta` is the primary: bone fill, ink text. Deliberately not a brass fill —
+   white-on-brass fails contrast at the small uppercase size these use, and a
+   large gold block is exactly the "cheap gold" the brief rules out.
+   --------------------------------------------------------------------------- */
+
+@layer components {
+  .cta,
+  .cta-ghost {
+    display: inline-block;
+    border-radius: 1px;
+    padding: 17px 36px;
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all var(--dur-mid) var(--ease-out-expo);
+  }
+
+  .cta {
+    background: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    background: #fff;
+    box-shadow: 0 18px 44px rgb(0 0 0 / 0.45);
+  }
+
+  /* On a light surface the primary inverts, so it stays the darkest element. */
+  .on-light .cta {
+    background: var(--color-ink);
+    color: var(--color-bone);
+  }
+
+  .on-light .cta:hover {
+    background: #000;
+    box-shadow: 0 18px 44px rgb(0 0 0 / 0.18);
+  }
+
+  .cta-ghost {
+    border: 1px solid color-mix(in srgb, var(--color-gold) 60%, transparent);
+    color: var(--color-gold-light);
+  }
+
+  .cta-ghost:hover {
+    border-color: var(--color-gold);
+    background: color-mix(in srgb, var(--color-gold) 12%, transparent);
+    color: var(--color-paper);
+  }
+
+  .on-light .cta-ghost {
+    border-color: color-mix(in srgb, var(--color-ink) 25%, transparent);
+    color: var(--color-ink);
+  }
+
+  .on-light .cta-ghost:hover {
+    border-color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-ink) 5%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Tertiary: a text link with a rule that fills in on hover. */
+  .cta-text {
+    display: inline-block;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+    padding-bottom: 2px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--color-gold-light);
+    transition: all var(--dur-mid) var(--ease-out-expo);
+  }
+
+  .cta-text:hover {
+    border-color: var(--color-gold);
+    color: var(--color-paper);
+  }
+
+  .on-light .cta-text {
+    border-color: color-mix(in srgb, var(--color-ink) 30%, transparent);
+    color: var(--color-ink-soft);
+  }
+
+  .on-light .cta-text:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
 }
 
 /* ---------------------------------------------------------------------------

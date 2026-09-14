@@ -4,113 +4,63 @@ import Layout from '~/layouts/Layout.astro';
 import Hero from '~/components/Hero.astro';
 import Split from '~/components/Split.astro';
 import Section from '~/components/Section.astro';
+import Pillars from '~/components/Pillars.astro';
+import JourneyArc from '~/components/JourneyArc.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
+import Collections from '~/components/Collections.astro';
 import QuoteBar from '~/components/QuoteBar.astro';
 import CtaBand from '~/components/CtaBand.astro';
-import { AIRPORTS, JOURNEY, ROUTES } from '~/data/content';
+import { JOURNEY_ARC, SAMPLE_JOURNEYS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { serviceSchema } from '~/lib/schema';
 import homeHero from '~/assets/home-hero.jpg';
 import cabinWork from '~/assets/cabin-work.jpg';
 import hangar from '~/assets/hangar.jpg';
-import londonHero from '~/assets/london-hero.jpg';
+import resortsHero from '~/assets/resorts-hero.jpg';
 import jetsHero from '~/assets/jets-hero.jpg';
 
 const meta = PAGES.home;
 
-const alternatives = [
-  {
-    kicker: 'Book direct with an operator',
-    title: 'Their fleet, their answer',
-    body: 'An operator will always recommend an aircraft it owns. If the right one for your sector is parked with somebody else, you will not hear about it.',
-  },
-  {
-    kicker: 'An online booking platform',
-    title: 'Fast until something moves',
-    body: 'Instant pricing is a real advantage. Then the meeting shifts, the aircraft goes technical, or the luggage does not fit, and there is nobody who knows your trip.',
-  },
-  {
-    kicker: 'Lapid Aviation',
-    title: 'A broker with no fleet to defend',
-    body: 'We hold no aircraft, so we have no reason to steer you. We search the market for your specific flight, present the options with their drawbacks stated, and stay on the line when the plan changes.',
-    highlight: true,
-  },
-];
+/**
+ * The home page is ordered as an argument, not as a service list:
+ *
+ *   what you are actually buying (pillars)
+ *   -> what that looks like as one journey (arc)
+ *   -> the aviation that starts it (split)
+ *   -> the world beyond it (ecosystem)
+ *   -> where you would stay (collections)
+ *   -> journeys made concrete (worked examples)
+ *   -> how it is held together (systems)
+ *   -> the invitation (enquiry)
+ *
+ * The competitor comparison that used to sit third has moved to /about/. It
+ * argued against other brokers, which is a sales move, and the brief asks for
+ * an invitation rather than a funnel.
+ */
 
 const standard = [
   {
-    title: 'Personal review',
-    body: 'Every enquiry is read and answered by a person, not routed through a quote engine.',
+    title: 'One relationship',
+    body: 'The person who plans the journey is the person who answers on the morning of departure, and the one who moves the car when the slot shifts.',
   },
   {
     title: 'Licensed operators only',
-    body: 'Every option comes from an appropriately licensed third-party operator, checked before it reaches you.',
-    link: { label: 'See how we vet', href: PAGES.vetting.url },
-  },
-  {
-    title: 'One person, start to finish',
-    body: 'The broker who quotes your flight stays on it through to boarding and back.',
+    body: 'Every aircraft comes from an appropriately licensed third-party operator, checked for your specific flight before it reaches you.',
+    link: { label: 'How we vet', href: PAGES.vetting.url },
   },
   {
     title: 'Discreet by default',
-    body: 'Your details, your itinerary and your preferences are handled in confidence, not shared beyond what a flight requires.',
+    body: 'Your movements, your household and your preferences stay with us. Nothing is shared beyond what a flight or a booking actually requires.',
+  },
+  {
+    title: 'Nothing invented',
+    body: 'Where we hold a direct relationship we say so. Where we are making an introduction, we say that instead — and we do not promise a landing site before it is confirmed.',
   },
 ];
-
-const services = [
-  {
-    title: 'Private jet charter',
-    body: 'Point-to-point flights from the London airports, sized to the group and the distance.',
-    href: PAGES.jets.url,
-  },
-  {
-    title: 'Helicopter charter',
-    body: 'Transfers, events and estate arrivals in and around London, including connections onto a waiting jet.',
-    href: PAGES.helicopter.url,
-  },
-  {
-    title: 'Business aviation',
-    body: 'Recurring corporate travel, multi-city itineraries and roadshows, as a standing arrangement.',
-    href: PAGES.business.url,
-  },
-  {
-    title: 'Airport transfers',
-    body: 'Chauffeur cars timed to your flight, at either end of the journey, through licensed partners.',
-    href: PAGES.transfers.url,
-  },
-  {
-    title: 'Resorts, villas & hotels',
-    body: "Introductions to where you're staying, for the trip either side of the flight.",
-    href: PAGES.resorts.url,
-  },
-];
-
-const journal = [
-  {
-    kicker: 'Cost',
-    title: 'How much does it cost to charter a private jet?',
-    body: 'What actually moves the number, and why charter is quoted per flight rather than per seat.',
-    href: PAGES.cost.url,
-  },
-  {
-    kicker: 'Guide',
-    title: 'First time flying private',
-    body: 'What happens from the moment you arrive at the terminal, and what nobody tells you in advance.',
-    href: PAGES.firsttime.url,
-  },
-  {
-    kicker: 'Business',
-    title: 'How private aviation saves executives time',
-    body: 'Where the hours come back, and how to tell whether a schedule justifies the aircraft.',
-    href: PAGES.business.url,
-  },
-];
-
-const routeHref = (route: (typeof ROUTES)[number]) =>
-  route.key === 'geneva' ? PAGES.routeGeneva.url : PAGES.jets.url;
 
 const schema = [
   serviceSchema({
-    name: 'Private jet and helicopter charter',
+    name: 'Private jet charter and travel concierge',
     description: meta.desc,
     serviceType: 'Private jet charter',
   }),
@@ -121,68 +71,24 @@ const schema = [
   <Hero
     image={homeHero}
     alt="A line of private jets on the apron at dusk"
-    eyebrow="London private aviation"
-    heading="Your schedule should belong to you."
-    standfirst="Lapid Aviation arranges private jet and helicopter charter from London. One broker, the right aircraft for the route, and a departure that fits the day you actually need to fly."
+    eyebrow="Private aviation & travel concierge"
+    heading="Tell us where you want to be."
+    standfirst="Lapid arranges the aircraft, and everything on either side of it. One relationship holding the flight, the car, the house and the reason you went."
     size="full"
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
-    secondary={{ label: 'What charter costs', href: PAGES.cost.url }}
+    primary={{ label: 'Request a Charter', href: PAGES.request.url }}
+    secondary={{ label: 'Plan Your Journey', href: PAGES.privateWorld.url }}
   />
 
-  <!-- Enquiry opener, lifted over the hero edge -->
-  <section class="relative z-10 -mt-10 lg:-mt-14">
-    <div class="shell">
-      <div class="shadow-[0_24px_60px_rgba(16,27,45,0.18)]">
-        <QuoteBar />
-      </div>
-    </div>
-  </section>
-
-  <Split
-    image={cabinWork}
-    alt="Two passengers working at a table in a private jet cabin"
-    eyebrow="Why Lapid"
-    heading="There are three ways to charter a jet. Only one of them works for you."
-    surface="obsidian"
-    flip
+  <!-- What the client is actually buying, before any mention of aircraft. -->
+  <Section
+    eyebrow="Why people fly this way"
+    heading="Nobody charters an aircraft because they want an aircraft."
+    standfirst="They want the day back. Four things sit underneath every journey we arrange, and they shape every decision we make on your behalf."
   >
-    <p>
-      We would rather explain the trade-offs than pretend they do not exist. We hold no aircraft,
-      so we have no reason to steer you toward one.
-    </p>
-    <p>
-      You see the shortlist with what each aircraft and airport costs you in time, money and
-      comfort — and the broker who quoted your flight is the one who answers on the morning of
-      departure.
-    </p>
-    <a
-      href={PAGES.about.url}
-      class="inline-block border-b border-gold/40 pb-px text-[13.5px] font-medium text-gold-light transition-colors hover:border-gold hover:text-paper"
-    >
-      How we work &rarr;
-    </a>
-  </Split>
-
-  <Section surface="charcoal" heading="The alternatives, honestly">
-    <ul class="grid gap-5 lg:grid-cols-3">
-      {
-        alternatives.map((item) => (
-          <li
-            class:list={[
-              'rounded-[3px] border p-[clamp(22px,2.6vw,32px)]',
-              item.highlight ? 'border-gold/45 bg-bone' : 'border-white/10',
-            ]}
-          >
-            <p class:list={['eyebrow', !item.highlight && '!text-slate']}>{item.kicker}</p>
-            <h3 class="mt-4 font-display text-[22px] leading-[1.25]">{item.title}</h3>
-            <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">{item.body}</p>
-          </li>
-        ))
-      }
-    </ul>
+    <Pillars />
   </Section>
 
-  <!-- The seven stages, over the hangar frame -->
+  <!-- The journey as one continuous thing, over the hangar frame. -->
   <section class="relative isolate overflow-hidden bg-charcoal">
     <!--
       Decorative only, hence the empty alt. Goes through <Image> rather than
@@ -199,157 +105,132 @@ const schema = [
       quality={55}
       loading="lazy"
       decoding="async"
-      class="absolute inset-0 -z-20 size-full object-cover opacity-25"
+      class="absolute inset-0 -z-20 size-full object-cover opacity-20"
     />
-    <div class="shell py-[clamp(56px,8vw,112px)]">
-      <p class="eyebrow !text-gold-light">From this page to the aircraft</p>
-      <h2 class="mt-4 max-w-[24ch] text-heading !text-paper">
-        Seven stages. You're involved in three.
-      </h2>
-      <p class="mt-5 max-w-[56ch] text-[16px] leading-[1.65] text-ash">
-        Charter goes wrong in the gaps between people. This is the whole sequence, and who is
-        holding it at each point.
-      </p>
+    <div class="shell py-[clamp(72px,10vw,150px)]">
+      <div data-reveal class="max-w-[820px]">
+        <p class="eyebrow">One journey</p>
+        <span class="gold-rule mt-5" aria-hidden="true"></span>
+        <h2 class="mt-7 text-heading">
+          From your door to the reason you travelled, without a handover.
+        </h2>
+        <p class="mt-6 max-w-measure text-[17px] leading-[1.7] text-ash">
+          Most trips lose their time in the gaps between suppliers — the car that
+          does not know the flight, the property that expects you at three. We hold
+          the whole line instead.
+        </p>
+      </div>
 
-      <ol class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          JOURNEY.map((step) => {
-            const yours = step.who === 'YOU' || step.who === 'YOU DECIDE';
-            return (
-              <li
-                class:list={[
-                  'border-t pt-5',
-                  yours ? 'border-gold-light/70' : 'border-white/18',
-                ]}
-              >
-                <div class="flex items-baseline justify-between gap-3">
-                  <span class="font-display text-[15px] tabular-nums" style={`color:${step.colour}`}>
-                    {step.n}
-                  </span>
-                  <span
-                    class:list={[
-                      'text-[9px] font-semibold tracking-[0.16em] uppercase',
-                      yours ? 'text-gold-light' : 'text-slate',
-                    ]}
-                  >
-                    {yours ? 'Your move' : 'We handle it'}
-                  </span>
-                </div>
-                <h3 class="mt-3 font-display text-[19px] leading-[1.3] !text-paper">{step.title}</h3>
-                <p class="mt-2 text-[13.5px] leading-[1.6] text-ash">{step.body}</p>
-              </li>
-            );
-          })
-        }
-      </ol>
+      <div data-reveal style="--reveal-delay:140ms" class="mt-[clamp(48px,6vw,84px)]">
+        <JourneyArc steps={JOURNEY_ARC} />
+      </div>
     </div>
   </section>
 
-  <Section eyebrow="What we arrange" heading="Five ways we take care of the journey.">
-    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-3">
-      {
-        services.map((service) => (
-          <li class="bg-obsidian">
-            <a
-              href={service.href}
-              class="group flex h-full flex-col p-[clamp(22px,2.6vw,32px)] transition-colors hover:bg-charcoal"
-            >
-              <h3 class="font-display text-[21px] leading-[1.25]">{service.title}</h3>
-              <p class="mt-3 flex-1 text-[14.5px] leading-[1.65] text-ash">{service.body}</p>
-              <span class="mt-6 text-[12px] font-semibold tracking-[0.13em] text-gold-light uppercase">
-                Explore
-                <span
-                  class="inline-block transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                >
-                  &nbsp;&rarr;
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-      <!--
-        Sixth tile. The hairline grid uses gap-px over a `bg-line` container,
-        so five services in a three-column grid left the empty cell rendering
-        as a solid rule-coloured block. This fills it and adds a CTA.
-      -->
-      <li class="bg-charcoal">
-        <a
-          href={PAGES.request.url}
-          class="group flex h-full flex-col justify-between p-[clamp(22px,2.6vw,32px)] transition-colors hover:bg-bone"
-        >
-          <h3 class="font-display text-[21px] leading-[1.25]">
-            Not sure which fits? Tell us the trip.
-          </h3>
-          <span class="mt-6 text-[12px] font-semibold tracking-[0.13em] text-gold-light uppercase">
-            Request a charter
-            <span
-              class="inline-block transition-transform group-hover:translate-x-1"
-              aria-hidden="true"
-            >
-              &nbsp;&rarr;
-            </span>
-          </span>
-        </a>
-      </li>
-    </ul>
+  <Split
+    image={cabinWork}
+    alt="Two passengers working at a table in a private jet cabin"
+    eyebrow="Where it starts"
+    heading="Aviation is the way in."
+    surface="obsidian"
+    flip
+  >
+    <p>
+      We hold no aircraft, so we have no fleet to defend and no reason to steer you
+      toward one. We search the market for the flight in front of us, and present
+      the options with their trade-offs written down.
+    </p>
+    <p>
+      That is also why the rest of the journey sits with us rather than with a
+      separate agency. The people who chose the airport are the people who brief
+      the car.
+    </p>
+    <a href={PAGES.jets.url} class="cta-text">Private jet charter &rarr;</a>
+  </Split>
+
+  <!-- The reveal: the ecosystem beyond the aircraft. -->
+  <Section
+    surface="charcoal"
+    eyebrow="The private world of Lapid"
+    heading="Seven parts of one journey."
+    standfirst="Private aviation is the entry point. Beyond it sits the ground, the stay and the reason for the trip — reached through one number rather than eight separate arrangements."
+  >
+    <Ecosystem />
+    <div class="mt-12" data-reveal>
+      <a href={PAGES.privateWorld.url} class="cta-ghost">Explore the Private World</a>
+    </div>
   </Section>
 
   <Split
-    image={londonHero}
-    alt="The London skyline and the River Thames"
-    eyebrow="Departure points"
-    heading="Six ways out of the city."
-    surface="charcoal"
+    image={resortsHero}
+    alt="An infinity pool and terrace looking out over a lake and mountains"
+    eyebrow="Where you stay"
+    heading="A collection, not a catalogue."
+    surface="obsidian"
   >
     <p>
-      Where you leave from changes the ground journey, the handling and sometimes the aircraft
-      available on the day. We weigh all three rather than defaulting to one field.
+      A short list of resorts, villas and hotels at the destinations we fly to most,
+      approached directly rather than through a booking engine. That is what makes a
+      late arrival or a held suite a conversation instead of a form.
     </p>
-    <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-[14.5px] text-paper">
-      {AIRPORTS.map((airport) => <li>{airport.name}</li>)}
-    </ul>
-    <a
-      href={PAGES.airportsHub.url}
-      class="inline-block border-b border-gold/40 pb-px text-[13.5px] font-medium text-gold-light transition-colors hover:border-gold hover:text-paper"
-    >
-      All airports &rarr;
-    </a>
+    <p>
+      Organised the way people actually think about a trip — by the kind of place
+      they want to wake up in.
+    </p>
+    <a href={PAGES.hotels.url} class="cta-text">Discover the Collection &rarr;</a>
   </Split>
 
-  <Section eyebrow="Routes" heading="Where we fly most.">
-    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-4">
+  <Section eyebrow="Curated collections" heading="Where would you like to wake up?">
+    <Collections />
+  </Section>
+
+  <!-- Journeys made concrete. -->
+  <Section
+    surface="charcoal"
+    eyebrow="Journeys"
+    heading="What it looks like when the pieces connect."
+    standfirst="Three shapes we arrange often. Illustrative rather than packaged — yours would be built around your dates."
+  >
+    <ul class="grid gap-px overflow-hidden bg-hair lg:grid-cols-3" data-reveal-group>
       {
-        ROUTES.map((route) => (
-          <li class="bg-obsidian">
-            <a
-              href={routeHref(route)}
-              class="group block h-full p-6 transition-colors hover:bg-charcoal"
-            >
-              <p class="eyebrow !text-slate">{route.cat}</p>
-              <h3 class="mt-3 font-display text-[20px]">London &rarr; {route.to}</h3>
-              <p class="mt-2 text-[13px] text-gold-light">{route.aircraft}</p>
-              <p class="mt-3 text-[13.5px] leading-[1.6] text-ash">{route.note}</p>
-            </a>
+        SAMPLE_JOURNEYS.map((journey) => (
+          <li class="flex flex-col bg-obsidian p-[clamp(24px,2.8vw,36px)]">
+            <p class="eyebrow !text-slate">{journey.kicker}</p>
+            <h3 class="mt-5 font-display text-[clamp(21px,1.9vw,26px)] leading-[1.2]">
+              {journey.title}
+            </h3>
+
+            {/* The route as a wrapping chain rather than a diagram, so it stays
+                legible at any width. */}
+            <ol class="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2">
+              {journey.steps.map((step, i) => (
+                <li class="flex items-center gap-2">
+                  <span class="text-[12px] tracking-[0.04em] text-paper">{step}</span>
+                  {i < journey.steps.length - 1 && (
+                    <span aria-hidden="true" class="text-[11px] text-gold/70">
+                      &rarr;
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+
+            <p class="mt-6 flex-1 text-[14.5px] leading-[1.7] text-ash">{journey.body}</p>
           </li>
         ))
       }
     </ul>
   </Section>
 
-  <Section surface="charcoal" heading="What every enquiry is built on" eyebrow="The Lapid standard">
-    <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
+  <Section eyebrow="The Lapid standard" heading="What every enquiry is built on.">
+    <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
       {
         standard.map((item) => (
-          <li class="border-t border-white/12 pt-5">
+          <li class="border-t border-white/12 pt-6">
             <h3 class="font-display text-[20px] leading-[1.3]">{item.title}</h3>
-            <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">{item.body}</p>
+            <p class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</p>
             {item.link && (
-              <a
-                href={item.link.href}
-                class="mt-3 inline-block text-[13px] text-gold-light transition-colors hover:text-paper"
-              >
+              <a href={item.link.href} class="cta-text mt-4">
                 {item.link.label} &rarr;
               </a>
             )}
@@ -359,33 +240,25 @@ const schema = [
     </ul>
   </Section>
 
+  <!-- The invitation. Placed at the end rather than lifted over the hero: a
+       four-field form overlapping the opening image read as a booking engine,
+       which is the one thing the brand is not. -->
   <Section
-    eyebrow="Journal"
-    heading="Straight answers to the questions people actually ask before their first charter."
+    surface="charcoal"
+    id="enquire"
+    eyebrow="Private access"
+    heading="Start with a destination, or just a date."
+    standfirst="No account and no commitment. Tell us roughly what you have in mind and a broker replies with what is genuinely possible."
   >
-    <ul class="grid gap-5 lg:grid-cols-3">
-      {
-        journal.map((entry) => (
-          <li>
-            <a
-              href={entry.href}
-              class="group flex h-full flex-col border-t-2 border-white/12 pt-6 transition-colors hover:border-gold"
-            >
-              <p class="eyebrow">{entry.kicker}</p>
-              <h3 class="mt-4 font-display text-[21px] leading-[1.28]">{entry.title}</h3>
-              <p class="mt-3 flex-1 text-[14.5px] leading-[1.65] text-ash">{entry.body}</p>
-              <span class="mt-5 text-[13px] font-medium text-gold-light">Read &rarr;</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="max-w-[760px]">
+      <QuoteBar />
+    </div>
   </Section>
 
   <CtaBand
     image={jetsHero}
     alt="Private jets parked on an open apron"
-    heading="Tell us the route and the day."
-    body="No commitment. We reply with options, not a hard sell."
+    heading="Where would you like to be?"
+    body="Tell us the destination and the day. We will hold everything in between."
   />
 </Layout>

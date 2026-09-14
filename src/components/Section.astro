@@ -39,7 +39,13 @@ const {
 const light = surface === 'bone';
 ---
 
-<section id={id} class:list={[surfaces[surface], 'py-[clamp(72px,10vw,150px)]', className]}>
+{/* `on-light` flips the shared .cta / .cta-ghost / .cta-text styles to their
+    dark-on-light variants. Without it a primary CTA inside a bone section
+    would render bone-on-bone. */}
+<section
+  id={id}
+  class:list={[surfaces[surface], light && 'on-light', 'py-[clamp(72px,10vw,150px)]', className]}
+>
   <div class="shell">
     {
       (eyebrow || heading || standfirst) && (

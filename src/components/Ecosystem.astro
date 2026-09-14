@@ -1,0 +1,49 @@
+---
+import { ECOSYSTEM } from '~/data/content';
+
+/**
+ * The seven stages of the Lapid ecosystem, as a stacked editorial list.
+ *
+ * Rows rather than cards: a grid of seven crowded cards is precisely the
+ * "crowded cards" the brief rules out, and a full-width row lets the numeral,
+ * the name and the line breathe. The whole row is the link target.
+ */
+interface Props {
+  /** Omit a stage by href — used on a service page to hide its own row. */
+  omit?: string;
+}
+
+const { omit }: Props = Astro.props;
+const stages = omit ? ECOSYSTEM.filter((stage) => stage.href !== omit) : ECOSYSTEM;
+---
+
+<ol class="border-t border-white/10" data-reveal-group>
+  {
+    stages.map((stage) => (
+      <li class="border-b border-white/10">
+        <a
+          href={stage.href}
+          class="group grid items-baseline gap-x-8 gap-y-3 py-[clamp(26px,3vw,40px)] transition-colors duration-700 hover:bg-charcoal/60 lg:grid-cols-[auto_minmax(0,1.1fr)_minmax(0,1.4fr)_auto]"
+        >
+          <span class="font-display text-[13px] tabular-nums text-slate">{stage.n}</span>
+
+          <div>
+            <h3 class="font-display text-[clamp(22px,2.4vw,32px)] leading-[1.12] transition-colors duration-700 group-hover:text-gold-light">
+              {stage.name}
+            </h3>
+            <p class="mt-2 text-[13.5px] italic text-gold-light/80">{stage.line}</p>
+          </div>
+
+          <p class="text-[14.5px] leading-[1.7] text-ash">{stage.body}</p>
+
+          <span
+            aria-hidden="true"
+            class="hidden text-[18px] text-slate transition-all duration-700 ease-(--ease-out-expo) group-hover:translate-x-1.5 group-hover:text-gold-light lg:block"
+          >
+            &rarr;
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ol>

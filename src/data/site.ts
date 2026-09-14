@@ -16,6 +16,10 @@ export type PageKey =
   | 'firsttime'
   | 'request'
   | 'transfers'
+  | 'vehicles'
+  | 'hotels'
+  | 'experiences'
+  | 'privateWorld'
   | 'resorts'
   | 'about'
   | 'contact'
@@ -39,9 +43,9 @@ export interface PageMeta {
 
 export const PAGES: Record<PageKey, PageMeta> = {
   home: {
-    title: 'Private Jet Charter London | Lapid Aviation',
+    title: 'Private Jet Charter & Travel Concierge London | Lapid Aviation',
     url: '/',
-    desc: 'Private jet and helicopter charter from London, arranged by an independent broker. Tell us the route and the day and we will return the aircraft that fit.',
+    desc: 'Private jet and helicopter charter from London, with the chauffeur, hotels, resorts and experiences around the flight held by one relationship. Tell us where you want to be.',
     intent: 'private jet charter London · transactional',
   },
   jets: {
@@ -81,15 +85,39 @@ export const PAGES: Record<PageKey, PageMeta> = {
     intent: 'request private jet charter · transactional',
   },
   transfers: {
-    title: 'Private Jet Airport Transfers | Lapid Aviation',
+    title: 'Chauffeur & Private Ground Transport | Lapid Aviation',
     url: '/transfers/',
-    desc: 'Chauffeur transfers to and from the aircraft, timed to your flight and arranged through licensed ground transport partners.',
+    desc: 'Chauffeur transfers timed to the aircraft rather than to the traffic, at both ends of the journey, arranged through licensed ground transport partners.',
     intent: 'private jet airport transfer London · transactional',
   },
+  vehicles: {
+    title: 'Luxury & Performance Vehicle Hire | Lapid Aviation',
+    url: '/vehicles/',
+    desc: 'Luxury and performance cars arranged at the destination, from a saloon waiting at the aircraft steps to a weekend behind something rarer.',
+    intent: 'luxury performance car hire · transactional',
+  },
+  hotels: {
+    title: 'Exclusive Hotels | Lapid Aviation',
+    url: '/hotels/',
+    desc: 'A curated collection of exceptional hotels at the destinations we fly to, held as relationships rather than listings. Discreet enquiry, no price grids.',
+    intent: 'exclusive luxury hotels · commercial investigation',
+  },
+  experiences: {
+    title: 'Private Experiences | Lapid Aviation',
+    url: '/experiences/',
+    desc: 'The reason for the journey: private experiences arranged around your dates, from a table that is not taking bookings to a mountain before the lifts open.',
+    intent: 'private luxury experiences · commercial investigation',
+  },
+  privateWorld: {
+    title: 'The Private World of Lapid | Lapid Aviation',
+    url: '/private-world/',
+    desc: 'Aviation is the way in. Beyond it sits chauffeur, vehicles, hotels, resorts and private experiences — one relationship holding the whole journey.',
+    intent: 'luxury travel concierge · commercial investigation',
+  },
   resorts: {
-    title: 'Resorts, Villas & Hotels | Lapid Aviation',
+    title: 'Bespoke Resorts & Private Villas | Lapid Aviation',
     url: '/resorts/',
-    desc: 'Introductions to villas, chalets and hotels at the destinations we fly to most, arranged through trusted destination partners.',
+    desc: 'A curated collection of resorts, villas and chalets at the destinations we fly to most, arranged through trusted destination partners.',
     intent: 'private jet resort access · commercial investigation',
   },
   about: {
@@ -166,13 +194,20 @@ export const PAGES: Record<PageKey, PageMeta> = {
   },
 };
 
-/** Primary navigation, as defined in the design. */
+/**
+ * Primary navigation.
+ *
+ * Aviation stays first and unqualified — it is the hero service and the entry
+ * point into the brand. The rest of the ecosystem sits behind a single
+ * "Private World" entry rather than as six more top-level links, so the header
+ * stays quiet and the wider offering is something the visitor discovers rather
+ * than something the nav shouts.
+ */
 export const NAV: { label: string; href: string }[] = [
   { label: 'Private jets', href: PAGES.jets.url },
   { label: 'Helicopters', href: PAGES.helicopter.url },
+  { label: 'Private World', href: PAGES.privateWorld.url },
   { label: 'Business aviation', href: PAGES.business.url },
-  { label: 'Transfers', href: PAGES.transfers.url },
-  { label: 'Safety', href: PAGES.vetting.url },
   { label: 'About', href: PAGES.about.url },
   { label: 'Contact', href: PAGES.contact.url },
 ];
@@ -190,13 +225,23 @@ export const FOOTER_GROUPS: { heading: string; links: { label: string; href: str
     ],
   },
   {
+    heading: 'Private World',
+    links: [
+      { label: 'The whole journey', href: PAGES.privateWorld.url },
+      { label: 'Chauffeur & ground', href: PAGES.transfers.url },
+      { label: 'Luxury & performance cars', href: PAGES.vehicles.url },
+      { label: 'Exclusive hotels', href: PAGES.hotels.url },
+      { label: 'Bespoke resorts & villas', href: PAGES.resorts.url },
+      { label: 'Private experiences', href: PAGES.experiences.url },
+    ],
+  },
+  {
     heading: 'Planning',
     links: [
       { label: 'What charter costs', href: PAGES.cost.url },
       { label: 'First time flying private', href: PAGES.firsttime.url },
       { label: 'How we vet operators', href: PAGES.vetting.url },
-      { label: 'Chauffeur transfers', href: PAGES.transfers.url },
-      { label: 'Resorts & villas', href: PAGES.resorts.url },
+      { label: 'Aircraft categories', href: PAGES.aircraft.url },
     ],
   },
   {

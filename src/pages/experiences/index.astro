@@ -1,0 +1,158 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import Split from '~/components/Split.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { EXPERIENCES, SAMPLE_JOURNEYS } from '~/data/content';
+import { PAGES } from '~/data/site';
+import { serviceSchema } from '~/lib/schema';
+import resortsHero from '~/assets/resorts-hero.jpg';
+import genevaHero from '~/assets/geneva-hero.jpg';
+import businessHero from '~/assets/business-hero.jpg';
+
+const meta = PAGES.experiences;
+
+/**
+ * Private experiences — the last stage of the ecosystem, and the one that
+ * explains why the journey happened at all.
+ *
+ * Written as categories rather than as a bookable inventory. Specific tables,
+ * guides and venues are not named: those relationships are destination-partner
+ * relationships that vary by season, and listing them as though they were on
+ * tap would be a promise we cannot keep.
+ */
+
+const schema = [
+  serviceSchema({
+    name: 'Private experiences and destination arrangements',
+    description: meta.desc,
+    serviceType: 'Travel concierge',
+  }),
+];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Hero
+    image={resortsHero}
+    alt="An infinity pool and terrace looking out over a lake and mountains"
+    eyebrow="Private experiences"
+    heading="Nobody remembers the aircraft."
+    standfirst="They remember the table on the terrace and the mountain before the lifts turned. The flight is how you got there — this is the reason you went."
+    primary={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+    secondary={{ label: 'Speak With Lapid', href: PAGES.contact.url }}
+  />
+
+  <Breadcrumb
+    trail={[
+      { name: 'Private World', url: PAGES.privateWorld.url },
+      { name: 'Private experiences', url: meta.url },
+    ]}
+  />
+
+  <Section
+    eyebrow="What we arrange"
+    heading="The far end of the journey."
+    standfirst="Four kinds of request, which between them cover most of what people actually ask for once the flight and the house are settled."
+  >
+    <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
+      {
+        EXPERIENCES.map((item) => (
+          <div class="border-t border-white/12 pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+              {item.name}
+            </dt>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Split
+    image={genevaHero}
+    alt="An aerial view of the Alps above a misty lake"
+    eyebrow="Why it sits with the flight"
+    heading="Timing is the whole difficulty."
+    surface="charcoal"
+    flip
+  >
+    <p>
+      Most of what makes an experience work is scheduling. First tracks mean being on
+      the mountain before the lifts turn, which means the helicopter the previous
+      evening rather than the morning flight. A table at nine means the car leaving
+      the house at half past eight, which means the aircraft landing by six.
+    </p>
+    <p>
+      When the flight, the car and the booking are arranged by three different
+      companies, nobody owns that chain. Here, one person does.
+    </p>
+  </Split>
+
+  <Section
+    eyebrow="Journeys"
+    heading="Built around the reason, not the route."
+    standfirst="Three shapes we arrange often — illustrative rather than packaged. Yours would be built around your dates and the thing you actually want to be doing."
+  >
+    <ul class="grid gap-px overflow-hidden bg-hair lg:grid-cols-3" data-reveal-group>
+      {
+        SAMPLE_JOURNEYS.map((journey) => (
+          <li class="flex flex-col bg-obsidian p-[clamp(24px,2.8vw,36px)]">
+            <p class="eyebrow !text-slate">{journey.kicker}</p>
+            <h3 class="mt-5 font-display text-[clamp(21px,1.9vw,26px)] leading-[1.2]">
+              {journey.title}
+            </h3>
+            <ol class="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2">
+              {journey.steps.map((step, i) => (
+                <li class="flex items-center gap-2">
+                  <span class="text-[12px] tracking-[0.04em] text-paper">{step}</span>
+                  {i < journey.steps.length - 1 && (
+                    <span aria-hidden="true" class="text-[11px] text-gold/70">
+                      &rarr;
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+            <p class="mt-6 flex-1 text-[14.5px] leading-[1.7] text-ash">{journey.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section eyebrow="How we answer" heading="Arranged where it can be. Declined where it cannot.">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Experiences are arranged through destination partners, venues and guides rather
+        than provided by Lapid. What is possible depends on the place, the season and
+        occasionally on the day of the week — a restaurant that will cook privately in
+        November may be immovable in August.
+      </p>
+      <p class="text-[16px] leading-[1.78] text-ash">
+        So we will tell you what we can reasonably arrange, what we can try for, and
+        what is not realistic for your dates. A concierge that says yes to everything
+        is a concierge that will disappoint you at the destination, where it is too
+        late to do anything about it.
+      </p>
+    </div>
+  </Section>
+
+  <Section
+    surface="charcoal"
+    eyebrow="The rest of the journey"
+    heading="Everything leading up to it."
+  >
+    <Ecosystem omit={meta.url} />
+  </Section>
+
+  <CtaBand
+    image={businessHero}
+    alt=""
+    heading="Start with the reason, not the route."
+    body="Tell us what you want to be doing and roughly when. We will work backwards to the aircraft."
+    cta={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+  />
+</Layout>

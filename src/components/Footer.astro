@@ -2,12 +2,16 @@
 import { FOOTER_GROUPS, PAGES, SITE } from '~/data/site';
 
 const year = new Date().getFullYear();
+
+// Derived from the data rather than hardcoded: the column count was fixed at
+// four and silently wrapped when a fifth link group was added.
+const columns = `1.2fr repeat(${FOOTER_GROUPS.length}, 1fr)`;
 ---
 
 <footer class="mt-auto bg-charcoal text-ash">
   <div class="shell py-[clamp(48px,7vw,84px)]">
-    <div class="grid gap-12 lg:grid-cols-[1.2fr_repeat(4,1fr)]">
-      <div class="max-w-[300px]">
+    <div class="grid gap-y-12 gap-x-8 sm:grid-cols-2 lg:grid-cols-(--footer-cols)" style={`--footer-cols:${columns}`}>
+      <div class="max-w-[300px] sm:col-span-2 lg:col-span-1">
         <a href="/" class="flex flex-col gap-[3px]" aria-label="Lapid Aviation — home">
           <span class="font-display text-[23px] leading-none tracking-[0.02em] text-paper">Lapid</span>
           <span class="text-[8.5px] font-semibold tracking-[0.34em] text-gold-light"
@@ -18,12 +22,7 @@ const year = new Date().getFullYear();
           {SITE.tagline} We own no aircraft. Every flight is operated by a licensed air carrier
           we have vetted for the trip.
         </p>
-        <a
-          href={PAGES.vetting.url}
-          class="mt-4 inline-block border-b border-gold-light/40 pb-px text-[13px] text-gold-light transition-colors hover:border-gold-light hover:text-paper"
-        >
-          How we vet operators
-        </a>
+        <a href={PAGES.vetting.url} class="cta-text mt-4">How we vet operators</a>
       </div>
 
       {

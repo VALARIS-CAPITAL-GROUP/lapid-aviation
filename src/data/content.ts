@@ -419,3 +419,233 @@ export const NEXT_STEPS: NumberedItem[] = [
   }
 ];
 
+/* ---------------------------------------------------------------------------
+   Brand layer — the outcome, the ecosystem and the curated collections.
+
+   Everything below sells the result of using Lapid rather than the mechanics
+   of chartering an aircraft. It is kept deliberately free of named properties,
+   named partners and claims of exclusivity: none of that has been confirmed,
+   and the brief is explicit that exclusivity must not be claimed until it has.
+   --------------------------------------------------------------------------- */
+
+export interface Pillar { name: string; line: string; body: string }
+export interface EcosystemStage { n: string; name: string; line: string; body: string; href: string }
+export interface ArcStep { label: string; note: string }
+export interface SampleJourney { kicker: string; title: string; steps: string[]; body: string }
+export interface Collection { name: string; line: string }
+
+/**
+ * The four ideas every page reinforces. Ordered as the brief orders them:
+ * time first, because it is the thing the client is actually buying.
+ */
+export const PILLARS: Pillar[] = [
+  {
+    name: 'Time',
+    line: 'The hours come back to you.',
+    body: 'No queue, no terminal, no connection built around somebody else’s timetable. You arrive minutes before departure and land closer to where you are going.',
+  },
+  {
+    name: 'Freedom',
+    line: 'Travel around your life.',
+    body: 'The aircraft waits for you rather than the reverse. Leave when the meeting finishes, return when the weekend is genuinely over, change it the evening before.',
+  },
+  {
+    name: 'Access',
+    line: 'One relationship, the whole journey.',
+    body: 'Aircraft, helicopters, chauffeur, cars, hotels, resorts and the experiences at the other end — reached through one number rather than eight separate arrangements.',
+  },
+  {
+    name: 'Effortless luxury',
+    line: 'The complexity stays with us.',
+    body: 'Slots, crew, handling, permissions, transfers and the table you wanted are held behind the scenes. What reaches you is a single itinerary and a person who knows it.',
+  },
+];
+
+/**
+ * The ecosystem, in the order the brief sets out. Aviation is stages one and
+ * two because it remains the hero service; the rest is what the visitor
+ * discovers as they go, not a menu of unrelated products.
+ */
+export const ECOSYSTEM: EcosystemStage[] = [
+  {
+    n: '01',
+    name: 'Private jets',
+    line: 'The way in.',
+    body: 'Point-to-point charter from the London airports, sized to the group and the distance rather than to a fleet we happen to own.',
+    href: '/private-jets/',
+  },
+  {
+    n: '02',
+    name: 'Helicopters',
+    line: 'Over the last hour of traffic.',
+    body: 'City to aircraft, aircraft to resort, or into a site with no useful runway — arranged as part of the same journey rather than booked separately.',
+    href: '/helicopter-charter/',
+  },
+  {
+    n: '03',
+    name: 'Chauffeur',
+    line: 'Timed to the aircraft.',
+    body: 'A car at the steps at both ends, briefed on the flight rather than on a pickup time, so a delay moves the car instead of stranding you.',
+    href: '/transfers/',
+  },
+  {
+    n: '04',
+    name: 'Luxury & performance cars',
+    line: 'Something to drive yourself.',
+    body: 'Where the point of the trip is the road, a saloon, an estate or something rarer waiting at the destination for the days you are there.',
+    href: '/vehicles/',
+  },
+  {
+    n: '05',
+    name: 'Exclusive hotels',
+    line: 'Held as relationships.',
+    body: 'A short collection of exceptional hotels at the destinations we fly to most, approached directly rather than through a booking engine.',
+    href: '/hotels/',
+  },
+  {
+    n: '06',
+    name: 'Bespoke resorts & villas',
+    line: 'The whole property, privately.',
+    body: 'Villas, chalets and resorts for the trip either side of the flight, arranged through destination partners who know the properties personally.',
+    href: '/resorts/',
+  },
+  {
+    n: '07',
+    name: 'Private experiences',
+    line: 'The reason you went.',
+    body: 'The table, the mountain, the berth, the paddock. Arranged around your dates so the journey ends in something worth the travel.',
+    href: '/experiences/',
+  },
+];
+
+/** The homepage scroll narrative: terminal to experience, in six beats. */
+export const JOURNEY_ARC: ArcStep[] = [
+  { label: 'Private terminal', note: 'Arrive minutes before, not hours.' },
+  { label: 'Private jet', note: 'Your aircraft, your departure time.' },
+  { label: 'Destination', note: 'The closest field, not the biggest.' },
+  { label: 'Chauffeur', note: 'A car at the aircraft steps.' },
+  { label: 'Private resort', note: 'Keys held, arrival expected.' },
+  { label: 'Experience', note: 'The reason the trip existed.' },
+];
+
+/**
+ * Worked journeys. Illustrative of how the pieces connect, and written as
+ * shapes rather than as packages with prices attached.
+ */
+export const SAMPLE_JOURNEYS: SampleJourney[] = [
+  {
+    kicker: 'A summer weekend',
+    title: 'London to a villa above the sea',
+    steps: ['London', 'Private terminal', 'Midsize jet', 'Ibiza', 'Chauffeur', 'Private villa'],
+    body: 'Leave west London after lunch on Friday, clear a private terminal in minutes, and be on a terrace before the light goes. The car knows the aircraft, and the villa knows the car.',
+  },
+  {
+    kicker: 'A winter week',
+    title: 'London to the Alps before the lifts open',
+    steps: ['London', 'Light jet', 'Geneva', 'Helicopter', 'Alpine resort'],
+    body: 'The road from Geneva into the mountains is the part that undoes the time the jet saved. A short helicopter leg removes it, and the skis travel with you rather than behind you.',
+  },
+  {
+    kicker: 'A working day',
+    title: 'Three cities, home for dinner',
+    steps: ['Farnborough', 'Super-midsize jet', 'Zurich', 'Milan', 'Chauffeur', 'London'],
+    body: 'Two meetings and a site visit placed where they are useful rather than where a timetable allows, with the aircraft waiting between them and one person holding the whole day.',
+  },
+];
+
+/**
+ * Curated collections. Organising ideas for the accommodation pages, so the
+ * experience reads as a private collection rather than as a search result.
+ * Named properties are deliberately absent until there is something real to
+ * name.
+ */
+export const COLLECTIONS: Collection[] = [
+  { name: 'Private Islands', line: 'A whole shoreline, and nobody else on it.' },
+  { name: 'Mediterranean Escapes', line: 'The coast from the Balearics to the Aegean.' },
+  { name: 'Alpine Retreats', line: 'Chalets with the mountain on the doorstep.' },
+  { name: 'City Icons', line: 'The addresses that define their skyline.' },
+  { name: 'Remote Luxury', line: 'Far from everything, short of nothing.' },
+  { name: 'Beachfront Villas', line: 'The sea at the end of the garden.' },
+  { name: 'Wellness Retreats', line: 'Somewhere designed around recovering.' },
+  { name: 'Bespoke Residences', line: 'Houses taken privately, staffed and stocked.' },
+];
+
+/** Chauffeur and ground transport, framed around what it removes. */
+export const GROUND_USES: NamedItem[] = [
+  {
+    name: 'At the aircraft steps',
+    body: 'Cars are permitted airside at most private terminals, so the walk from the seat to the cabin is a matter of yards rather than a terminal crossing.',
+  },
+  {
+    name: 'Briefed on the flight, not the clock',
+    body: 'Your driver is given the tail number and the movement, so an early arrival or a slot delay moves the car rather than leaving you waiting for it.',
+  },
+  {
+    name: 'Both ends of the journey',
+    body: 'The arrival car is arranged at the same time as the departure one, through partners at the destination rather than an app you open on landing.',
+  },
+  {
+    name: 'For the whole stay',
+    body: 'A car and driver held on call for the days you are there, rather than booked leg by leg as each plan firms up.',
+  },
+];
+
+/** Vehicle hire, kept honest about what depends on the destination. */
+export const VEHICLE_KINDS: NamedItem[] = [
+  {
+    name: 'Executive saloons',
+    body: 'The default for city arrivals and business travel: quiet, discreet, and unremarkable in the right way.',
+  },
+  {
+    name: 'Large SUVs and estates',
+    body: 'For families, luggage, skis and dogs, or where the last stretch of road is not tarmac.',
+  },
+  {
+    name: 'Performance and open-top',
+    body: 'Where the drive is the point. Availability is genuinely limited and seasonal, particularly in the Mediterranean and the Alps in peak weeks.',
+  },
+  {
+    name: 'Self-drive or chauffeured',
+    body: 'Either, at each destination. Self-drive depends on local licence and insurance requirements, which we confirm for your specific trip before promising a car.',
+  },
+];
+
+/** What the hotel and resort relationship actually is. Deliberately modest. */
+export const STAY_PRINCIPLES: NamedItem[] = [
+  {
+    name: 'A collection, not a catalogue',
+    body: 'A short list of places we would send someone we know, at the destinations we fly to most. No grids of a thousand properties competing on price.',
+  },
+  {
+    name: 'Approached directly',
+    body: 'Enquiries go to the property rather than through a booking platform, which is what makes a late arrival, an adjoining room or a held suite a conversation rather than a form.',
+  },
+  {
+    name: 'Arranged around the flight',
+    body: 'Check-in is set against your actual arrival, and the property is told when the aircraft lands rather than a nominal time.',
+  },
+  {
+    name: 'No invented exclusivity',
+    body: 'Where we have a direct relationship we will say so, and where we are making an introduction we will say that instead. We do not claim a property is ours alone.',
+  },
+];
+
+/** Experience categories, written as outcomes rather than as an activity list. */
+export const EXPERIENCES: NamedItem[] = [
+  {
+    name: 'Tables and cellars',
+    body: 'Restaurants that are not taking bookings, kitchens that will cook privately, and cellars that open for a small group.',
+  },
+  {
+    name: 'Mountains and water',
+    body: 'First tracks before the lifts turn, a guide who knows the off-piste, a berth for the week or a boat for the afternoon.',
+  },
+  {
+    name: 'Sport and the paddock',
+    body: 'Race weekends, finals and fixtures, with the arrival and departure windows — the genuinely difficult part — planned alongside the tickets.',
+  },
+  {
+    name: 'Quiet and closed doors',
+    body: 'A gallery outside opening hours, a maker’s workshop, a garden not open to the public. Arranged where it can be, declined where it cannot.',
+  },
+];
