@@ -3,10 +3,11 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 /**
- * Image-and-text half split. The main rhythm device of the redesign: breaks up
- * runs of text sections without needing a full-bleed image every time.
+ * Image-and-text half split. The main rhythm device: breaks up runs of text
+ * sections without needing a full-bleed image every time.
  *
- * `flip` puts the image on the right. `surface` sets the text side's background.
+ * `flip` puts the image on the right. The image carries a scroll-driven
+ * parallax so it drifts against the text column as the section passes.
  */
 interface Props {
   image: ImageMetadata;
@@ -14,9 +15,15 @@ interface Props {
   eyebrow?: string;
   heading: string;
   flip?: boolean;
-  surface?: 'sand' | 'cream' | 'navy';
+  surface?: 'obsidian' | 'charcoal' | 'bone';
   position?: string;
 }
+
+const surfaces = {
+  obsidian: 'bg-obsidian',
+  charcoal: 'bg-charcoal',
+  bone: 'bg-bone',
+} as const;
 
 const {
   image,
@@ -24,12 +31,11 @@ const {
   eyebrow,
   heading,
   flip = false,
-  surface = 'cream',
+  surface = 'charcoal',
   position = 'center',
 }: Props = Astro.props;
 
-const surfaces = { sand: 'bg-sand', cream: 'bg-cream', navy: 'bg-navy' } as const;
-const dark = surface === 'navy';
+const light = surface === 'bone';
 ---
 
 <section class:list={[surfaces[surface], 'overflow-hidden']}>
@@ -38,10 +44,11 @@ const dark = surface === 'navy';
       data-reveal
       style="--reveal-y:0px"
       class:list={[
-        'relative min-h-[300px] overflow-hidden lg:min-h-[clamp(440px,46vw,620px)]',
+        'relative min-h-[340px] overflow-hidden lg:min-h-[clamp(480px,50vw,700px)]',
         flip && 'lg:order-2',
       ]}
     >
+      <!-- Scaled past the frame so the parallax drift never exposes an edge. -->
       <Image
         src={image}
         alt={alt}
@@ -50,24 +57,32 @@ const dark = surface === 'navy';
         format="webp"
         loading="lazy"
         data-zoom
-        class="absolute inset-0 size-full object-cover"
+        data-parallax
+        class="absolute inset-0 size-full scale-115 object-cover"
         style={`object-position:${position}`}
       />
     </div>
 
     <div
       class:list={[
-        'flex items-center px-[clamp(22px,5vw,72px)] py-[clamp(44px,6vw,88px)]',
+        'flex items-center px-[clamp(24px,5vw,88px)] py-[clamp(56px,7vw,112px)]',
         flip && 'lg:order-1',
       ]}
     >
-      <div class="max-w-[54ch]" data-reveal style="--reveal-delay:120ms">
-        {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
-        <h2 class:list={['mt-4 text-heading', dark && '!text-sand']}>{heading}</h2>
+      <div class="max-w-[52ch]" data-reveal style="--reveal-delay:140ms">
+        {
+          eyebrow && (
+            <>
+              <p class:list={['eyebrow', light && '!text-gold']}>{eyebrow}</p>
+              <span class="gold-rule mt-5" aria-hidden="true" />
+            </>
+          )
+        }
+        <h2 class:list={['mt-7 text-heading', light && '!text-ink']}>{heading}</h2>
         <div
           class:list={[
-            'mt-6 space-y-5 text-[15.5px] leading-[1.72]',
-            dark ? 'text-[#a9b2bf]' : 'text-slate',
+            'mt-7 space-y-6 text-[16px] leading-[1.78]',
+            light ? 'text-ink-soft' : 'text-ash',
           ]}
         >
           <slot />

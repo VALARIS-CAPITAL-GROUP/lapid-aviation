@@ -1,0 +1,40 @@
+---
+/**
+ * Per-word headline reveal.
+ *
+ * Words are wrapped at build time rather than split on the client, so there is
+ * no SplitText-style DOM surgery, no layout thrash, and no risk of leaving the
+ * accessibility tree in a broken state — the text is plain text in the HTML,
+ * just wrapped in spans that CSS animates.
+ *
+ * Each word gets a masking span and an inner span translated 110% down; the
+ * `.is-in` class (added by the reveal sweep) slides them up in sequence.
+ */
+interface Props {
+  text: string;
+  /** ms between each word. */
+  stagger?: number;
+  class?: string;
+}
+
+const { text, stagger = 80, class: className }: Props = Astro.props;
+const words = text.split(' ');
+---
+
+<span
+  data-words
+  data-reveal-words
+  class:list={[className]}
+  style={`--word-stagger:${stagger}ms`}
+>
+  {
+    words.map((word, i) => (
+      <>
+        <span>
+          <span style={`--i:${i}`}>{word}</span>
+        </span>
+        {i < words.length - 1 ? ' ' : ''}
+      </>
+    ))
+  }
+</span>

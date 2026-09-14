@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import Words from '~/components/Words.astro';
 
 /**
  * Full-bleed image hero. The image carries the page; type sits over a gradient
@@ -37,8 +38,8 @@ const {
 
 const heights =
   size === 'full'
-    ? 'min-h-[min(88svh,860px)] py-[clamp(80px,14vh,160px)]'
-    : 'min-h-[min(58svh,560px)] py-[clamp(56px,9vh,104px)]';
+    ? 'min-h-[min(92svh,940px)] py-[clamp(96px,16vh,190px)]'
+    : 'min-h-[min(62svh,620px)] py-[clamp(64px,10vh,120px)]';
 
 // The hero is always the LCP element. It is the first thing in <body>, eager
 // and fetchpriority=high, so the browser starts it immediately — a separate
@@ -46,7 +47,7 @@ const heights =
 const widths = [640, 1024, 1600, 2200];
 ---
 
-<section class:list={['relative isolate flex items-end overflow-hidden bg-navy', heights]}>
+<section class:list={['relative isolate flex items-end overflow-hidden bg-charcoal', heights]}>
   <Image
     src={image}
     alt={alt}
@@ -61,34 +62,43 @@ const widths = [640, 1024, 1600, 2200];
   />
 
   <!--
-    Scrim: dark at the bottom where the type sits, clearing toward the top.
-    Weighted heavily enough that the copper eyebrow still reads against a
-    bright sky — a bare gradient left it washed out over pale cloud.
+    Scrim: near-opaque at the bottom where the type sits, clearing toward the
+    top. Heavy enough that the gold eyebrow reads against a bright sky — a
+    lighter gradient left it washed out over pale cloud.
   -->
   <div
-    class="absolute inset-0 -z-10 bg-gradient-to-t from-navy/95 via-navy/75 to-navy/35"
+    class="absolute inset-0 -z-10 bg-gradient-to-t from-obsidian via-obsidian/80 to-obsidian/40"
+    aria-hidden="true"
+  >
+  </div>
+  <!-- Side vignette, so type on the left always sits on the darkest area. -->
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-r from-obsidian/85 via-obsidian/25 to-transparent"
     aria-hidden="true"
   >
   </div>
 
   <div class="shell w-full">
-    <p class="eyebrow !text-copper-light" data-animate="rise">{eyebrow}</p>
-    <Heading
+    <p class="eyebrow" data-animate="rise">{eyebrow}</p>
+    <span
+      class="gold-rule mt-5"
       data-animate="rise"
-      style="--animate-delay:110ms"
+      style="--animate-delay:80ms"
+      aria-hidden="true"></span>
+    <Heading
       class:list={[
-        'mt-5 max-w-[15ch] text-balance !text-white',
-        size === 'full' ? 'text-display' : 'text-heading',
+        'mt-8 max-w-[14ch] text-balance !text-paper',
+        size === 'full' ? 'text-mega' : 'text-display',
       ]}
     >
-      {heading}
+      <Words text={heading} stagger={size === 'full' ? 90 : 70} />
     </Heading>
     {
       standfirst && (
         <p
           data-animate="rise"
-          style="--animate-delay:220ms"
-          class="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-white/78"
+          style="--animate-delay:340ms"
+          class="mt-8 max-w-[50ch] text-[17px] leading-[1.75] text-ash"
         >
           {standfirst}
         </p>
@@ -97,14 +107,14 @@ const widths = [640, 1024, 1600, 2200];
     {
       (primary || secondary) && (
         <div
-          class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4"
+          class="mt-11 flex flex-wrap items-center gap-x-9 gap-y-4"
           data-animate="rise"
-          style="--animate-delay:330ms"
+          style="--animate-delay:460ms"
         >
           {primary && (
             <a
               href={primary.href}
-              class="rounded-[2px] bg-copper px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-white hover:text-navy hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+              class="rounded-[1px] bg-gold px-9 py-4.5 text-[10.5px] font-semibold tracking-[0.2em] text-white uppercase transition-all duration-500 ease-(--ease-out-expo) hover:-translate-y-[3px] hover:bg-gold-light hover:shadow-[0_16px_40px_rgba(161,98,7,0.35)]"
             >
               {primary.label}
             </a>
@@ -112,7 +122,7 @@ const widths = [640, 1024, 1600, 2200];
           {secondary && (
             <a
               href={secondary.href}
-              class="border-b border-white/40 pb-px text-[13.5px] font-medium text-white transition-colors hover:border-copper-light hover:text-copper-light"
+              class="border-b border-white/30 pb-1 text-[13px] tracking-[0.02em] text-paper transition-colors duration-500 hover:border-gold-light hover:text-gold-light"
             >
               {secondary.label} &rarr;
             </a>

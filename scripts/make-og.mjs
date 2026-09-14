@@ -71,16 +71,16 @@ function overlay(title) {
 
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0">
-    <stop offset="0%" stop-color="#101B2D" stop-opacity="0.97"/>
-    <stop offset="55%" stop-color="#101B2D" stop-opacity="0.78"/>
-    <stop offset="100%" stop-color="#101B2D" stop-opacity="0.38"/>
+    <stop offset="0%" stop-color="#0C0A09" stop-opacity="0.98"/>
+    <stop offset="55%" stop-color="#0C0A09" stop-opacity="0.82"/>
+    <stop offset="100%" stop-color="#0C0A09" stop-opacity="0.42"/>
   </linearGradient></defs>
   <rect width="1200" height="630" fill="url(#g)"/>
-  <text x="72" y="96" font-family="Georgia, serif" font-size="42" fill="#EDE7DC">Lapid</text>
-  <text x="72" y="126" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="7" fill="#C08A5F">AVIATION</text>
+  <text x="72" y="96" font-family="Georgia, serif" font-size="42" fill="#FAFAF9">Lapid</text>
+  <text x="72" y="126" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="7" fill="#D4A04A">AVIATION</text>
   <text y="${firstBaseline}" font-family="Georgia, serif" font-size="54" fill="#FFFFFF">${tspans}</text>
-  <rect x="72" y="${ruleY}" width="64" height="3" fill="#9A5B33"/>
-  <text x="72" y="${ruleY + 52}" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#A9B2BF">Independent charter broker &#183; lapidaviation.com</text>
+  <rect x="72" y="${ruleY}" width="64" height="3" fill="#A16207"/>
+  <text x="72" y="${ruleY + 52}" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#A8A29E">Independent charter broker &#183; lapidaviation.com</text>
 </svg>`);
 }
 
