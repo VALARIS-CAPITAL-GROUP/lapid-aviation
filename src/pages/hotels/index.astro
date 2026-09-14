@@ -1,0 +1,125 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import Split from '~/components/Split.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import Collections from '~/components/Collections.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { STAY_PRINCIPLES } from '~/data/content';
+import { PAGES } from '~/data/site';
+import resortsHero from '~/assets/resorts-hero.jpg';
+import londonHero from '~/assets/london-hero.jpg';
+
+const meta = PAGES.hotels;
+
+/**
+ * Exclusive hotels.
+ *
+ * Deliberately not a hotel-search page: no grid of property cards, no prices,
+ * no star ratings, no "from £x per night". The brief rules that out, and there
+ * is also nothing real to list yet — naming properties or claiming exclusive
+ * access before either is confirmed would be inventing a portfolio.
+ *
+ * So the page sells the *nature of the relationship* instead, and routes every
+ * interest through a discreet enquiry.
+ */
+---
+
+<Layout meta={meta}>
+  <Hero
+    image={resortsHero}
+    alt="An infinity pool and terrace looking out over a lake and mountains"
+    eyebrow="Exclusive hotels"
+    heading="Places we would send someone we know."
+    standfirst="A short collection of exceptional hotels at the destinations we fly to most — approached directly, and arranged around the aircraft rather than around a check-in time."
+    primary={{ label: 'Discover the Collection', href: PAGES.request.url }}
+    secondary={{ label: 'Speak With Lapid', href: PAGES.contact.url }}
+  />
+
+  <Breadcrumb
+    trail={[
+      { name: 'Private World', url: PAGES.privateWorld.url },
+      { name: 'Exclusive hotels', url: meta.url },
+    ]}
+  />
+
+  <Section
+    eyebrow="How this works"
+    heading="A collection, not a catalogue."
+    standfirst="There is no search box on this page, and that is deliberate. A booking platform is the right tool when you want the cheapest room in a city on a Tuesday. It is the wrong tool when you want the corner suite, a late arrival held, and somebody at the property who knows you are coming off a private flight."
+  >
+    <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
+      {
+        STAY_PRINCIPLES.map((item) => (
+          <div class="border-t border-white/12 pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+              {item.name}
+            </dt>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section
+    surface="charcoal"
+    eyebrow="Curated collections"
+    heading="Where would you like to wake up?"
+    standfirst="Organised by the kind of place rather than by region or rate. Tell us which one interests you and we will come back with what is genuinely available for your dates."
+  >
+    <Collections />
+  </Section>
+
+  <Split
+    image={londonHero}
+    alt="The London skyline and the River Thames"
+    eyebrow="City icons"
+    heading="The addresses that define their skyline."
+    surface="obsidian"
+    flip
+  >
+    <p>
+      In the cities we fly to most — London, Paris, Geneva, Zurich, Milan, New York,
+      Dubai — the useful thing is rarely the room. It is the late arrival held
+      without a conversation, the car allowed to the door, and a duty manager who
+      recognises the name on the booking.
+    </p>
+    <p>
+      That comes from the property knowing us rather than from a membership tier, and
+      it is the part we can actually influence on your behalf.
+    </p>
+  </Split>
+
+  <!-- The honest framing. This is customer-facing copy, not a dev note. -->
+  <Section eyebrow="What we are not claiming" heading="No invented exclusivity.">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Plenty of travel companies describe every property on their site as exclusive
+        to them. Almost none of it is true. Where Lapid holds a direct relationship
+        with a property we will tell you so, and where we are simply making a
+        well-informed introduction we will tell you that instead.
+      </p>
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Hotels and resorts are arranged through third-party properties and destination
+        partners rather than operated by Lapid. Availability depends on the season and
+        the property, and in peak weeks the honest answer is sometimes that the place
+        you want is already taken.
+      </p>
+    </div>
+  </Section>
+
+  <Section surface="charcoal" eyebrow="The rest of the journey" heading="It rarely stops at the room.">
+    <Ecosystem omit={meta.url} />
+  </Section>
+
+  <CtaBand
+    image={resortsHero}
+    alt=""
+    heading="Tell us the kind of place, not the name of it."
+    body="A region, a week, a reason for going. We will come back with what is worth taking."
+    cta={{ label: 'Discover the Collection', href: PAGES.request.url }}
+  />
+</Layout>

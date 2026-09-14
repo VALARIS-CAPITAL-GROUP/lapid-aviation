@@ -3,39 +3,49 @@ import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
+import Split from '~/components/Split.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
+import { GROUND_USES } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 import heroImage from '~/assets/transfers-hero.jpg';
+import londonHero from '~/assets/london-hero.jpg';
 
 const meta = PAGES.transfers;
 
-const points = [
-  {
-    title: 'Timed to the flight, not the clock',
-    body: 'A delay on either side does not strand you: the car is timed to your flight, not to a fixed slot.',
-  },
-  {
-    title: 'Both ends of the journey',
-    body: 'The drive to your departure airport, and the collection on arrival, arranged as one request.',
-  },
-];
+/**
+ * Chauffeur and ground transport.
+ *
+ * URL kept as /transfers/ deliberately — it is in the published sitemap and
+ * carries the airport-transfer search intent. The framing is broader than it
+ * was: this is the ground stage of the journey, with self-drive vehicle hire
+ * split out to /vehicles/.
+ */
 
 const faqs = [
   {
     q: 'Is the transfer included in the charter price?',
-    a: 'Not usually. It is quoted separately, alongside the flight, so you see both costs before confirming.',
+    a: 'Not usually. It is quoted separately, alongside the flight, so you see both costs before confirming rather than finding ground transport folded into a single opaque number.',
+  },
+  {
+    q: 'Can the car come to the aircraft?',
+    a: 'At most private terminals, yes — vehicles are commonly permitted to the aircraft or to the terminal door. It depends on the airport and its handling agent, and we confirm it for your specific departure rather than assuming it.',
   },
   {
     q: "Can you arrange this for a destination you don't fly to often?",
-    a: 'Ask. If we do not have an existing partner there, we will say so rather than arrange something we cannot stand behind.',
+    a: 'Ask. Where we have an existing partner we will use them. Where we do not, we will say so rather than arrange something we cannot stand behind — which is a more useful answer than a car from a supplier none of us has met.',
+  },
+  {
+    q: 'What happens if the flight is delayed?',
+    a: 'The driver is briefed on the tail number and the movement rather than on a pickup time, so a slot delay or an early arrival moves the car. That is the practical difference between this and booking a car yourself for a nominal hour.',
   },
 ];
 
 const schema = [
   serviceSchema({
-    name: 'Private jet airport transfers',
+    name: 'Chauffeur and private ground transport',
     description: meta.desc,
     serviceType: 'Chauffeur airport transfer',
   }),
@@ -47,31 +57,91 @@ const schema = [
   <Hero
     image={heroImage}
     alt="A chauffeur holding open the door of an executive car"
-    eyebrow="Airport transfers"
-    heading="Chauffeur transfers, to and from the aircraft"
-    standfirst="A car booked to meet the aircraft, or to take you to it, timed against your actual flight rather than a fixed slot. Arranged through licensed chauffeur partners — we do not own the vehicles."
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
-    secondary={{ label: 'Looking for accommodation instead? See resorts, villas & hotels', href: PAGES.resorts.url }}
+    eyebrow="Chauffeur & ground transport"
+    heading="The last hour of the journey."
+    standfirst="A car at the aircraft steps at both ends, briefed on the flight rather than on a pickup time. Arranged through licensed chauffeur partners — we do not own the vehicles."
+    primary={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+    secondary={{ label: 'Luxury & performance cars', href: PAGES.vehicles.url }}
   />
 
-  <Breadcrumb trail={[{ name: 'Transfers & access', url: meta.url }]} />
+  <Breadcrumb
+    trail={[
+      { name: 'Private World', url: PAGES.privateWorld.url },
+      { name: 'Chauffeur & ground transport', url: meta.url },
+    ]}
+  />
 
-  <Section surface="charcoal" heading="How the timing works">
-    <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+  <Section
+    eyebrow="Why it matters"
+    heading="A jet saves three hours. A bad transfer gives two of them back."
+    standfirst="This is the least glamorous part of private travel and the part that most often decides whether the aircraft was worth chartering at all."
+  >
+    <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
       {
-        points.map((point) => (
-          <li class="border-t border-white/12 pt-5">
-            <h3 class="font-display text-[21px] leading-[1.3]">{point.title}</h3>
-            <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">{point.body}</p>
-          </li>
+        GROUND_USES.map((item) => (
+          <div class="border-t border-white/12 pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+              {item.name}
+            </dt>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+          </div>
         ))
       }
-    </ul>
+    </dl>
   </Section>
 
-  <Section heading="Common questions">
-    <Faq items={faqs} />
+  <Split
+    image={londonHero}
+    alt="The London skyline and the River Thames"
+    eyebrow="The London runs"
+    heading="Which airport is a ground question."
+    surface="charcoal"
+    flip
+  >
+    <p>
+      Farnborough is the dedicated business-aviation field, but from east London at
+      five o'clock Biggin Hill is frequently the shorter door-to-aircraft time. From
+      Mayfair on a clear Sunday the calculation reverses.
+    </p>
+    <p>
+      We weigh the drive alongside the aircraft and the handling rather than
+      defaulting to one field, which is why the transfer is planned at the same time
+      as the flight instead of afterwards.
+    </p>
+    <a href={PAGES.airportsHub.url} class="cta-text">Explore Destinations &rarr;</a>
+  </Split>
+
+  <Section eyebrow="Driving yourself" heading="If the road is the point, hire rather than transfer.">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        A chauffeur removes the last hour of a journey. It is the right answer for
+        business travel, late arrivals and anywhere you would rather be reading than
+        navigating.
+      </p>
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Where the drive is part of why you went — an Alpine pass, the coast road east
+        of Nice — a car waiting at the terminal makes more sense than a driver. We
+        arrange either, or both across the same trip.
+      </p>
+    </div>
+    <div class="mt-10" data-reveal>
+      <a href={PAGES.vehicles.url} class="cta-ghost">Luxury &amp; performance cars</a>
+    </div>
   </Section>
 
-  <CtaBand heading="Tell us the flight, and where the car needs to be." />
+  <Section surface="charcoal" heading="Common questions">
+    <Faq items={faqs} surface="charcoal" />
+  </Section>
+
+  <Section eyebrow="The rest of the journey" heading="One arrangement, not four.">
+    <Ecosystem omit={meta.url} />
+  </Section>
+
+  <CtaBand
+    image={heroImage}
+    alt=""
+    heading="Tell us the flight, and where the car needs to be."
+    body="Both ends, planned together, briefed against the aircraft rather than the clock."
+    cta={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+  />
 </Layout>

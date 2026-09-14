@@ -4,6 +4,7 @@ import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { HELI_FAQS, HELI_USES } from '~/data/content';
@@ -84,7 +85,16 @@ const schema = [
   </Section>
 
   <Section surface="charcoal" heading="Common questions">
-    <Faq items={HELI_FAQS} />
+    <Faq items={HELI_FAQS} surface="charcoal" />
+  </Section>
+
+  <!-- The ecosystem reveal: a helicopter leg is usually part of a longer chain. -->
+  <Section
+    eyebrow="Beyond the flight"
+    heading="A helicopter leg is rarely the whole journey."
+    standfirst="It is usually the piece that connects two others — a jet to a resort, a city to an aircraft. Those connections sit with the same person."
+  >
+    <Ecosystem omit={meta.url} />
   </Section>
 
   <CtaBand

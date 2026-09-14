@@ -1,0 +1,59 @@
+---
+/**
+ * The journey as a horizontal arc: private terminal through to the experience
+ * at the far end.
+ *
+ * This is the device that turns a list of services into one journey. It is a
+ * single <ol> with a connecting hairline behind it, so it stays a readable
+ * ordered list in the accessibility tree and with CSS off.
+ *
+ * On small screens it becomes a vertical spine rather than a scroller — a
+ * horizontal scroll region that gives no indication it scrolls is the usual
+ * way this pattern fails on a phone.
+ */
+import type { ArcStep } from '~/data/content';
+
+interface Props {
+  steps: ArcStep[];
+  class?: string;
+}
+
+const { steps, class: className }: Props = Astro.props;
+---
+
+<ol
+  class:list={['relative grid gap-y-9 sm:grid-flow-col sm:auto-cols-fr sm:gap-x-4', className]}
+  data-reveal-group
+>
+  {
+    steps.map((step, i) => (
+      <li class="relative flex gap-5 sm:block">
+        {/*
+          The connector. Vertical on mobile, horizontal from `sm` up. Drawn per
+          item rather than as one line across the whole row so it cannot
+          overhang the first and last markers.
+        */}
+        <span
+          aria-hidden="true"
+          class:list={[
+            'absolute bg-gold/30',
+            'left-[5px] top-3 h-full w-px sm:left-0 sm:top-[5px] sm:h-px sm:w-full',
+            i === steps.length - 1 && 'hidden',
+          ]}
+        ></span>
+
+        <span
+          aria-hidden="true"
+          class="relative mt-[7px] size-[11px] shrink-0 rotate-45 border border-gold-light/70 bg-obsidian sm:mt-0"
+        ></span>
+
+        <div class="sm:mt-7 sm:pr-6">
+          <p class="font-display text-[clamp(17px,1.4vw,20px)] leading-[1.25] text-paper">
+            {step.label}
+          </p>
+          <p class="mt-2 text-[13px] leading-[1.6] text-ash">{step.note}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>

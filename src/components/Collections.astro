@@ -1,0 +1,39 @@
+---
+import { COLLECTIONS } from '~/data/content';
+import { PAGES } from '~/data/site';
+
+/**
+ * The curated collections, as a hairline grid of names.
+ *
+ * These are organising ideas, not property listings — there is deliberately no
+ * photograph, price or "from £x" on them, because naming and pricing
+ * individual properties would mean inventing a portfolio that does not exist
+ * yet. Each one opens an enquiry rather than a results page.
+ */
+---
+
+<ul
+  class="grid gap-px overflow-hidden bg-hair sm:grid-cols-2 lg:grid-cols-4"
+  data-reveal-group
+>
+  {
+    COLLECTIONS.map((collection) => (
+      <li class="bg-obsidian">
+        <a
+          href={`${PAGES.request.url}?collection=${encodeURIComponent(collection.name)}`}
+          class="group flex h-full min-h-[172px] flex-col justify-between p-[clamp(22px,2.4vw,30px)] transition-colors duration-700 hover:bg-charcoal"
+        >
+          <h3 class="font-display text-[clamp(19px,1.7vw,23px)] leading-[1.2] transition-colors duration-700 group-hover:text-gold-light">
+            {collection.name}
+          </h3>
+          <div>
+            <p class="text-[13.5px] leading-[1.6] text-ash">{collection.line}</p>
+            <span class="mt-4 inline-block text-[10.5px] font-semibold tracking-[0.18em] text-slate uppercase transition-colors duration-700 group-hover:text-gold-light">
+              Enquire
+            </span>
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -5,6 +5,7 @@ import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import DisclosureList from '~/components/DisclosureList.astro';
 import Faq from '~/components/Faq.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
 import { AIRPORTS, CATEGORIES, JET_FAQS } from '~/data/content';
@@ -38,7 +39,7 @@ const schema = [
     eyebrow="Private jet charter"
     heading="Private jet charter from London"
     standfirst="Charter is a flight arranged for you alone: your departure time, your passengers, your airport. We source the aircraft from licensed operators and manage the arrangement end to end, from the first enquiry to the arrival transfer."
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    primary={{ label: 'Request a Charter', href: PAGES.request.url }}
     secondary={{ label: 'What it costs', href: PAGES.cost.url }}
   />
 
@@ -86,7 +87,16 @@ const schema = [
   </Section>
 
   <Section surface="charcoal" heading="Common questions">
-    <Faq items={JET_FAQS} />
+    <Faq items={JET_FAQS} surface="charcoal" />
+  </Section>
+
+  <!-- The ecosystem reveal: the flight is rarely the whole trip. -->
+  <Section
+    eyebrow="Beyond the flight"
+    heading="The aircraft is the way in, not the whole journey."
+    standfirst="Most trips need a car at both ends, somewhere worth staying and a reason for going. Those sit with the same person who arranged the aircraft."
+  >
+    <Ecosystem omit={meta.url} />
   </Section>
 
   <CtaBand

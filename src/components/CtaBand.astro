@@ -19,7 +19,7 @@ interface Props {
 const {
   heading,
   body,
-  cta = { label: 'Request a charter', href: PAGES.request.url },
+  cta = { label: 'Request a Charter', href: PAGES.request.url },
   image,
   alt = '',
   position = 'center',
@@ -52,11 +52,6 @@ const {
         <p class="mx-auto mt-5 max-w-[48ch] text-[15.5px] leading-[1.65] text-white/72">{body}</p>
       )
     }
-    <a
-      href={cta.href}
-      class="mt-9 inline-block rounded-[2px] bg-gold px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-bone hover:text-ink hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
-    >
-      {cta.label}
-    </a>
+    <a href={cta.href} class="cta mt-10">{cta.label}</a>
   </div>
 </section>

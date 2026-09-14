@@ -1,0 +1,150 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import Split from '~/components/Split.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { VEHICLE_KINDS } from '~/data/content';
+import { PAGES } from '~/data/site';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+import transfersHero from '~/assets/transfers-hero.jpg';
+import genevaHero from '~/assets/geneva-hero.jpg';
+
+const meta = PAGES.vehicles;
+
+/**
+ * Luxury and performance vehicle hire — the ecosystem stage after chauffeur.
+ *
+ * The distinction from /transfers/ is who drives: transfers is a chauffeur
+ * timed to the aircraft, this is a car you take for the days you are there.
+ *
+ * No makes or models are named. Availability is genuinely supplier- and
+ * season-dependent, and promising a specific car on a specific week is the
+ * fastest way for a concierge to be caught out.
+ */
+
+const faqs = [
+  {
+    q: 'Can a car be waiting at the aircraft?',
+    a: 'Usually, yes. Most private terminals allow a vehicle to the aircraft or to the terminal door, so the handover happens where you land rather than at a rental desk. It depends on the airport and its handling agent, which we confirm for your specific departure.',
+  },
+  {
+    q: 'Can I drive it myself?',
+    a: 'Often, but not always. Self-drive depends on local licence recognition, minimum driver age, and the insurance and deposit terms the supplier applies — all of which vary by country and by vehicle. We check the requirements for your licence and your destination before confirming a car.',
+  },
+  {
+    q: 'How far in advance do performance cars need arranging?',
+    a: 'Further than you would expect. The interesting vehicles exist in very small numbers at any given destination, and in peak Mediterranean and Alpine weeks they are committed well in advance. Ordinary executive cars are usually available at short notice; rare ones are not.',
+  },
+  {
+    q: 'Is this arranged by Lapid directly?',
+    a: 'No. Vehicles are provided by third-party hire companies and chauffeur operators at the destination. Lapid arranges and coordinates them alongside the flight, and remains your point of contact, but we are not the supplier and do not own a fleet.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    name: 'Luxury and performance vehicle hire',
+    description: meta.desc,
+    serviceType: 'Vehicle hire',
+  }),
+  faqSchema(faqs),
+];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Hero
+    image={transfersHero}
+    alt="A chauffeur holding open the door of an executive car"
+    eyebrow="Luxury & performance vehicles"
+    heading="Something waiting when you land."
+    standfirst="A car at the aircraft steps, or something rarer for the days you are there. Arranged alongside the flight, by the people who know when it lands."
+    primary={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+    secondary={{ label: 'Chauffeur transfers', href: PAGES.transfers.url }}
+  />
+
+  <Breadcrumb
+    trail={[
+      { name: 'Private World', url: PAGES.privateWorld.url },
+      { name: 'Luxury & performance vehicles', url: meta.url },
+    ]}
+  />
+
+  <Section
+    eyebrow="Two different things"
+    heading="A car that drives you, or a car you drive."
+    standfirst="Worth separating, because they solve different problems. A chauffeur removes the last hour of a journey. A vehicle on hire is for when the road itself is part of why you went."
+  >
+    <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
+      {
+        VEHICLE_KINDS.map((item) => (
+          <div class="border-t border-white/12 pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+              {item.name}
+            </dt>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Split
+    image={genevaHero}
+    alt="An aerial view of the Alps above a misty lake"
+    eyebrow="Where it earns its place"
+    heading="The roads worth the aircraft."
+    surface="charcoal"
+    flip
+  >
+    <p>
+      Some journeys are better for having a car in them rather than a driver. The
+      Alpine passes above Geneva in late summer, the coast east of Nice, the hill
+      roads behind Marbella, an empty motorway in the middle of Germany.
+    </p>
+    <p>
+      In those cases we fly you in, put the car at the terminal, and arrange the
+      chauffeur for the legs where you would rather not be driving — the late dinner,
+      the airport run at six.
+    </p>
+    <a href={PAGES.transfers.url} class="cta-text">Chauffeur &amp; ground transport &rarr;</a>
+  </Split>
+
+  <Section
+    eyebrow="What we will not promise"
+    heading="Availability is the honest constraint."
+  >
+    <div class="grid gap-10 lg:grid-cols-2">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Executive saloons and large SUVs are widely available at almost every
+        destination we fly to, usually at short notice. Performance and open-top cars
+        are not. They exist in very small numbers, they are concentrated in a handful
+        of places, and in peak weeks they are committed months ahead.
+      </p>
+      <p class="text-[16px] leading-[1.78] text-ash">
+        We would rather tell you that at the enquiry than confirm something and
+        substitute it at the destination. Where a specific kind of vehicle matters to
+        the trip, say so early and we will tell you honestly whether it is realistic.
+      </p>
+    </div>
+  </Section>
+
+  <Section heading="Common questions">
+    <Faq items={faqs} />
+  </Section>
+
+  <Section surface="charcoal" eyebrow="The rest of the journey" heading="One arrangement, not four.">
+    <Ecosystem omit={meta.url} />
+  </Section>
+
+  <CtaBand
+    image={transfersHero}
+    alt=""
+    heading="Tell us where you land and what you want to drive."
+    body="We will confirm what is genuinely available for those dates, and say so if it is not."
+    cta={{ label: 'Plan Your Journey', href: PAGES.request.url }}
+  />
+</Layout>

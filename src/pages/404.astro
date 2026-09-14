@@ -17,7 +17,7 @@ const popular = [
   { label: 'Private jet charter', href: PAGES.jets.url },
   { label: 'Helicopter charter', href: PAGES.helicopter.url },
   { label: 'What charter costs', href: PAGES.cost.url },
-  { label: 'Request a charter', href: PAGES.request.url },
+  { label: 'Request a Charter', href: PAGES.request.url },
   { label: 'How we vet operators', href: PAGES.vetting.url },
   { label: 'Contact a broker', href: PAGES.contact.url },
 ];
@@ -30,12 +30,12 @@ const popular = [
     eyebrow="Error 404"
     heading="That page has already departed."
     standfirst="The link is wrong or the page has moved. Everything below is still where it should be."
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
+    primary={{ label: 'Request a Charter', href: PAGES.request.url }}
     secondary={{ label: 'Back to the home page', href: '/' }}
   />
 
   <Section heading="Where you were probably going">
-    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-line sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-hair sm:grid-cols-2 lg:grid-cols-3">
       {
         popular.map((item) => (
           <li class="bg-obsidian">
@@ -62,10 +62,7 @@ const popular = [
       {
         NAV.map((item) => (
           <li>
-            <a
-              href={item.href}
-              class="border-b border-gold/30 pb-px text-[15px] text-gold-light transition-colors hover:border-gold hover:text-paper"
-            >
+            <a href={item.href} class="cta-text !text-[15px]">
               {item.label}
             </a>
           </li>

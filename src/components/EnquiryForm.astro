@@ -15,6 +15,13 @@
  */
 import { PAGES } from '~/data/site';
 
+interface Props {
+  /** Submit label. The concierge pages ask for a journey, not just a charter. */
+  submitLabel?: string;
+}
+
+const { submitLabel = 'Request a Charter' }: Props = Astro.props;
+
 const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT;
 
 const fieldClass =
@@ -27,8 +34,10 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
   action={endpoint}
   class="rounded-[3px] border border-white/12 bg-charcoal p-[clamp(20px,3vw,34px)]"
 >
-  <h2 class="font-display text-[24px] text-paper">Your flight</h2>
-  <p class="mt-2 text-[13.5px] text-ash">The four fields we need. Contact details after.</p>
+  <h2 class="font-display text-[26px] text-paper">Where would you like to be?</h2>
+  <p class="mt-2 text-[13.5px] text-ash">
+    The four fields we need to start. Everything around the flight can come later.
+  </p>
 
   <fieldset class="mt-7 mb-6 flex gap-[6px]">
     <legend class="sr-only">Trip type</legend>
@@ -46,9 +55,13 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
             checked={option.checked}
             class="peer sr-only"
           />
+          {/*
+            Checked state was `bg-charcoal` on a `bg-charcoal` form, so the
+            selected pill was invisible. Graphite is the next surface up.
+          */}
           <label
             for={`req-trip-${option.value}`}
-            class="block cursor-pointer rounded-[20px] px-[14px] py-[6px] text-[11.5px] font-semibold text-ash transition-colors peer-checked:bg-charcoal peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
+            class="block cursor-pointer rounded-[20px] border border-transparent px-[14px] py-[6px] text-[11.5px] font-semibold text-ash transition-colors peer-checked:border-gold/40 peer-checked:bg-graphite peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
           >
             {option.label}
           </label>
@@ -70,11 +83,15 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     </div>
     <div class="flex flex-col gap-2">
       <label class={labelClass} for="req-to">To</label>
+      {/*
+        Not required. Enquiries arriving from a collection tile ("Private
+        Islands", "Alpine Retreats") have a region in mind rather than an
+        airport, and a required field here made those a dead end.
+      */}
       <input
         id="req-to"
         name="to"
-        placeholder="Geneva"
-        required
+        placeholder="Geneva, or a region"
         class={fieldClass}
       />
     </div>
@@ -119,11 +136,14 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     </div>
   </div>
 
-  <details class="group mt-7">
+  {/* `id` so the prefill script can open this when a link arrives carrying a
+      collection or an interest, which would otherwise land in a closed panel
+      and look as though the link had been ignored. */}
+  <details class="group mt-7" id="req-more">
     <summary
       class="inline-flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-gold-light [&::-webkit-details-marker]:hidden"
     >
-      <span class="group-open:hidden">Add return legs, luggage, anything unusual</span>
+      <span class="group-open:hidden">Add onward legs, a stay, anything unusual</span>
       <span class="hidden group-open:inline">Hide extra detail</span>
       <span class="transition-transform group-open:rotate-45" aria-hidden="true">&#43;</span>
     </summary>
@@ -138,6 +158,15 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
         />
       </div>
       <div class="flex flex-col gap-2">
+        <label class={labelClass} for="req-interest">Anything beyond the flight</label>
+        <input
+          id="req-interest"
+          name="interest"
+          placeholder="A villa, a car, a table, a guide"
+          class={fieldClass}
+        />
+      </div>
+      <div class="flex flex-col gap-2 sm:col-span-2">
         <label class={labelClass} for="req-notes">Luggage, pets, anything unusual</label>
         <input
           id="req-notes"
@@ -149,12 +178,8 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     </div>
   </details>
 
-  <button
-    type="submit"
-    disabled={!endpoint}
-    class="mt-9 w-full cursor-pointer rounded-[2px] bg-charcoal px-8 py-[17px] text-[11.5px] font-semibold tracking-[0.13em] text-paper uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-gold hover:shadow-[0_10px_22px_rgba(16,27,45,0.22)] disabled:pointer-events-none disabled:opacity-40 sm:w-auto"
-  >
-    Request Charter
+  <button type="submit" disabled={!endpoint} class="cta mt-9 w-full cursor-pointer disabled:pointer-events-none disabled:opacity-40 sm:w-auto">
+    {submitLabel}
   </button>
 
   <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-ash">
@@ -193,10 +218,21 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
   setField('req-to', 'to');
   setField('req-date', 'date');
   setField('req-pax', 'pax');
+  setField('req-interest', 'interest');
 
   if (params.get('trip') === 'oneway') {
     const oneway = document.getElementById('req-trip-oneway');
     if (oneway instanceof HTMLInputElement) oneway.checked = true;
+  }
+
+  // A collection or experience tile links here carrying what it was. Drop it
+  // into the interest field and open the panel, so the choice is visibly
+  // carried over rather than silently discarded.
+  const interest = params.get('collection') ?? params.get('interest');
+  const interestField = document.getElementById('req-interest');
+  if (interest && interestField instanceof HTMLInputElement) {
+    interestField.value = interest;
+    document.getElementById('req-more')?.setAttribute('open', '');
   }
 
   const from = params.get('from');
@@ -204,5 +240,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
   const hint = document.getElementById('enquiry-hint');
   if (from && to && hint) {
     hint.textContent = `${from} to ${to}. A broker will reply with the options that fit.`;
+  } else if (interest && hint) {
+    hint.textContent = `${interest}. Tell us the dates and we will come back with what is possible.`;
   }
 </script>

@@ -3,22 +3,43 @@ import Layout from '~/layouts/Layout.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
+import Split from '~/components/Split.astro';
+import Collections from '~/components/Collections.astro';
+import Ecosystem from '~/components/Ecosystem.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
+import { STAY_PRINCIPLES } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
 import heroImage from '~/assets/resorts-hero.jpg';
+import genevaHero from '~/assets/geneva-hero.jpg';
 
 const meta = PAGES.resorts;
+
+/**
+ * Bespoke resorts and private villas.
+ *
+ * Sits alongside /hotels/: hotels is the city and the property-with-a-front-
+ * desk end, this is taking a whole house. Both route through the same curated
+ * collections, and both are deliberately free of named properties and prices.
+ */
 
 const faqs = [
   {
     q: 'Do you book the property directly?',
-    a: 'We make the introduction; the booking and its terms sit between you and the property or its agent.',
+    a: 'It depends on the property. With some we deal directly; with others we make an introduction and the booking sits between you and the property or its agent. We will tell you which applies before you commit, rather than implying a relationship we do not have.',
   },
   {
     q: 'Can this be arranged alongside the flight?',
-    a: 'Yes — tell us both when you enquire and we coordinate timing between the two.',
+    a: 'Yes, and it is the main reason to arrange it through us. Tell us both at the enquiry and the arrival time, the transfer and the check-in are planned as one thing — so the property expects you when the aircraft actually lands rather than at a nominal hour.',
+  },
+  {
+    q: 'Is a villa better value than a hotel for a group?',
+    a: 'Often, for families and groups travelling together, because you are paying for a property rather than for six rooms. It is usually worse for a short city stay, where a hotel does more for you. We will say which we would take for your trip.',
+  },
+  {
+    q: 'How far ahead do peak weeks need arranging?',
+    a: 'Further than most people expect. Prime Mediterranean villas in August and Alpine chalets over New Year and February half-term are frequently committed six to twelve months ahead. At short notice in those windows the honest answer is often that what you want is gone.',
   },
 ];
 
@@ -29,25 +50,96 @@ const schema = [faqSchema(faqs)];
   <Hero
     image={heroImage}
     alt="An infinity pool and terrace overlooking a lake at sunset"
-    eyebrow="Exclusive access"
-    heading="Introductions to resorts, villas and hotels"
-    standfirst="For the stay either side of the flight, we can introduce you to villas, chalets and hotels at the destinations we fly to most. We pass the request to a trusted partner and stay involved until it is confirmed. We do not own or operate any property."
-    primary={{ label: 'Request a charter', href: PAGES.request.url }}
-    secondary={{ label: 'Need a car at either end instead? See airport transfers', href: PAGES.transfers.url }}
+    eyebrow="Bespoke resorts & villas"
+    heading="The whole house, privately."
+    standfirst="Villas, chalets and resorts for the stay either side of the flight — arranged through destination partners who know the properties personally, and planned around the aircraft rather than around a check-in time."
+    primary={{ label: 'Discover the Collection', href: PAGES.request.url }}
+    secondary={{ label: 'Exclusive hotels', href: PAGES.hotels.url }}
   />
 
-  <Breadcrumb trail={[{ name: 'Resorts, villas & hotels', url: meta.url }]} />
+  <Breadcrumb
+    trail={[
+      { name: 'Private World', url: PAGES.privateWorld.url },
+      { name: 'Bespoke resorts & villas', url: meta.url },
+    ]}
+  />
 
-  <Section surface="charcoal" heading="What we do, and what we do not">
-    <p class="max-w-[760px] text-[16px] leading-[1.7] text-ash">
-      Availability, pricing and terms are set by the property or its agent, not by Lapid Aviation.
-      We make the introduction and stay reachable if anything needs coordinating with your flight.
+  <Section
+    eyebrow="How this works"
+    heading="A collection, not a catalogue."
+    standfirst="There is no search box and no price grid on this page. A booking platform is the right tool for the cheapest room in a city on a Tuesday; it is the wrong one for taking a house for a week with staff, a chef and a car included."
+  >
+    <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
+      {
+        STAY_PRINCIPLES.map((item) => (
+          <div class="border-t border-white/12 pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+              {item.name}
+            </dt>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section
+    surface="charcoal"
+    eyebrow="Curated collections"
+    heading="Where would you like to wake up?"
+    standfirst="Organised by the kind of place rather than by region or rate. Tell us which interests you and we will come back with what is genuinely available."
+  >
+    <Collections />
+  </Section>
+
+  <Split
+    image={genevaHero}
+    alt="An aerial view of the Alps above a misty lake"
+    eyebrow="Alpine retreats"
+    heading="Chalets, and the last hour to reach them."
+    surface="obsidian"
+    flip
+  >
+    <p>
+      The chalet is the easy part. The difficult part is the road up from Geneva on a
+      Saturday in February, which can take longer than the flight from London and
+      undo everything the aircraft saved.
     </p>
+    <p>
+      So we plan the transfer before the property — a helicopter leg where it is
+      justified, a driver who has done the run before where it is not.
+    </p>
+    <a href={PAGES.transfers.url} class="cta-text">Chauffeur &amp; ground transport &rarr;</a>
+  </Split>
+
+  <Section eyebrow="What we are not claiming" heading="No invented exclusivity.">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Availability, pricing and terms are set by the property or its agent, not by
+        Lapid Aviation. We own and operate no property, and we do not claim that any
+        house on our list is ours alone.
+      </p>
+      <p class="text-[16px] leading-[1.78] text-ash">
+        What we do is make a well-informed introduction, coordinate it against the
+        flight, and stay reachable while it is being confirmed — including when
+        something needs moving at short notice.
+      </p>
+    </div>
   </Section>
 
   <Section heading="Common questions">
     <Faq items={faqs} />
   </Section>
 
-  <CtaBand heading="Tell us the flight, and where you'd like to stay." />
+  <Section surface="charcoal" eyebrow="The rest of the journey" heading="It rarely stops at the house.">
+    <Ecosystem omit={meta.url} />
+  </Section>
+
+  <CtaBand
+    image={heroImage}
+    alt=""
+    heading="Tell us the kind of place, not the name of it."
+    body="A region, a week, and how many of you. We will come back with what is worth taking."
+    cta={{ label: 'Discover the Collection', href: PAGES.request.url }}
+  />
 </Layout>

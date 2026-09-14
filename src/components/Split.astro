@@ -38,7 +38,8 @@ const {
 const light = surface === 'bone';
 ---
 
-<section class:list={[surfaces[surface], 'overflow-hidden']}>
+{/* `on-light` flips the shared CTA styles to their dark-on-light variants. */}
+<section class:list={[surfaces[surface], light && 'on-light', 'overflow-hidden']}>
   <div class="grid items-stretch lg:grid-cols-2">
     <div
       data-reveal

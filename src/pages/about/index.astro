@@ -17,6 +17,33 @@ const team = [
   { role: 'Private Aviation Broker', name: 'To be introduced' },
 ];
 
+/**
+ * The three-way comparison, moved here from the home page.
+ *
+ * It argues against the alternatives, which is a sales move and reads badly as
+ * the third thing a visitor sees. On an "about" page, where someone has gone
+ * looking for how the company works, the same argument is useful rather than
+ * pushy — so it was relocated rather than deleted.
+ */
+const alternatives = [
+  {
+    kicker: 'Book direct with an operator',
+    title: 'Their fleet, their answer',
+    body: 'An operator will always recommend an aircraft it owns. If the right one for your sector is parked with somebody else, you will not hear about it.',
+  },
+  {
+    kicker: 'An online booking platform',
+    title: 'Fast until something moves',
+    body: 'Instant pricing is a real advantage. Then the meeting shifts, the aircraft goes technical, or the luggage does not fit, and there is nobody who knows your trip.',
+  },
+  {
+    kicker: 'Lapid Aviation',
+    title: 'A broker with no fleet to defend',
+    body: 'We hold no aircraft, so we have no reason to steer you. We search the market for your specific flight, present the options with their drawbacks stated, and stay on the line when the plan changes.',
+    highlight: true,
+  },
+];
+
 const principles = [
   {
     title: 'What a broker does',
@@ -77,8 +104,59 @@ const principles = [
     </ul>
   </Section>
 
+  <Section
+    surface="charcoal"
+    eyebrow="The alternatives, honestly"
+    heading="There are three ways to charter an aircraft."
+    standfirst="Each of them works for somebody. It is worth knowing which one you are using, and what it costs you when the plan changes."
+  >
+    <ul class="grid gap-5 lg:grid-cols-3" data-reveal-group>
+      {
+        alternatives.map((item) => (
+          <li
+            class:list={[
+              'rounded-[3px] border p-[clamp(22px,2.6vw,32px)]',
+              item.highlight ? 'on-light border-gold/45 bg-bone' : 'border-white/10',
+            ]}
+          >
+            <p class:list={['eyebrow', item.highlight ? '!text-gold' : '!text-slate']}>
+              {item.kicker}
+            </p>
+            <h3
+              class:list={[
+                'mt-4 font-display text-[22px] leading-[1.25]',
+                item.highlight && '!text-ink',
+              ]}
+            >
+              {item.title}
+            </h3>
+            <p
+              class:list={[
+                'mt-3 text-[14.5px] leading-[1.7]',
+                item.highlight ? 'text-ink-soft' : 'text-ash',
+              ]}
+            >
+              {item.body}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section eyebrow="Beyond the aircraft" heading="What else sits with us.">
+    <div class="max-w-measure">
+      <p class="text-[16px] leading-[1.78] text-ash">
+        Charter is the entry point, but most trips need a car, somewhere to stay and a
+        reason for going. We arrange those too, through destination partners rather
+        than as services we provide ourselves.
+      </p>
+      <a href={PAGES.privateWorld.url} class="cta-ghost mt-9">Explore the Private World</a>
+    </div>
+  </Section>
+
   <CtaBand
     heading="Questions before your first enquiry?"
-    cta={{ label: 'Contact us', href: PAGES.contact.url }}
+    cta={{ label: 'Speak With Lapid', href: PAGES.contact.url }}
   />
 </Layout>
