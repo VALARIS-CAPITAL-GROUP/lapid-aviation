@@ -22,12 +22,20 @@
  * empty, which is a fine fallback.
  */
 
+import { RESPONSE_TIME } from '~/data/site';
+
 interface Props {
   /** Submit label. The concierge pages ask for a journey, not just a charter. */
   submitLabel?: string;
 }
 
 const { submitLabel = 'Request a Charter' }: Props = Astro.props;
+
+// A stated response time is the strongest thing this form can say, so it goes
+// first when we have one. Until RESPONSE_TIME is set we promise nothing.
+const hint = RESPONSE_TIME
+  ? `A broker replies ${RESPONSE_TIME}. No commitment, and options rather than a hard sell.`
+  : 'No commitment. We reply with options, not a hard sell.';
 
 /**
  * An explicit endpoint wins; otherwise fall back to Netlify Forms, which
@@ -221,9 +229,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-body upperca
     {submitLabel}
   </button>
 
-  <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-body">
-    No commitment. We reply with options, not a hard sell.
-  </p>
+  <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-body">{hint}</p>
 
   {
     /* Dev-only reminder of the one manual step Netlify Forms needs. Not shown

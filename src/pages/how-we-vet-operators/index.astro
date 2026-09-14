@@ -4,7 +4,7 @@ import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
-import { ACCREDITATIONS, BROKER_QUESTIONS } from '~/data/content';
+import { ACCREDITATIONS, BROKER_QUESTIONS, TRIP_BRIEF } from '~/data/content';
 import { PAGES } from '~/data/site';
 import heroImage from '~/assets/jets-apron.jpg';
 
@@ -94,6 +94,36 @@ const questions = [
   </Section>
 
   <!--
+    The competitor review found the market's trust signals are all badges:
+    LunaJets' ARGUS certification, Charter-A's Trustpilot stars. We hold no
+    accreditation yet, so competing on badges is not available. What is
+    available is the substance behind the best of them — Wyvern's per-trip
+    verification — delivered as a commitment we keep rather than a logo.
+  -->
+  <Section
+    surface="tint"
+    eyebrow="Before you pay"
+    heading="What we send you, without being asked"
+    standfirst="The section above lists what you can ask us. This is what arrives anyway, with every set of options, whether or not you think to request it. It is the substance of a per-trip safety verification, which is the one part of the accreditation industry that genuinely helps a passenger."
+  >
+    <ol class="grid gap-x-12 gap-y-9 sm:grid-cols-2">
+      {
+        TRIP_BRIEF.map((item) => (
+          <li class="border-t border-rule pt-5">
+            <p class="text-[13px] tabular-nums text-accent">{item.n}</p>
+            <h3 class="mt-2 font-display text-[20px] leading-[1.3]">{item.name}</h3>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-body">{item.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-10 max-w-measure text-[14.5px] leading-[1.7] text-body">
+      If any of it is missing from something we send you, ask. Getting it wrong is a failure on
+      our side, not an inconvenience on yours.
+    </p>
+  </Section>
+
+  <!--
     Added after reviewing how the London market handles safety. Two patterns:
     name-dropping an accreditation with no explanation, or "rigorous safety
     protocols" with nothing behind it at all. Neither tells a client that
@@ -101,7 +131,6 @@ const questions = [
     explanation costs us nothing and is the most useful thing on the page.
   -->
   <Section
-    surface="tint"
     eyebrow="Reading the acronyms"
     heading="What the safety badges actually mean"
     standfirst="Charter websites are full of these, rarely with an explanation. The distinction that matters is the one in the second column: some of them audit the company flying the aircraft, and some audit the company selling you the flight. They are not substitutes for each other."
@@ -133,6 +162,7 @@ const questions = [
   </Section>
 
   <Section
+    surface="tint"
     eyebrow="Due diligence"
     heading="Five questions worth asking any charter broker"
     standfirst="Including us. Most of this market will answer the first three comfortably and go quiet on the last two, which is precisely why they are worth asking."

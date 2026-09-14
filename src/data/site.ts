@@ -227,6 +227,37 @@ export function routeMeta(route: RouteDetail): PageMeta {
 export const ROUTE_URLS: string[] = ROUTE_DETAIL.map((route) => `/routes/${route.slug}/`);
 
 /**
+ * A link to the enquiry form with the fields we already know filled in.
+ *
+ * EnquiryForm reads `from`, `to`, `date`, `pax`, `trip` and `interest` off the
+ * query string on load. Route and collection pages used to link to the bare
+ * form, so a visitor who had just read a page about London–Nice arrived at an
+ * empty "From / To" and had to type it again — the prefill machinery existed
+ * and nothing upstream was using it.
+ */
+export function requestHref(
+  params: Partial<Record<'from' | 'to' | 'date' | 'pax' | 'trip' | 'interest', string>>,
+): string {
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value) search.set(key, value);
+  }
+  const query = search.toString();
+  return query ? `${PAGES.request.url}?${query}` : PAGES.request.url;
+}
+
+/**
+ * How quickly an enquiry is answered, stated on the form.
+ *
+ * `null` like CONTACT, and for the same reason: every competitor in this
+ * market promises 24/7 availability, and a stated response time is the single
+ * strongest thing a form can say — but only if it is true and kept. Set it to
+ * something you will actually hold to ('within the hour, day or night',
+ * 'inside two hours, 7am to 11pm') and the enquiry form says so everywhere.
+ */
+export const RESPONSE_TIME: string | null = null;
+
+/**
  * Primary navigation.
  *
  * Aviation stays first and unqualified — it is the hero service and the entry

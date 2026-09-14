@@ -8,7 +8,7 @@ import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import RateTable from '~/components/RateTable.astro';
 import { ROUTE_DETAIL, RATE_CAVEATS, type RouteDetail } from '~/data/content';
-import { PAGES, routeMeta } from '~/data/site';
+import { PAGES, requestHref, routeMeta } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 import genevaHero from '~/assets/geneva-hero.jpg';
 import jetsHero from '~/assets/jets-hero.jpg';
@@ -45,6 +45,10 @@ const heroes: Record<string, ImageMetadata> = {
 
 const heroImage = heroes[route.image] ?? jetsHero;
 
+// Carries the route into the form, so the visitor does not retype what they
+// have just spent a page reading about.
+const enquire = requestHref({ from: 'London', to: route.city });
+
 const links = {
   firsttime: { label: 'What to expect', href: PAGES.firsttime.url },
   transfers: { label: 'Ground transfer', href: PAGES.transfers.url },
@@ -76,7 +80,7 @@ const schema = [
     eyebrow={route.eyebrow}
     heading={`Private jet charter from London to ${route.city}`}
     standfirst={route.standfirst}
-    primary={{ label: 'Request this route', href: PAGES.request.url }}
+    primary={{ label: 'Request this route', href: enquire }}
   />
 
   <Breadcrumb
@@ -200,6 +204,6 @@ const schema = [
   <CtaBand
     heading={`Request London to ${route.city}.`}
     body="Tell us the day and the passenger count. A broker replies with the realistic options, and the trade-offs written down."
-    cta={{ label: 'Request this route', href: PAGES.request.url }}
+    cta={{ label: 'Request this route', href: enquire }}
   />
 </Layout>

@@ -1092,6 +1092,414 @@ export const ROUTE_DETAIL: RouteDetail[] = [
     ],
     priority: 0.6,
   },
+  {
+    slug: 'london-to-amsterdam',
+    city: 'Amsterdam',
+    title: 'Private Jet London to Amsterdam | Lapid Aviation',
+    desc: 'Private jet charter from London to Amsterdam. Block time, suitable aircraft, Rotterdam as an alternative and what drives the cost.',
+    intent: 'private jet London to Amsterdam · transactional',
+    image: 'business',
+    eyebrow: 'European route',
+    standfirst:
+      'Under an hour in the air, which makes this the route where chartering is hardest to justify on speed alone and easiest to justify on the day. Scheduled options are frequent and cheap; what they will not do is leave at 6.40am because your meeting moved.',
+    distanceNm: 215,
+    blockTime: '55 minutes – 1 hour 10 minutes',
+    nearest: 'Stansted, at 169nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton', 'Stansted'],
+    arrival:
+      'Schiphol (AMS) has business aviation handling but shares the congestion of a major hub. Rotterdam (RTM) is often quicker on the ground and closer to the south of the city.',
+    categories: ['Light jets'],
+    aircraftNote:
+      'A light jet, and on a sector this short the smallest one that fits the group. Anything larger is paying for range you will not use — the cost here is almost entirely positioning and the minimum charge.',
+    uses: [
+      {
+        title: 'Same-day meetings',
+        body: 'Out and back inside a working day with the aircraft waiting, which on a route this short usually costs less than two separate one-way charters.',
+        link: 'business',
+      },
+      {
+        title: 'Moving a team',
+        body: 'Six or eight people travelling together rather than spread across three scheduled departures.',
+        link: 'business',
+      },
+      {
+        title: 'Onward into Europe',
+        body: 'Amsterdam as the first leg of a multi-city week, where the aircraft stays with you rather than being rebooked.',
+      },
+      {
+        title: 'Late finishes',
+        body: 'A day that ends when it ends. Schiphol operates into the evening and Rotterdam has a curfew, so the airport choice follows the diary.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is this route worth chartering at all?',
+        a: 'Honestly, not always — and we will say so. On a flexible day the scheduled options are hard to argue with. Charter earns its cost here when the timing is fixed, the group is more than four, or the return has to happen the same evening.',
+      },
+      {
+        q: 'Schiphol or Rotterdam?',
+        a: 'Schiphol for onward connections and the east of the city; Rotterdam for The Hague, the south, and a faster turn on the ground. The difference is usually twenty to thirty minutes of road, which on a one-hour flight is not trivial.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-courchevel',
+    city: 'Courchevel',
+    title: 'Private Jet London to Courchevel | Lapid Aviation',
+    desc: 'Private jet charter from London to Courchevel via Chambéry or Geneva. Block time, the altiport restriction, transfer options and what drives the cost.',
+    intent: 'private jet London to Courchevel · transactional',
+    image: 'resorts',
+    eyebrow: 'Alpine route',
+    standfirst:
+      'The route most people ask for by the resort rather than the airport, which is where the complication starts. Courchevel has its own altiport, but it is one of the most restricted runways in Europe and takes almost no jets — so for most trips the flight goes to Chambéry and the last hour is on the ground.',
+    distanceNm: 430,
+    blockTime: '1 hour 25 minutes – 1 hour 45 minutes',
+    nearest: 'Biggin Hill, at 413nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton'],
+    arrival:
+      'Chambéry (CMF) is the usual answer, around an hour and a half by road. Geneva is further but has more slots and longer hours. Courchevel Altiport (CVF) itself takes turboprops and helicopters only, and requires a specifically certified crew.',
+    categories: ['Light jets', 'Midsize jets'],
+    aircraftNote:
+      'A midsize jet more often than a light one, because nobody travels to the Alps without luggage. If the plan is to land at the altiport rather than drive up, that is a turboprop or a helicopter and a separate conversation — we will tell you which is realistic for your dates before you commit to the idea.',
+    uses: [
+      {
+        title: 'Ski weeks',
+        body: 'Saturday to Saturday in high season, which is exactly when Chambéry slots and Alpine transfers are hardest to get.',
+        link: 'transfers',
+      },
+      {
+        title: 'Long weekends',
+        body: 'Thursday night out, Monday morning back, with the chalet and the transfer timed to the aircraft rather than to a booking system.',
+      },
+      {
+        title: 'The altiport',
+        body: 'A helicopter from Chambéry or Geneva into Courchevel itself, which turns a ninety-minute mountain road into about fifteen minutes.',
+      },
+      {
+        title: 'Families with kit',
+        body: 'Skis, boards, boots and a pushchair, with no allowance to argue about and no oversize desk.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Can I land a jet at Courchevel?',
+        a: 'Almost certainly not. The altiport has a very short, steeply sloped runway, no instrument approach and a crew certification requirement. It is turboprop and helicopter territory. Any broker promising you a jet into CVF is worth a second question.',
+      },
+      {
+        q: 'Chambéry or Geneva?',
+        a: 'Chambéry is closer — roughly an hour and a half to Courchevel against two and a half from Geneva. Geneva has more slots, longer operating hours and more aircraft positioned nearby, so in a busy week it is often the only one available.',
+      },
+      {
+        q: 'How far ahead for February half term?',
+        a: 'Months, not weeks. It is the single most contested week of the Alpine season, and the constraint is the slot and the transfer rather than the aircraft.',
+      },
+    ],
+    priority: 0.7,
+  },
+  {
+    slug: 'london-to-milan',
+    city: 'Milan',
+    title: 'Private Jet London to Milan | Lapid Aviation',
+    desc: 'Private jet charter from London to Milan Linate. Block time, suitable aircraft, airport choice and what drives the cost.',
+    intent: 'private jet London to Milan · transactional',
+    image: 'business',
+    eyebrow: 'European route',
+    standfirst:
+      'A business route with two spikes a year for fashion week and one for the Grand Prix. Linate sits close enough to the centre that the ground leg is genuinely short, which is most of the reason this route is flown privately rather than scheduled.',
+    distanceNm: 532,
+    blockTime: '1 hour 40 minutes – 2 hours',
+    nearest: 'Biggin Hill, at 510nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton'],
+    arrival:
+      'Linate (LIN) for almost all private traffic, around twenty minutes from the centre. Malpensa is further out and Bergamo further still; both are fallbacks when Linate is slot-constrained.',
+    categories: ['Light jets', 'Midsize jets'],
+    aircraftNote:
+      'A light jet does it comfortably. A midsize is the usual choice when the group is larger than five or the same aircraft is going on to Rome or Geneva the next morning.',
+    uses: [
+      {
+        title: 'Same-day business',
+        body: 'The standard pattern: early out, back the same evening, nothing lost to a connection at either end.',
+        link: 'business',
+      },
+      {
+        title: 'Fashion weeks',
+        body: 'February and September, when the whole route books out and the slots go before the aircraft do.',
+      },
+      {
+        title: 'Monza',
+        body: 'Grand Prix weekend, which is planned in the spring rather than in August.',
+      },
+      {
+        title: 'Onward to the lakes',
+        body: 'Como and Garda, with the car meeting the aircraft at Linate and the house expecting you when you actually arrive.',
+        link: 'transfers',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why Linate rather than Malpensa?',
+        a: 'Proximity. Linate is roughly twenty minutes from central Milan against fifty or more from Malpensa, and on a two-hour flight that is a meaningful share of the journey. Linate is slot-constrained, though, so it is not always available.',
+      },
+      {
+        q: 'Can the aircraft wait for a same-day return?',
+        a: 'Usually, and on this sector waiting is often cheaper than two one-way charters. Crew duty limits set the outer boundary, so a late finish is the thing to tell us at the start.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-palma',
+    city: 'Palma',
+    title: 'Private Jet London to Palma de Mallorca | Lapid Aviation',
+    desc: 'Private jet charter from London to Palma de Mallorca. Block time, suitable aircraft, summer slot pressure and what drives the cost.',
+    intent: 'private jet London to Palma · transactional',
+    image: 'resorts',
+    eyebrow: 'Mediterranean route',
+    standfirst:
+      'Two and a half hours to the Balearics, and a route that behaves completely differently in July than in April. Palma is a full commercial airport with heavy summer traffic, so in season the constraint is the slot and the parking rather than the aircraft.',
+    distanceNm: 719,
+    blockTime: '2 hours 10 minutes – 2 hours 30 minutes',
+    nearest: 'Biggin Hill, at 716nm',
+    departures: ['Farnborough', 'Biggin Hill', 'Luton', 'Stansted'],
+    arrival:
+      'Palma de Mallorca (PMI), with a dedicated general aviation terminal. Summer slot allocation is tight and parking often forces an aircraft to reposition away and return.',
+    categories: ['Midsize jets', 'Super-midsize jets'],
+    aircraftNote:
+      'Midsize upward. At two and a half hours a light jet becomes a compromise rather than a saving, and summer groups travelling to a villa rarely pack light.',
+    uses: [
+      {
+        title: 'Villa weeks',
+        body: 'A house for a week or a fortnight, with the flights either side and the ground in between held by one person.',
+      },
+      {
+        title: 'Yachts',
+        body: 'Joining or leaving a boat in Palma or Port Adriano, where the flight has to fit a berth window rather than a diary.',
+      },
+      {
+        title: 'Family summers',
+        body: 'Children, luggage and a departure time chosen around them instead of around a timetable.',
+      },
+      {
+        title: 'Shoulder season',
+        body: 'April, May and October, when the island is quiet, the slots are free and this route is at its least expensive.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why does August cost so much more?',
+        a: 'Because the aircraft usually cannot stay. Parking at Palma fills, so it flies empty to Valencia or Ibiza, waits, and flies back empty for you. Those two legs are the difference, and they are not a markup — they are real flying.',
+      },
+      {
+        q: 'Can I fly straight to Ibiza or Menorca instead?',
+        a: 'Yes, both take private traffic directly. Which island you land on should follow where you are staying, not the other way round, and we will price all three rather than steering you to one.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-malaga',
+    city: 'Málaga',
+    title: 'Private Jet London to Málaga | Lapid Aviation',
+    desc: 'Private jet charter from London to Málaga for Marbella and the Costa del Sol. Block time, suitable aircraft, Gibraltar as an alternative and cost drivers.',
+    intent: 'private jet London to Malaga · transactional',
+    image: 'resorts',
+    eyebrow: 'Mediterranean route',
+    standfirst:
+      'The gateway to Marbella and the Costa del Sol, and one of the longer sectors people still fly on a midsize aircraft. Málaga runs year-round rather than seasonally, which makes it one of the easier Mediterranean routes to arrange at short notice.',
+    distanceNm: 891,
+    blockTime: '2 hours 30 minutes – 2 hours 50 minutes',
+    nearest: 'Farnborough, at 891nm',
+    departures: ['Farnborough', 'Biggin Hill', 'Luton', 'Stansted'],
+    arrival:
+      'Málaga (AGP), with a separate general aviation terminal and around forty minutes on the road to Marbella. Gibraltar and Jerez are alternatives for the western end of the coast.',
+    categories: ['Midsize jets', 'Super-midsize jets'],
+    aircraftNote:
+      'A midsize jet is the usual answer and a super-midsize the comfortable one. Close to three hours is long enough that a stand-up cabin stops being a luxury for a full group.',
+    uses: [
+      {
+        title: 'Marbella and Sotogrande',
+        body: 'The reason most of this traffic exists, with the car meeting the aircraft rather than waiting in a rank.',
+        link: 'transfers',
+      },
+      {
+        title: 'Golf',
+        body: 'Clubs, a group of eight, and a tee time that the flight is arranged around rather than the reverse.',
+      },
+      {
+        title: 'Winter sun',
+        body: 'One of the few Mediterranean routes that genuinely works in January, which also makes it cheaper then.',
+      },
+      {
+        title: 'Property',
+        body: 'A viewing trip out and back in a day, which scheduled timings make close to impossible.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Should I fly to Gibraltar for Sotogrande?',
+        a: 'Sometimes. Gibraltar is much closer to the western coast but its runway and weather make it less reliable, and a diversion there is inconvenient in a way a diversion at Málaga is not. We price both and explain the risk rather than picking for you.',
+      },
+      {
+        q: 'Is a day return realistic?',
+        a: 'Yes, and it is a common shape for property and business trips. Roughly five and a half hours of flying plus the day itself sits inside crew duty limits comfortably.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-mykonos',
+    city: 'Mykonos',
+    title: 'Private Jet London to Mykonos | Lapid Aviation',
+    desc: 'Private jet charter from London to Mykonos. Block time, suitable aircraft, severe summer slot and parking constraints, and what drives the cost.',
+    intent: 'private jet London to Mykonos · transactional',
+    image: 'resorts',
+    eyebrow: 'Mediterranean route',
+    standfirst:
+      'Three and a half hours to a small island airport that spends ten weeks a year well beyond its comfortable capacity. Mykonos is the route where we are most likely to tell you that the aircraft is available and the airport is not.',
+    distanceNm: 1383,
+    blockTime: '3 hours 30 minutes – 3 hours 55 minutes',
+    nearest: 'Biggin Hill, at 1,358nm',
+    departures: ['Farnborough', 'Luton', 'Stansted'],
+    arrival:
+      'Mykonos (JMK), a single-runway airport with very limited parking. In July and August aircraft routinely drop passengers and reposition to Athens for the duration of the stay.',
+    categories: ['Midsize jets', 'Super-midsize jets', 'Heavy jets'],
+    aircraftNote:
+      'Super-midsize is the sweet spot: enough range to do it comfortably without a stop, and a cabin worth having for three and a half hours. A midsize aircraft will make it, but with less margin on a hot day out of a short runway.',
+    uses: [
+      {
+        title: 'Summer weeks',
+        body: 'July and August, when the island is the destination and the airport is the problem.',
+      },
+      {
+        title: 'Yachts',
+        body: 'Joining a boat in the Cyclades, where Mykonos or Athens is the airport and the berth sets the timing.',
+      },
+      {
+        title: 'Groups',
+        body: 'Twelve or fourteen travelling together, which is where the per-person arithmetic starts to change.',
+      },
+      {
+        title: 'Island hopping',
+        body: 'Paros, Naxos and Santorini as onward legs by helicopter or boat, planned with the flight rather than after it.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why is Mykonos disproportionately expensive in August?',
+        a: 'Parking. The aircraft cannot sit on the island for a week, so it flies empty to Athens and empty back. On a week-long trip you are paying for four legs of flying to take two, and no broker can make that go away.',
+      },
+      {
+        q: 'Would Athens plus a helicopter be better?',
+        a: 'Often, yes — and it is worth pricing both. Athens has capacity, longer hours and more aircraft nearby, and the helicopter leg is about thirty-five minutes. For a longer stay it frequently comes out cheaper as well as easier.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-marrakech',
+    city: 'Marrakech',
+    title: 'Private Jet London to Marrakech | Lapid Aviation',
+    desc: 'Private jet charter from London to Marrakech. Block time, suitable aircraft, permits and handling, and what drives the cost.',
+    intent: 'private jet London to Marrakech · transactional',
+    image: 'resorts',
+    eyebrow: 'North African route',
+    standfirst:
+      'Three and a quarter hours, and the first route on this list that leaves European airspace — which changes the paperwork rather than the flying. Permits and handling need real lead time, and that is the part a broker is actually for.',
+    distanceNm: 1224,
+    blockTime: '3 hours 15 minutes – 3 hours 40 minutes',
+    nearest: 'Farnborough, at 1,224nm',
+    departures: ['Farnborough', 'Luton', 'Stansted'],
+    arrival:
+      'Marrakech Menara (RAK), which handles private traffic routinely but requires landing permits and arranged handling. Overflight and landing clearances are the long lead item, not the aircraft.',
+    categories: ['Midsize jets', 'Super-midsize jets'],
+    aircraftNote:
+      'Midsize or super-midsize. The sector is comfortably inside a midsize aircraft’s range, and the decision is usually about cabin comfort for three hours rather than about whether it can make it.',
+    uses: [
+      {
+        title: 'Long weekends',
+        body: 'Close enough for three nights to make sense, and far enough that the weather is genuinely different.',
+      },
+      {
+        title: 'Riads and resorts',
+        body: 'The medina or the Palmeraie, with the transfer arranged at an airport where turning up without one is unpleasant.',
+        link: 'transfers',
+      },
+      {
+        title: 'Winter sun',
+        body: 'December to February, when it is the shortest reliable flight from London to warmth.',
+      },
+      {
+        title: 'Golf and the Atlas',
+        body: 'Courses around the city, or a guided day in the mountains arranged before you land.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'How much notice does this route need?',
+        a: 'More than a European sector. Landing and overflight permits are the constraint and they are not instant. Same-day is unrealistic; a few days is usually workable, and we will tell you plainly if your date is too tight rather than accepting it and hoping.',
+      },
+      {
+        q: 'Is the handling different outside the EU?',
+        a: 'Yes, in practice. Ground handling, customs and immigration all have to be arranged rather than assumed, and it is where an unmanaged private arrival goes wrong. It is included in what we set up, not an extra.',
+      },
+    ],
+    priority: 0.5,
+  },
+  {
+    slug: 'london-to-miami',
+    city: 'Miami',
+    title: 'Private Jet London to Miami | Lapid Aviation',
+    desc: 'Private jet charter from London to Miami non-stop. Block time both directions, ultra-long-range aircraft, fuel stops and what drives the cost.',
+    intent: 'private jet London to Miami · transactional',
+    image: 'cabin',
+    eyebrow: 'Transatlantic route',
+    standfirst:
+      'Nearly four thousand nautical miles, and the longest sector we are regularly asked for. Westbound against the jet stream it is a genuine test of an aircraft’s range: the question is not whether you can get there, but whether you can get there without stopping.',
+    distanceNm: 3823,
+    blockTime: '9 hours – 9 hours 45 minutes westbound, around an hour less coming back',
+    nearest: 'Farnborough, at 3,823nm',
+    departures: ['Farnborough', 'Luton', 'Stansted'],
+    arrival:
+      'Opa-locka (OPF) takes most private traffic and is closest to Miami Beach. Fort Lauderdale Executive and Miami International are alternatives, the last of them rarely worth it.',
+    categories: ['Ultra-long-range jets'],
+    aircraftNote:
+      'Ultra-long-range, and not every aircraft in that category with a full cabin and full luggage against winter headwinds. A heavy jet will need a stop — Bangor, Gander or the Azores — and anyone quoting you one non-stop westbound in January should be asked to show the flight plan.',
+    uses: [
+      {
+        title: 'Winter escapes',
+        body: 'January and February, which is also when the headwinds are worst and the range question is sharpest.',
+      },
+      {
+        title: 'Families crossing together',
+        body: 'Nine hours in a cabin you can sleep in, with no connection and one set of luggage.',
+      },
+      {
+        title: 'Onward to the Caribbean',
+        body: 'Miami as the connection point for the islands, with the second sector planned as part of the same journey.',
+      },
+      {
+        title: 'Business',
+        body: 'Latin American and Caribbean operations run through Miami, and the time zone makes a same-week return workable.',
+        link: 'business',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Will I need a fuel stop?',
+        a: 'On a true ultra-long-range aircraft, usually not. On anything smaller, or on a winter westbound leg with a full load, probably. We tell you which before you book and put it in writing, because discovering it over Newfoundland is not the same conversation.',
+      },
+      {
+        q: 'Why is the return so much quicker?',
+        a: 'The jet stream runs west to east, so it fights you going out and carries you coming home. An hour of difference is routine on this sector and it also means the eastbound leg is far less likely to need a stop.',
+      },
+      {
+        q: 'Do I clear US customs at Opa-locka?',
+        a: 'Yes, at the private terminal rather than in a hall, which normally takes minutes. ESTA or a visa is still required, and we confirm the arrangements for your specific arrival airport before departure.',
+      },
+    ],
+    priority: 0.5,
+  },
 ];
 
 export interface Accreditation {
@@ -1139,6 +1547,45 @@ export const ACCREDITATIONS: Accreditation[] = [
     name: 'ARGUS or Wyvern broker programmes',
     audits: 'The broker',
     body: 'These audit the broker’s own vetting process — whether we actually do what we say we do on this page. Worth distinguishing from the operator ratings above, because a broker can hold one and none of its aircraft hold the other.',
+  },
+];
+
+/**
+ * The pre-flight brief.
+ *
+ * Wyvern's broker programme sells a per-trip verification report on the actual
+ * aircraft and crew assigned to your flight — that trip-specific check, rather
+ * than a badge in a footer, is the part clients value. It needs no
+ * accreditation to deliver, only the discipline to send it every time and
+ * unprompted, so it is a commitment rather than a credential. The vetting page
+ * previously listed these as things a client *could* ask for; sending them
+ * without being asked is the actual differentiator.
+ */
+export const TRIP_BRIEF: NumberedItem[] = [
+  {
+    n: '01',
+    name: 'The operator, named',
+    body: 'Which company holds the certificate for your flight, the authority that issued it, and the registration of the specific aircraft. Before you pay, not at the aircraft steps.',
+  },
+  {
+    n: '02',
+    name: 'Its safety standing',
+    body: 'Any independent rating the operator holds, who issued it, and when it was last renewed. If it holds none, we say that too rather than leaving the line blank.',
+  },
+  {
+    n: '03',
+    name: 'The crew on your flight',
+    body: 'Total hours and hours on this aircraft type for the crew actually assigned, not a company average.',
+  },
+  {
+    n: '04',
+    name: 'Insurance in force',
+    body: 'The liability cover carried for this aircraft and this flight, confirmed rather than assumed.',
+  },
+  {
+    n: '05',
+    name: 'What we turned down',
+    body: 'Where we rejected a cheaper option on safety or suitability grounds, you get told which and why. A quote you cannot see the alternatives to is not really a choice.',
   },
 ];
 

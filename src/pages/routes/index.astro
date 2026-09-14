@@ -6,7 +6,7 @@ import Section from '~/components/Section.astro';
 import RateTable from '~/components/RateTable.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import { ROUTE_DETAIL } from '~/data/content';
-import { PAGES } from '~/data/site';
+import { PAGES, requestHref } from '~/data/site';
 import { serviceSchema } from '~/lib/schema';
 import heroImage from '~/assets/jets-apron.jpg';
 
@@ -29,14 +29,14 @@ const groups = [
     routes: ROUTE_DETAIL.filter((route) => route.distanceNm < 600),
   },
   {
-    heading: 'Two to three hours',
+    heading: 'Two to four hours',
     note: 'Long enough that cabin space starts to earn its cost, and long enough that a light jet becomes a compromise rather than a saving.',
-    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 600 && route.distanceNm < 2000),
+    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 600 && route.distanceNm < 1500),
   },
   {
-    heading: 'Non-stop long-haul',
-    note: 'Where the cabin stops being a comfort and becomes the reason you chartered. Payload, range and winds all become live questions.',
-    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 2000),
+    heading: 'Long-haul and transatlantic',
+    note: 'Where the cabin stops being a comfort and becomes the reason you chartered. Payload, range and winds all become live questions, and the honest answer to "can it make it non-stop" is sometimes no.',
+    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 1500),
   },
 ].filter((group) => group.routes.length > 0);
 
@@ -100,9 +100,16 @@ const schema = [
                 </div>
               </dl>
               <p class="mt-5 flex-1 text-[14.5px] leading-[1.7] text-body">{route.aircraftNote}</p>
-              <a href={`/routes/${route.slug}/`} class="cta-text mt-6">
-                London to {route.city} &rarr;
-              </a>
+              <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href={`/routes/${route.slug}/`} class="cta-text">The route in full &rarr;</a>
+                {/* Prefilled, so the enquiry arrives knowing what they read. */}
+                <a
+                  href={requestHref({ from: 'London', to: route.city })}
+                  class="text-[13px] font-medium text-body transition-colors hover:text-accent"
+                >
+                  Request it
+                </a>
+              </div>
             </li>
           ))}
         </ul>
