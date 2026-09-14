@@ -1,0 +1,136 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import RateTable from '~/components/RateTable.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { ROUTE_DETAIL } from '~/data/content';
+import { PAGES } from '~/data/site';
+import { serviceSchema } from '~/lib/schema';
+import heroImage from '~/assets/jets-apron.jpg';
+
+/**
+ * The routes hub.
+ *
+ * Every broker in the London market runs route pages; the hub is what turns
+ * them from a pile of landing pages into something worth reading, because it
+ * puts the routes side by side with the two figures that actually differ
+ * between them — distance and block time.
+ */
+
+const meta = PAGES.routesHub;
+
+// Grouped the way a reader thinks about distance, not by continent.
+const groups = [
+  {
+    heading: 'Inside two hours',
+    note: 'Day-trip territory. The aircraft matters least here and the airports matter most, because positioning and minimum charges dominate the price.',
+    routes: ROUTE_DETAIL.filter((route) => route.distanceNm < 600),
+  },
+  {
+    heading: 'Two to three hours',
+    note: 'Long enough that cabin space starts to earn its cost, and long enough that a light jet becomes a compromise rather than a saving.',
+    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 600 && route.distanceNm < 2000),
+  },
+  {
+    heading: 'Non-stop long-haul',
+    note: 'Where the cabin stops being a comfort and becomes the reason you chartered. Payload, range and winds all become live questions.',
+    routes: ROUTE_DETAIL.filter((route) => route.distanceNm >= 2000),
+  },
+].filter((group) => group.routes.length > 0);
+
+const schema = [
+  serviceSchema({
+    name: 'Private jet charter routes from London',
+    description: meta.desc,
+    serviceType: 'Private jet charter',
+  }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Private jet routes from London',
+    itemListElement: ROUTE_DETAIL.map((route, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `London to ${route.city}`,
+      url: new URL(`/routes/${route.slug}/`, 'https://www.lapidaviation.com').href,
+    })),
+  },
+];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Hero
+    image={heroImage}
+    alt="Private jets on the apron at dusk"
+    eyebrow="Where we fly"
+    heading="Routes from London"
+    standfirst="The sectors we arrange most often, each with the distance measured rather than quoted, a block time given as the range it actually is, and the aircraft categories that suit it. No route has a price, because charter does not work that way — but every one of these pages shows you the arithmetic."
+    primary={{ label: 'Request a Charter', href: PAGES.request.url }}
+  />
+
+  <Breadcrumb trail={[{ name: 'Routes', url: meta.url }]} />
+
+  {
+    groups.map((group, index) => (
+      <Section
+        surface={index % 2 === 0 ? 'tint' : 'light'}
+        eyebrow={group.heading}
+        heading={group.note}
+      >
+        <ul class="grid gap-px overflow-hidden bg-rule md:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+          {group.routes.map((route) => (
+            <li class="flex flex-col bg-surface p-[clamp(22px,2.4vw,32px)]">
+              <h3 class="font-display text-[clamp(21px,1.9vw,25px)] leading-[1.2]">
+                <a href={`/routes/${route.slug}/`} class="transition-colors hover:text-accent">
+                  London to {route.city}
+                </a>
+              </h3>
+              <dl class="mt-5 flex flex-wrap gap-x-7 gap-y-2">
+                <div>
+                  <dt class="eyebrow !text-muted">Distance</dt>
+                  <dd class="mt-1 text-[14px] tabular-nums text-title">
+                    {route.distanceNm.toLocaleString('en-GB')} nm
+                  </dd>
+                </div>
+                <div>
+                  <dt class="eyebrow !text-muted">Block time</dt>
+                  <dd class="mt-1 text-[14px] text-title">{route.blockTime}</dd>
+                </div>
+              </dl>
+              <p class="mt-5 flex-1 text-[14.5px] leading-[1.7] text-body">{route.aircraftNote}</p>
+              <a href={`/routes/${route.slug}/`} class="cta-text mt-6">
+                London to {route.city} &rarr;
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    ))
+  }
+
+  <Section
+    eyebrow="Before you ask for a quote"
+    heading="What an hour in the air actually costs"
+    standfirst="Most of this market will not put a number on a page. These are the published market ranges, so you can judge the order of magnitude before you speak to anyone — including us."
+  >
+    <RateTable />
+    <a href={PAGES.cost.url} class="cta-text mt-10">What moves the number &rarr;</a>
+  </Section>
+
+  <Section surface="tint" heading="A route that is not listed here">
+    <p class="max-w-measure text-[16px] leading-[1.7] text-body">
+      These are the sectors we are asked for most, not the limits of where we can send you. The
+      aircraft comes from the market rather than from a fleet we own, so the honest answer to an
+      unlisted route is that it depends on what is positioned nearby that week &mdash; which is a
+      conversation rather than a page.
+    </p>
+    <a href={PAGES.request.url} class="cta-ghost mt-8">Ask about a route</a>
+  </Section>
+
+  <CtaBand
+    heading="Tell us the route and the day."
+    body="A broker replies with the realistic options for your dates, and the trade-offs written down."
+  />
+</Layout>

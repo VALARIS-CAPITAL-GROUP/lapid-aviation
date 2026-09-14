@@ -7,6 +7,8 @@
  * so page copy can be checked against it later.
  */
 
+import { ROUTE_DETAIL, type RouteDetail } from '~/data/content';
+
 export type PageKey =
   | 'home'
   | 'jets'
@@ -23,6 +25,7 @@ export type PageKey =
   | 'resorts'
   | 'about'
   | 'contact'
+  | 'routesHub'
   | 'routeGeneva'
   | 'vetting'
   | 'emptylegs'
@@ -132,10 +135,21 @@ export const PAGES: Record<PageKey, PageMeta> = {
     desc: 'Speak to a broker about a private jet or helicopter charter from London.',
     intent: 'contact private jet broker London · navigational',
   },
+  routesHub: {
+    title: 'Private Jet Routes from London | Lapid Aviation',
+    url: '/routes/',
+    desc: 'The routes we fly most often from London, each with verified distance, realistic block time, the aircraft that suit it and what actually moves the price.',
+    intent: 'private jet routes from London · commercial investigation',
+  },
+  /**
+   * Geneva keeps a named entry because it is linked directly from the footer.
+   * Every other route page derives its metadata from ROUTE_DETAIL — see
+   * `routeMeta()` below and `src/pages/routes/[route]/index.astro`.
+   */
   routeGeneva: {
     title: 'Private Jet London to Geneva | Lapid Aviation',
     url: '/routes/london-to-geneva/',
-    desc: 'Private jet charter from London to Geneva. Departure airports, suitable aircraft, and what shapes the cost of the route.',
+    desc: 'Private jet charter from London to Geneva. Departure airports, block time, suitable aircraft and what shapes the cost of the route.',
     intent: 'private jet London to Geneva · transactional',
   },
   vetting: {
@@ -195,6 +209,24 @@ export const PAGES: Record<PageKey, PageMeta> = {
 };
 
 /**
+ * Page metadata for a route page, derived from its entry in ROUTE_DETAIL.
+ *
+ * Route pages are generated from data rather than hand-built, so their SEO
+ * copy lives beside the route facts instead of being duplicated here.
+ */
+export function routeMeta(route: RouteDetail): PageMeta {
+  return {
+    title: route.title,
+    url: `/routes/${route.slug}/`,
+    desc: route.desc,
+    intent: route.intent,
+  };
+}
+
+/** Every route page URL, for the sitemap priority table and the hub. */
+export const ROUTE_URLS: string[] = ROUTE_DETAIL.map((route) => `/routes/${route.slug}/`);
+
+/**
  * Primary navigation.
  *
  * Aviation stays first and unqualified — it is the hero service and the entry
@@ -247,6 +279,7 @@ export const FOOTER_GROUPS: { heading: string; links: { label: string; href: str
   {
     heading: 'Where we fly',
     links: [
+      { label: 'Routes from London', href: PAGES.routesHub.url },
       { label: 'London airports', href: PAGES.airportsHub.url },
       { label: 'Farnborough Airport', href: PAGES.farnborough.url },
       { label: 'London by area', href: PAGES.londonHub.url },

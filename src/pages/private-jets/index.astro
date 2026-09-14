@@ -8,7 +8,7 @@ import Faq from '~/components/Faq.astro';
 import Ecosystem from '~/components/Ecosystem.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
-import { AIRPORTS, CATEGORIES, JET_FAQS } from '~/data/content';
+import { AIRPORTS, CATEGORIES, JET_FAQS, ROUTE_DETAIL } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 import heroImage from '~/assets/jets-hero.jpg';
@@ -86,7 +86,31 @@ const schema = [
     </a>
   </Section>
 
-  <Section surface="tint" heading="Common questions">
+  <!--
+    Routes were missing entirely from this page, which left the highest-intent
+    pages on the site reachable only from the footer.
+  -->
+  <Section
+    surface="tint"
+    eyebrow="Where we fly"
+    heading="The routes we are asked for most"
+    standfirst="Each one with the distance measured rather than quoted, the block time as the range it really is, and the aircraft categories that suit it."
+  >
+    <ul class="flex flex-wrap gap-x-8 gap-y-4">
+      {
+        ROUTE_DETAIL.map((route) => (
+          <li>
+            <a href={`/routes/${route.slug}/`} class="cta-text">
+              London to {route.city} &rarr;
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={PAGES.routesHub.url} class="cta-ghost mt-10">All routes from London</a>
+  </Section>
+
+  <Section heading="Common questions">
     <Faq items={JET_FAQS} />
   </Section>
 

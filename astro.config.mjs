@@ -37,7 +37,16 @@ export default defineConfig({
           '/empty-leg-flights/': 0.7,
           '/first-time-private-flyers/': 0.7,
           '/aircraft/': 0.7,
+          // Routes: the hub ranks above the individual sectors, and the
+          // sectors carry the priority recorded alongside their data.
+          '/routes/': 0.8,
+          '/routes/london-to-paris/': 0.7,
           '/routes/london-to-geneva/': 0.7,
+          '/routes/london-to-nice/': 0.7,
+          '/routes/london-to-ibiza/': 0.6,
+          '/routes/london-to-zurich/': 0.6,
+          '/routes/london-to-dubai/': 0.6,
+          '/routes/london-to-new-york/': 0.6,
           '/transfers/': 0.6,
           '/resorts/': 0.6,
           '/how-we-vet-operators/': 0.6,

@@ -7,7 +7,6 @@
 
 export interface Airport { name: string; note: string }
 export interface Category { name: string; use: string; spec: string; more: string }
-export interface Route { key?: string; to: string; cat: string; aircraft: string; note: string }
 export interface JourneyStep { n: string; title: string; who: string; colour: string; body: string; more: string }
 export interface Sector { name: string; line: string; more: string }
 export interface Faq { q: string; a: string }
@@ -96,58 +95,6 @@ export const CATEGORIES: Category[] = [
     "use": "London to the Gulf, the US west coast or Asia without stopping. Beds, working space and quiet.",
     "spec": "Specification to verify",
     "more": "The category for non-stop long-haul: the Gulf, the US west coast or Asia, with a cabin built for sleeping en route."
-  }
-];
-
-export const ROUTES: Route[] = [
-  {
-    "to": "Paris",
-    "cat": "Short European",
-    "aircraft": "Light jets",
-    "note": "The most requested short-haul route from London, usually flown with return same day."
-  },
-  {
-    "to": "Geneva",
-    "cat": "Short European",
-    "key": "geneva",
-    "aircraft": "Light – midsize jets",
-    "note": "Banking meetings and ski connections into the Alps."
-  },
-  {
-    "to": "Nice",
-    "cat": "Mediterranean",
-    "aircraft": "Light – midsize jets",
-    "note": "The gateway to the Côte d'Azur and Monaco, busiest in the summer season."
-  },
-  {
-    "to": "Monaco",
-    "cat": "Mediterranean",
-    "aircraft": "Light jets + helicopter",
-    "note": "Flown into Nice, with a short helicopter transfer on to Monaco itself."
-  },
-  {
-    "to": "Ibiza",
-    "cat": "Mediterranean",
-    "aircraft": "Midsize jets",
-    "note": "Seasonal demand peaks sharply in summer weekends."
-  },
-  {
-    "to": "Zurich",
-    "cat": "Short European",
-    "aircraft": "Light jets",
-    "note": "A regular business route with minimal ground-transfer time to the financial district."
-  },
-  {
-    "to": "Dubai",
-    "cat": "Long-haul",
-    "aircraft": "Heavy – ultra-long-range",
-    "note": "Non-stop, typically flown overnight to arrive in the working day."
-  },
-  {
-    "to": "New York",
-    "cat": "Transatlantic",
-    "aircraft": "Ultra-long-range",
-    "note": "Direct, avoiding the connections and check-in time of scheduled transatlantic travel."
   }
 ];
 
@@ -647,5 +594,574 @@ export const EXPERIENCES: NamedItem[] = [
   {
     name: 'Quiet and closed doors',
     body: 'A gallery outside opening hours, a maker’s workshop, a garden not open to the public. Arranged where it can be, declined where it cannot.',
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ * Market rates, route detail and accreditation literacy.
+ *
+ * Added after a competitor review of the London charter market
+ * (September 2026). Three gaps came out of it:
+ *
+ *  1. Every competitor either publishes nothing on price (Charter-A,
+ *     Starr Luxury Jets, SHY) or publishes single fake-precise totals
+ *     (PrivateFly quotes one number per seat count for London–Geneva).
+ *     Publishing honest *ranges* with their provenance, and showing the
+ *     arithmetic rather than a total, beats both.
+ *  2. Competitors run dozens of route pages; we had one, and it showed
+ *     "To verify" to real visitors.
+ *  3. LunaJets leads on trust with "first European broker to hold ARGUS
+ *     certification". Nobody explains to a client what the standards
+ *     actually are, or that auditing an operator and auditing a broker
+ *     are different things. That explanation is ours to own.
+ * ------------------------------------------------------------------ */
+
+export interface MarketRate {
+  /** Must match a `name` in CATEGORIES. */
+  category: string;
+  /** Indicative charter rate per flying hour, GBP. */
+  low: number;
+  high: number;
+  /** The sectors this category is usually the right answer for. */
+  suits: string;
+}
+
+/**
+ * Indicative UK market rates per flying hour, not a Lapid rate card.
+ *
+ * These are the published ranges that independent UK charter cost guides
+ * converged on as at September 2026, cross-checked against the per-flight
+ * figures PrivateFly publishes for London–Geneva. They are here to give a
+ * reader an order of magnitude before they enquire — which is the single
+ * thing the market's own websites refuse to do — and every page that shows
+ * them also shows what sits on top.
+ *
+ * Very light jets and turboprops are deliberately absent: the published
+ * figures for them disagree too widely to quote, and on the short sectors
+ * they suit, positioning dominates the price anyway.
+ */
+export const MARKET_RATES: MarketRate[] = [
+  {
+    category: 'Light jets',
+    low: 2200,
+    high: 3500,
+    suits: 'London to Paris, Geneva, Amsterdam or Zurich with a small group.',
+  },
+  {
+    category: 'Midsize jets',
+    low: 3000,
+    high: 4500,
+    suits: 'Ski trips with luggage, and Mediterranean sectors without a stop.',
+  },
+  {
+    category: 'Super-midsize jets',
+    low: 3800,
+    high: 5500,
+    suits: 'Four-hour-plus sectors with a stand-up cabin, short of transatlantic.',
+  },
+  {
+    category: 'Heavy jets',
+    low: 5000,
+    high: 7500,
+    suits: 'Larger groups on long sectors, with separate zones to work or rest.',
+  },
+  {
+    category: 'Ultra-long-range jets',
+    low: 7000,
+    high: 10000,
+    suits: 'Non-stop to the Gulf, the US west coast or Asia.',
+  },
+];
+
+/** Provenance for MARKET_RATES, rendered wherever the table appears. */
+export const MARKET_RATES_NOTE =
+  'Indicative UK market ranges per flying hour as at September 2026, drawn from published charter cost guides and cross-checked against operator quotes. They are not our rates, and they are not a quote.';
+
+/** What sits on top of the hourly rate. The honest half of the arithmetic. */
+export const RATE_CAVEATS: NamedItem[] = [
+  {
+    name: 'Positioning',
+    body: 'The aircraft has to get to you. If the nearest suitable one is in Nice, you are paying for the empty legs at both ends, and on a short sector that can exceed the flight itself.',
+  },
+  {
+    name: 'Minimum charges',
+    body: 'Most operators apply a minimum — commonly two flying hours a day, and a daily minimum on a multi-day trip where the aircraft waits for you.',
+  },
+  {
+    name: 'Airport and handling',
+    body: 'Landing, handling, parking and passenger fees differ sharply between airports. Choosing Luton over London City can move the total either way.',
+  },
+  {
+    name: 'The day itself',
+    body: 'De-icing in January, a slot at 7am on a Friday in July, an overnight crew, a two-hour wait on the ground. Each is real and none is in an hourly rate.',
+  },
+];
+
+export interface RouteDetail {
+  /** URL segment under /routes/. */
+  slug: string;
+  city: string;
+  title: string;
+  desc: string;
+  intent: string;
+  /** Key into the route hero image map in the page template. */
+  image: string;
+  eyebrow: string;
+  standfirst: string;
+  /** Great-circle distance from Farnborough, nautical miles. Computed, not sourced. */
+  distanceNm: number;
+  /** Realistic block time range, engines on to engines off. */
+  blockTime: string;
+  /** The nearest London departure field, where it is not Farnborough. */
+  nearest: string;
+  departures: string[];
+  arrival: string;
+  /** Categories from MARKET_RATES that suit this sector, in order of typical choice. */
+  categories: string[];
+  aircraftNote: string;
+  uses: { title: string; body: string; link?: 'firsttime' | 'transfers' | 'business' }[];
+  faqs: Faq[];
+  /** Sitemap priority. */
+  priority: number;
+}
+
+/**
+ * Distances are great-circle from Farnborough, computed rather than quoted.
+ * Block times add airway routing and taxi to that, and are given as ranges
+ * because winds and routing genuinely move them — a single figure would be
+ * the same false precision we are criticising elsewhere.
+ */
+export const ROUTE_DETAIL: RouteDetail[] = [
+  {
+    slug: 'london-to-paris',
+    city: 'Paris',
+    title: 'Private Jet London to Paris | Lapid Aviation',
+    desc: 'Private jet charter from London to Paris Le Bourget. Departure airports, block time, suitable aircraft and what actually moves the price.',
+    intent: 'private jet London to Paris · transactional',
+    image: 'jets',
+    eyebrow: 'European route',
+    standfirst:
+      'The shortest route most people fly privately, and the one where the aircraft matters least and the airports matter most. Le Bourget sits closer to central Paris than Charles de Gaulle, and the whole journey is usually shorter than the queue at the other end of a scheduled flight.',
+    distanceNm: 186,
+    blockTime: '50 minutes – 1 hour 5 minutes',
+    nearest: 'Biggin Hill, at 169nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton', 'RAF Northolt'],
+    arrival:
+      'Paris Le Bourget (LBG), the dedicated business aviation airport north-east of the city. Toussus-le-Noble and Pontoise are alternatives when Le Bourget is full.',
+    categories: ['Light jets', 'Midsize jets'],
+    aircraftNote:
+      'A light jet is almost always the right answer. On a sector this short the hourly rate barely matters — positioning and the minimum charge dominate the total, which is why two quotes for the same aircraft can differ by thousands.',
+    uses: [
+      {
+        title: 'Same-day business',
+        body: 'Out at seven, a full day of meetings, home for dinner. The reason this route exists.',
+        link: 'business',
+      },
+      {
+        title: 'Weekends',
+        body: 'Friday evening out and Sunday night back, with the car waiting at the aircraft rather than in a rank.',
+        link: 'transfers',
+      },
+      {
+        title: 'First private flight',
+        body: 'Short, familiar and forgiving — the sector most people fly first.',
+        link: 'firsttime',
+      },
+      {
+        title: 'Events',
+        body: 'Roland-Garros, the rugby, a show. Arrival and departure windows are the difficult part, and they are planned with the tickets.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is it quicker than the Eurostar?',
+        a: 'Door to door, often not by much, and on a bad day the train wins. What charter buys on this route is the departure time and the absence of a terminal, not raw speed.',
+      },
+      {
+        q: 'Why is a 50-minute flight not cheap?',
+        a: 'Because you are not paying for 50 minutes. You are paying for the aircraft to reach you, the crew day, the minimum charge and the handling at both ends. On short sectors that fixed cost is most of the price.',
+      },
+    ],
+    priority: 0.7,
+  },
+  {
+    slug: 'london-to-geneva',
+    city: 'Geneva',
+    title: 'Private Jet London to Geneva | Lapid Aviation',
+    desc: 'Private jet charter from London to Geneva. Departure airports, block time, suitable aircraft and what shapes the cost of the route.',
+    intent: 'private jet London to Geneva · transactional',
+    image: 'geneva',
+    eyebrow: 'European route',
+    standfirst:
+      'One of the busiest private aviation routes in Europe, used for banking meetings, ski connections and onward travel into the Alps. Charter removes the layover through Zurich or Basel that scheduled airlines often add, and lets you choose the airport at either end.',
+    distanceNm: 407,
+    blockTime: '1 hour 25 minutes – 1 hour 40 minutes',
+    nearest: 'Biggin Hill, at 389nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton'],
+    arrival:
+      'Geneva Airport (GVA), which has dedicated business aviation handling on the French and Swiss sides. Slots tighten considerably on winter weekends.',
+    categories: ['Light jets', 'Midsize jets'],
+    aircraftNote:
+      'Light jets cover this sector comfortably for small groups. A midsize aircraft adds cabin and baggage space, which is what decides it for a ski party travelling with boards, boots and bags.',
+    uses: [
+      {
+        title: 'Business travel',
+        body: 'A morning meeting in Geneva and back in London for the evening, without a scheduled layover eating the middle of the day.',
+        link: 'business',
+      },
+      {
+        title: 'The Alps',
+        body: 'The usual connection point for the mountains, with luggage for boards, boots and bags handled without an allowance.',
+        link: 'transfers',
+      },
+      {
+        title: 'Family travel',
+        body: 'No transfers, no queues, and departure times that work around school runs and nap schedules rather than a timetable.',
+      },
+      {
+        title: 'First-time flyers',
+        body: 'A short, familiar route is a straightforward first private flight.',
+        link: 'firsttime',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Can I fly into Geneva for a ski connection?',
+        a: 'Yes, it is one of the most common uses of this route. Ground transfer onward into the Alps is arranged alongside the flight, and timed to the aircraft rather than to the booking.',
+      },
+      {
+        q: 'Is a same-day return practical?',
+        a: 'Often, for a single meeting. Crew duty limits and airport hours set the boundaries, and we check both before confirming a same-day plan.',
+      },
+      {
+        q: 'How far ahead should I book in ski season?',
+        a: 'Further than you would expect. Geneva slots and Alpine ground transfer both tighten on Saturdays between late December and early March, and the aircraft is rarely the constraint — the slot is.',
+      },
+    ],
+    priority: 0.7,
+  },
+  {
+    slug: 'london-to-nice',
+    city: 'Nice',
+    title: 'Private Jet London to Nice | Lapid Aviation',
+    desc: 'Private jet charter from London to Nice Côte d’Azur. Block time, suitable aircraft, the onward helicopter to Monaco and what drives the cost.',
+    intent: 'private jet London to Nice · transactional',
+    image: 'resorts',
+    eyebrow: 'Mediterranean route',
+    standfirst:
+      'The gateway to the Côte d’Azur, and the busiest business aviation airport in France. It is also the route where timing matters most: on a Friday in July the aircraft is the easy part and the slot is not.',
+    distanceNm: 560,
+    blockTime: '1 hour 50 minutes – 2 hours 5 minutes',
+    nearest: 'Biggin Hill, at 544nm',
+    departures: ['Farnborough', 'Biggin Hill', 'Luton', 'Stansted'],
+    arrival:
+      'Nice Côte d’Azur (NCE), with a separate business aviation terminal and a heliport alongside it for the onward run to Monaco.',
+    categories: ['Light jets', 'Midsize jets', 'Super-midsize jets'],
+    aircraftNote:
+      'A light jet will do it, but a midsize is the more usual choice — two hours is long enough that cabin space starts to be worth paying for, particularly with a family and summer luggage.',
+    uses: [
+      {
+        title: 'Summer on the coast',
+        body: 'Antibes, Saint-Tropez and Cap Ferrat, with the car or the tender arranged to meet the aircraft.',
+        link: 'transfers',
+      },
+      {
+        title: 'Monaco',
+        body: 'Flown into Nice with a seven-minute helicopter transfer on to Monaco itself — faster and considerably more pleasant than the coast road.',
+      },
+      {
+        title: 'Race weekend',
+        body: 'The Grand Prix is the hardest weekend of the year to arrange here. It is planned months out, not weeks.',
+      },
+      {
+        title: 'Yachts',
+        body: 'Joining or leaving a boat, where the flight has to fit a berth window rather than a diary.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Should I fly to Nice or Cannes–Mandelieu?',
+        a: 'Mandelieu is closer to Cannes and quieter, but it takes smaller aircraft and closes earlier. For most trips Nice is the better answer; for a light jet landing in daylight, Mandelieu can save half an hour of road.',
+      },
+      {
+        q: 'Is the helicopter to Monaco worth it?',
+        a: 'In summer, almost always. It is roughly seven minutes against an hour or more on the coast road, and it is a scheduled-frequency service rather than a charter in its own right.',
+      },
+    ],
+    priority: 0.7,
+  },
+  {
+    slug: 'london-to-ibiza',
+    city: 'Ibiza',
+    title: 'Private Jet London to Ibiza | Lapid Aviation',
+    desc: 'Private jet charter from London to Ibiza. Block time, suitable aircraft, summer slot constraints and what shapes the cost.',
+    intent: 'private jet London to Ibiza · transactional',
+    image: 'resorts',
+    eyebrow: 'Mediterranean route',
+    standfirst:
+      'A two-and-a-half hour sector with the sharpest seasonality of any route we fly. Between June and September, Ibiza is not a question of which aircraft but of whether there is a slot and somewhere to park it.',
+    distanceNm: 750,
+    blockTime: '2 hours 15 minutes – 2 hours 35 minutes',
+    nearest: 'Farnborough or Biggin Hill, both at 750nm',
+    departures: ['Farnborough', 'Biggin Hill', 'Luton', 'Stansted'],
+    arrival:
+      'Ibiza Airport (IBZ). Parking is the binding constraint in high summer, and an aircraft often has to reposition away and return for you.',
+    categories: ['Midsize jets', 'Super-midsize jets'],
+    aircraftNote:
+      'Midsize upward. It is long enough that a light jet becomes a compromise, and summer groups rarely travel light.',
+    uses: [
+      {
+        title: 'Summer weekends',
+        body: 'Thursday or Friday out, Sunday or Monday back — the pattern the whole island runs on, and the reason those slots go first.',
+      },
+      {
+        title: 'Villa season',
+        body: 'A house for a week or a fortnight, with the flights at either end and the ground in between held together.',
+      },
+      {
+        title: 'Groups',
+        body: 'Ten or twelve travelling together, where the alternative is three scheduled flights arriving four hours apart.',
+      },
+      {
+        title: 'Formentera',
+        body: 'The real destination for many trips here, reached by boat from Ibiza and worth arranging before you land.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why does the price jump so much in August?',
+        a: 'Because the aircraft cannot stay. Parking at Ibiza is full, so it flies empty to Palma or Valencia, waits, and flies back empty to collect you. You pay for those legs, and they are the difference.',
+      },
+      {
+        q: 'How early should I book a summer weekend?',
+        a: 'Weeks rather than days for July and August. It is the one route where we will tell you plainly that leaving it late means either a worse aircraft or a different day.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-zurich',
+    city: 'Zurich',
+    title: 'Private Jet London to Zurich | Lapid Aviation',
+    desc: 'Private jet charter from London to Zurich. Block time, suitable aircraft, ground transfer to the financial district and what drives the cost.',
+    intent: 'private jet London to Zurich · transactional',
+    image: 'business',
+    eyebrow: 'European route',
+    standfirst:
+      'A business route almost to the exclusion of anything else. Ninety minutes in the air, minimal ground transfer at the far end, and a diary that usually wants the same aircraft back the same evening.',
+    distanceNm: 430,
+    blockTime: '1 hour 25 minutes – 1 hour 45 minutes',
+    nearest: 'Biggin Hill, at 405nm',
+    departures: ['Farnborough', 'Biggin Hill', 'London City', 'Luton'],
+    arrival:
+      'Zurich Airport (ZRH), with business aviation handling and around fifteen minutes on the road to the financial district. Kloten operates a night curfew that shapes late departures.',
+    categories: ['Light jets', 'Midsize jets'],
+    aircraftNote:
+      'A light jet suits it. Where the same team is going on to Geneva or Milan the following morning, a midsize aircraft held for the two days is often the cheaper arrangement despite the larger aircraft.',
+    uses: [
+      {
+        title: 'Same-day meetings',
+        body: 'The standard shape: early out, back before the curfew, nothing lost to a connection.',
+        link: 'business',
+      },
+      {
+        title: 'Roadshows',
+        body: 'Zurich as one stop among four or five, where the aircraft waits and the schedule is yours.',
+        link: 'business',
+      },
+      {
+        title: 'Discretion',
+        body: 'A movement that does not appear on a passenger manifest anyone can see, which for some of this traffic is the point.',
+      },
+      {
+        title: 'The mountains',
+        body: 'An alternative entry to the eastern Alps, with the onward drive to Klosters or St Moritz timed to the aircraft.',
+        link: 'transfers',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Can I get back the same night?',
+        a: 'Usually, but Zurich has a night curfew and crew duty limits apply from the moment they report. A late finish is the thing to tell us first, not last.',
+      },
+      {
+        q: 'Is London City worth using for this route?',
+        a: 'If you are in the City or Canary Wharf, often yes. It has a steep-approach restriction that rules out some types, so the airport choice and the aircraft choice have to be made together.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-dubai',
+    city: 'Dubai',
+    title: 'Private Jet London to Dubai | Lapid Aviation',
+    desc: 'Private jet charter from London to Dubai non-stop. Block time, ultra-long-range aircraft, overnight scheduling and what drives the cost.',
+    intent: 'private jet London to Dubai · transactional',
+    image: 'cabin',
+    eyebrow: 'Long-haul route',
+    standfirst:
+      'Just under three thousand nautical miles, flown non-stop and usually overnight so the aircraft lands into the start of a working day. This is the sector where the cabin stops being a comfort and becomes the reason you chartered.',
+    distanceNm: 2986,
+    blockTime: '6 hours 30 minutes – 7 hours 15 minutes',
+    nearest: 'Stansted, at 2,956nm',
+    departures: ['Farnborough', 'Luton', 'Stansted'],
+    arrival:
+      'Al Maktoum (DWC) for most private movements, or Dubai International (DXB) where the schedule justifies it. Al Maktoum is quicker on the ground and further from the city.',
+    categories: ['Heavy jets', 'Ultra-long-range jets'],
+    aircraftNote:
+      'Ultra-long-range for a comfortable non-stop with beds. A heavy jet will do it, but with a tighter payload-and-range trade: a full cabin of passengers and luggage can be the thing that forces a fuel stop.',
+    uses: [
+      {
+        title: 'Overnight business',
+        body: 'Depart after the London evening, sleep, and arrive able to work. The single most common reason this sector is flown privately.',
+        link: 'business',
+      },
+      {
+        title: 'Family relocation trips',
+        body: 'A household moving in one aircraft, with the luggage and the flexibility that implies.',
+      },
+      {
+        title: 'Onward to the Indian Ocean',
+        body: 'Dubai as the connection point for the Maldives or the Seychelles, with the second sector and the resort arranged together.',
+      },
+      {
+        title: 'Winter sun',
+        body: 'A long weekend in January where the flight time is the price of the weather.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is it definitely non-stop?',
+        a: 'On an ultra-long-range aircraft, yes. On a heavy jet it depends on the passenger and luggage load and on the winds that day — we tell you which before you book, not after.',
+      },
+      {
+        q: 'Does flying overnight cost more?',
+        a: 'Not in itself, and it often costs less: the aircraft is more likely to be available, and you are not paying for a crew to sit in a hotel while you work.',
+      },
+    ],
+    priority: 0.6,
+  },
+  {
+    slug: 'london-to-new-york',
+    city: 'New York',
+    title: 'Private Jet London to New York | Lapid Aviation',
+    desc: 'Private jet charter from London to New York Teterboro. Block time both directions, ultra-long-range aircraft, customs pre-clearance and cost drivers.',
+    intent: 'private jet London to New York · transactional',
+    image: 'jets',
+    eyebrow: 'Transatlantic route',
+    standfirst:
+      'Flown direct into Teterboro, twelve miles from Midtown, which is most of the argument. The other part is that the westbound and eastbound legs are not the same flight: the jet stream adds close to an hour going out.',
+    distanceNm: 2986,
+    blockTime: '7 hours 30 minutes – 8 hours 15 minutes westbound, around an hour less coming back',
+    nearest: 'Farnborough, at 2,986nm',
+    departures: ['Farnborough', 'Luton', 'Stansted'],
+    arrival:
+      'Teterboro (TEB) for most private traffic, with Westchester and Morristown as alternatives. Teterboro has a weight limit that rules out the largest types.',
+    categories: ['Heavy jets', 'Ultra-long-range jets'],
+    aircraftNote:
+      'Ultra-long-range westbound. Heavy jets make the crossing eastbound comfortably but can need a technical stop — Gander, Shannon or Keflavík — going the other way against the winds with a full load.',
+    uses: [
+      {
+        title: 'Working the day twice',
+        body: 'Leave London in the morning, land into the New York working day, and keep both.',
+        link: 'business',
+      },
+      {
+        title: 'Deal timetables',
+        body: 'Signings and closings that move by hours, where a scheduled ticket is the wrong instrument.',
+        link: 'business',
+      },
+      {
+        title: 'Families crossing together',
+        body: 'One aircraft, one set of luggage, no connection, and a cabin the children can actually sleep in.',
+      },
+      {
+        title: 'Onward domestic',
+        body: 'Teterboro to Nantucket, Aspen or Palm Beach as a second short sector, planned as one journey rather than two bookings.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why is the return quicker?',
+        a: 'The jet stream. It runs west to east across the Atlantic, so it works against you outbound and with you coming home — routinely an hour of difference, occasionally more.',
+      },
+      {
+        q: 'Do I still clear customs?',
+        a: 'Yes. You clear on arrival at the private terminal rather than in a hall, which typically takes minutes, and we confirm the arrangements at your specific arrival airport before you fly.',
+      },
+    ],
+    priority: 0.6,
+  },
+];
+
+export interface Accreditation {
+  name: string;
+  audits: 'The operator' | 'The broker';
+  body: string;
+}
+
+/**
+ * What the safety acronyms actually mean.
+ *
+ * Competitors either name-drop these without explanation (LunaJets leads with
+ * ARGUS certification) or gesture at "rigorous safety protocols" with nothing
+ * behind it (Starr Luxury Jets, Charter-A). Neither tells a client the one
+ * thing that matters: auditing the operator and auditing the broker are
+ * different exercises, and a badge in a footer does not say which you got.
+ */
+export const ACCREDITATIONS: Accreditation[] = [
+  {
+    name: 'AOC — Air Operator Certificate',
+    audits: 'The operator',
+    body: 'The licence itself, issued by a civil aviation authority such as the UK CAA or EASA. It is the floor, not a distinction: no legitimate commercial charter happens without one. What is worth checking is that it covers the specific aircraft and the specific kind of flight you are buying.',
+  },
+  {
+    name: 'IS-BAO',
+    audits: 'The operator',
+    body: 'An international standard for business aircraft operations, registered at three stages of increasing maturity. It looks at how the operator runs its safety management system rather than at any single aircraft.',
+  },
+  {
+    name: 'ARGUS',
+    audits: 'The operator',
+    body: 'Independent operator ratings — Gold, Gold Plus and Platinum — based on historical safety data, crew experience and, at the higher tiers, an on-site audit. ARGUS also runs a separate registry for brokers, which is a different thing wearing a similar name.',
+  },
+  {
+    name: 'Wyvern Wingman',
+    audits: 'The operator',
+    body: 'An on-site operator audit, plus a per-trip verification report that checks the actual aircraft and the actual crew assigned to your flight against the standard. The trip-specific part is what makes it useful rather than decorative.',
+  },
+  {
+    name: 'Air Charter Association',
+    audits: 'The broker',
+    body: 'The UK trade body for charter brokers, whose members sign a code of conduct and are checked for financial standing and insurance. It says something about the company selling you the flight. It says nothing about the aircraft.',
+  },
+  {
+    name: 'ARGUS or Wyvern broker programmes',
+    audits: 'The broker',
+    body: 'These audit the broker’s own vetting process — whether we actually do what we say we do on this page. Worth distinguishing from the operator ratings above, because a broker can hold one and none of its aircraft hold the other.',
+  },
+];
+
+/** The uncomfortable questions. Published because most brokers will not answer them. */
+export const BROKER_QUESTIONS: NamedItem[] = [
+  {
+    name: 'Are you a broker or an operator, and do you own this aircraft?',
+    body: 'A broker with its own fleet has a reason to put you on it. Ask outright, because the answer changes how you should read every recommendation that follows.',
+  },
+  {
+    name: 'How are you paid on this flight?',
+    body: 'Commission from the operator, a margin on the price, or a fee from me? All three are legitimate. Only one of them is usually disclosed without being asked.',
+  },
+  {
+    name: 'Which operator is flying it, under which licence, and what is its safety rating?',
+    body: 'You are entitled to the operator’s name before you pay, not at the point of boarding. A broker who will not name it is telling you something.',
+  },
+  {
+    name: 'What is not in this price?',
+    body: 'De-icing, waiting time, overnight crew, catering beyond standard, changes after signature. Get the exclusions in writing while you still have alternatives.',
+  },
+  {
+    name: 'Where is my money held until the flight?',
+    body: 'Charter is paid up front. Ask whether funds sit in a client account or in general working capital, and what happens to them if the operator or the broker fails.',
   },
 ];

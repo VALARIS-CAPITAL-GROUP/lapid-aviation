@@ -1,0 +1,205 @@
+---
+import type { GetStaticPaths, ImageMetadata } from 'astro';
+import Layout from '~/layouts/Layout.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import RateTable from '~/components/RateTable.astro';
+import { ROUTE_DETAIL, RATE_CAVEATS, type RouteDetail } from '~/data/content';
+import { PAGES, routeMeta } from '~/data/site';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+import genevaHero from '~/assets/geneva-hero.jpg';
+import jetsHero from '~/assets/jets-hero.jpg';
+import resortsHero from '~/assets/resorts-hero.jpg';
+import businessHero from '~/assets/business-hero.jpg';
+import cabinWork from '~/assets/cabin-work.jpg';
+
+/**
+ * One template for every route page.
+ *
+ * The competitor review found brokers running dozens of route pages against
+ * our one — and ours shipped "To verify" placeholders to real visitors.
+ * Generating them from ROUTE_DETAIL means a new route is a data entry, and
+ * means no page can go live with a figure nobody checked: distances are
+ * computed great-circle values and block times are honest ranges.
+ */
+export const getStaticPaths = (() =>
+  ROUTE_DETAIL.map((route) => ({
+    params: { route: route.slug },
+    props: { route },
+  }))) satisfies GetStaticPaths;
+
+// Props are inferred from the `props` returned by getStaticPaths above.
+const { route }: { route: RouteDetail } = Astro.props;
+const meta = routeMeta(route);
+
+const heroes: Record<string, ImageMetadata> = {
+  geneva: genevaHero,
+  jets: jetsHero,
+  resorts: resortsHero,
+  business: businessHero,
+  cabin: cabinWork,
+};
+
+const heroImage = heroes[route.image] ?? jetsHero;
+
+const links = {
+  firsttime: { label: 'What to expect', href: PAGES.firsttime.url },
+  transfers: { label: 'Ground transfer', href: PAGES.transfers.url },
+  business: { label: 'Business aviation', href: PAGES.business.url },
+} as const;
+
+const overview = [
+  { label: 'From', value: 'London' },
+  { label: 'To', value: route.city },
+  { label: 'Distance', value: `${route.distanceNm.toLocaleString('en-GB')} nm` },
+  { label: 'Block time', value: route.blockTime },
+  { label: 'Typical aircraft', value: route.categories.join(' · ') },
+];
+
+const schema = [
+  faqSchema(route.faqs),
+  serviceSchema({
+    name: `Private jet charter London to ${route.city}`,
+    description: route.desc,
+    serviceType: 'Private jet charter',
+  }),
+];
+---
+
+<Layout meta={meta} schema={schema}>
+  <Hero
+    image={heroImage}
+    alt={`The approach to ${route.city}`}
+    eyebrow={route.eyebrow}
+    heading={`Private jet charter from London to ${route.city}`}
+    standfirst={route.standfirst}
+    primary={{ label: 'Request this route', href: PAGES.request.url }}
+  />
+
+  <Breadcrumb
+    trail={[
+      { name: 'Routes', url: PAGES.routesHub.url },
+      { name: `London to ${route.city}`, url: meta.url },
+    ]}
+  />
+
+  <Section surface="tint" eyebrow="Journey overview" heading="The route at a glance">
+    <dl class="grid gap-x-8 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
+      {
+        overview.map((item) => (
+          <div class="border-t border-rule pt-4">
+            <dt class="eyebrow !text-muted">{item.label}</dt>
+            <dd class="mt-3 font-display text-[19px] leading-[1.3] text-title">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <p class="mt-8 max-w-measure text-[13.5px] leading-[1.7] text-muted">
+      Distance is the great-circle figure from Farnborough &mdash; the nearest London field is {
+        route.nearest
+      }. Block time is engines on to engines off, given as a range because airway routing and
+      winds genuinely move it. A single figure would be false precision.
+    </p>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      <div class="border-t border-rule pt-5">
+        <h3 class="eyebrow">Departure airports</h3>
+        <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-body">
+          {route.departures.map((airport) => <li>{airport}</li>)}
+        </ul>
+        <a href={PAGES.airportsHub.url} class="cta-text mt-4">Compare London airports &rarr;</a>
+      </div>
+      <div class="border-t border-rule pt-5">
+        <h3 class="eyebrow">Arrival airport</h3>
+        <p class="mt-4 text-[15px] leading-[1.65] text-body">{route.arrival}</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section heading="Which aircraft for this route">
+    <p class="max-w-measure text-[16px] leading-[1.7] text-body">{route.aircraftNote}</p>
+    <a href={PAGES.aircraft.url} class="cta-text mt-6">See all aircraft categories &rarr;</a>
+  </Section>
+
+  <!--
+    The cost block. We publish the two inputs and let the reader do the
+    multiplication, rather than either refusing to discuss price (most of the
+    market) or inventing a single total for a route that does not have one.
+  -->
+  <Section
+    surface="tint"
+    eyebrow="Cost"
+    heading="The arithmetic, rather than a price"
+  >
+    <p class="max-w-measure text-[16px] leading-[1.7] text-body">
+      Charter is priced per flight, not per seat, so there is no rate for this route &mdash; there
+      is a rate for an aircraft on a day. Below are the two numbers that set the floor: what the
+      categories suiting this sector cost per flying hour, and a block time of {route.blockTime}.
+      Multiply them and you have the flying cost. Then read what sits on top of it.
+    </p>
+
+    <div class="mt-10">
+      <RateTable categories={route.categories} />
+    </div>
+
+    <h3 class="eyebrow mt-14">What sits on top</h3>
+    <ul class="mt-5 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+      {
+        RATE_CAVEATS.map((caveat) => (
+          <li class="border-t border-rule pt-4">
+            <h4 class="font-display text-[18px] leading-[1.3]">{caveat.name}</h4>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-body">{caveat.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a href={PAGES.cost.url} class="cta-text mt-10">How charter is priced in full &rarr;</a>
+  </Section>
+
+  <Section heading="Who flies it">
+    <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
+      {
+        route.uses.map((use) => (
+          <li class="border-t border-rule pt-5">
+            <h3 class="font-display text-[21px] leading-[1.3]">{use.title}</h3>
+            <p class="mt-3 text-[14.5px] leading-[1.65] text-body">{use.body}</p>
+            {use.link && (
+              <a href={links[use.link].href} class="cta-text mt-3">
+                {links[use.link].label} &rarr;
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section surface="tint" heading="Route questions">
+    <Faq items={route.faqs} />
+  </Section>
+
+  <Section eyebrow="Other routes" heading="Where else we fly from London">
+    <ul class="flex flex-wrap gap-x-8 gap-y-3">
+      {
+        ROUTE_DETAIL.filter((other) => other.slug !== route.slug).map((other) => (
+          <li>
+            <a href={`/routes/${other.slug}/`} class="cta-text">
+              London to {other.city} &rarr;
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <CtaBand
+    heading={`Request London to ${route.city}.`}
+    body="Tell us the day and the passenger count. A broker replies with the realistic options, and the trade-offs written down."
+    cta={{ label: 'Request this route', href: PAGES.request.url }}
+  />
+</Layout>

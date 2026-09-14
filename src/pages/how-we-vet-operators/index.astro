@@ -4,6 +4,7 @@ import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import CtaBand from '~/components/CtaBand.astro';
+import { ACCREDITATIONS, BROKER_QUESTIONS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import heroImage from '~/assets/jets-apron.jpg';
 
@@ -84,12 +85,69 @@ const questions = [
         ))
       }
     </ol>
-    <p class="mt-8 max-w-[760px] text-[14.5px] leading-[1.7] text-body">
+    <p class="mt-8 max-w-measure text-[14.5px] leading-[1.7] text-body">
       We are a broker, not a regulator. Final responsibility for the aircraft's airworthiness and
       the flight itself sits with the operator and its licensing authority. Our role is to check
       before we recommend, ask the questions above on your behalf, and tell you plainly if
       something does not check out.
     </p>
+  </Section>
+
+  <!--
+    Added after reviewing how the London market handles safety. Two patterns:
+    name-dropping an accreditation with no explanation, or "rigorous safety
+    protocols" with nothing behind it at all. Neither tells a client that
+    auditing an operator and auditing a broker are separate exercises. That
+    explanation costs us nothing and is the most useful thing on the page.
+  -->
+  <Section
+    surface="tint"
+    eyebrow="Reading the acronyms"
+    heading="What the safety badges actually mean"
+    standfirst="Charter websites are full of these, rarely with an explanation. The distinction that matters is the one in the second column: some of them audit the company flying the aircraft, and some audit the company selling you the flight. They are not substitutes for each other."
+  >
+    <ul class="border-t border-rule">
+      {
+        ACCREDITATIONS.map((item) => (
+          <li class="grid gap-x-10 gap-y-3 border-b border-rule py-6 lg:grid-cols-[minmax(0,1fr)_140px_minmax(0,1.6fr)]">
+            <h3 class="font-display text-[19px] leading-[1.3] text-title">{item.name}</h3>
+            <p
+              class:list={[
+                'text-[12px] uppercase tracking-[0.1em]',
+                item.audits === 'The broker' ? 'text-accent' : 'text-muted',
+              ]}
+            >
+              Audits {item.audits.toLowerCase()}
+            </p>
+            <p class="text-[14.5px] leading-[1.65] text-body">{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 max-w-measure text-[14.5px] leading-[1.7] text-body">
+      Where we hold an accreditation ourselves we will name it on this page and you can verify it
+      with the issuing body. Until it appears here, assume we do not hold it &mdash; which is the
+      same standard we would like you to apply to everyone else you are comparing us against.
+    </p>
+  </Section>
+
+  <Section
+    eyebrow="Due diligence"
+    heading="Five questions worth asking any charter broker"
+    standfirst="Including us. Most of this market will answer the first three comfortably and go quiet on the last two, which is precisely why they are worth asking."
+  >
+    <ol class="grid gap-x-12 gap-y-9 sm:grid-cols-2">
+      {
+        BROKER_QUESTIONS.map((question, i) => (
+          <li class="border-t border-rule pt-5">
+            <p class="text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, '0')}</p>
+            <h3 class="mt-2 font-display text-[19px] leading-[1.35]">{question.name}</h3>
+            <p class="mt-3 text-[14.5px] leading-[1.65] text-body">{question.body}</p>
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 
   <CtaBand

@@ -5,8 +5,8 @@ import Hero from '~/components/Hero.astro';
 import Section from '~/components/Section.astro';
 import Faq from '~/components/Faq.astro';
 import CtaBand from '~/components/CtaBand.astro';
-import ResearchNote from '~/components/ResearchNote.astro';
-import { COST_FACTORS, COST_FAQS } from '~/data/content';
+import RateTable from '~/components/RateTable.astro';
+import { COST_FACTORS, COST_FAQS, RATE_CAVEATS } from '~/data/content';
 import { PAGES } from '~/data/site';
 import { faqSchema } from '~/lib/schema';
 import heroImage from '~/assets/hangar.jpg';
@@ -101,11 +101,48 @@ const schema = [faqSchema(COST_FAQS)];
         </ul>
       </div>
     </div>
-    <ResearchNote>
-      Indicative price ranges: a table by aircraft category and sector length belongs here and
-      will convert well. It stays unpublished until the figures come from real quotes or verified
-      market data.
-    </ResearchNote>
+  </Section>
+
+  <!--
+    The competitor review that prompted this block found the London market
+    split in two: sites that publish nothing on price at all, and sites that
+    publish one precise-looking total per route as though a route had a price.
+    The first is unhelpful and the second is untrue. Ranges with their
+    provenance stated are the only version of this that survives scrutiny.
+  -->
+  <Section
+    surface="tint"
+    eyebrow="Order of magnitude"
+    heading="What an hour in the air costs"
+    standfirst="We will not invent a price for your flight before we have quoted it. We will tell you what the market charges per flying hour, so you can decide whether to have the conversation at all."
+  >
+    <RateTable />
+
+    <h3 class="eyebrow mt-14">And what sits on top of it</h3>
+    <p class="mt-4 max-w-measure text-[15px] leading-[1.7] text-body">
+      An hourly rate multiplied by a flight time is the floor, not the answer. Four things move
+      the total above it, and on a short sector they can exceed the flying cost itself.
+    </p>
+    <ul class="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+      {
+        RATE_CAVEATS.map((caveat) => (
+          <li class="border-t border-rule pt-4">
+            <h4 class="font-display text-[18px] leading-[1.3]">{caveat.name}</h4>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-body">{caveat.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-10 max-w-measure text-[15px] leading-[1.7] text-body">
+      Very light jets and turboprops are not in the table. The published figures for them
+      disagree too widely to quote honestly, and on the short sectors they suit, positioning
+      dominates the price to the point where an hourly rate tells you almost nothing.
+    </p>
+
+    <a href={PAGES.routesHub.url} class="cta-text mt-10">
+      See the block times these multiply against &rarr;
+    </a>
   </Section>
 
   <Section surface="tint" heading="Common questions">
