@@ -265,6 +265,44 @@ export const FOOTER_GROUPS: { heading: string; links: { label: string; href: str
   },
 ];
 
+/**
+ * Contact details — the single place they are defined.
+ *
+ * All three are deliberately `null` because none has been supplied yet, and a
+ * concierge brand inventing its own phone number is worse than admitting it
+ * does not have one on the page.
+ *
+ * Fill these in and the whole site lights up at once: the header strip becomes
+ * real `tel:` / `wa.me` / `mailto:` links, the contact page renders them
+ * instead of "to be confirmed", and the caveat on the contact page disappears.
+ * Nothing else needs editing.
+ */
+export const CONTACT: {
+  /** International format, e.g. '+44 20 7123 4567'. */
+  phone: string | null;
+  /** Digits only, no + or spaces, e.g. '442071234567'. */
+  whatsapp: string | null;
+  email: string | null;
+} = {
+  phone: null,
+  whatsapp: null,
+  email: null,
+};
+
+/** `href` for a contact method, or the contact page when it is not set yet. */
+export function contactHref(method: 'phone' | 'whatsapp' | 'email'): string {
+  if (method === 'phone') {
+    return CONTACT.phone ? `tel:${CONTACT.phone.replace(/[^+\d]/g, '')}` : PAGES.contact.url;
+  }
+  if (method === 'whatsapp') {
+    return CONTACT.whatsapp ? `https://wa.me/${CONTACT.whatsapp}` : PAGES.contact.url;
+  }
+  return CONTACT.email ? `mailto:${CONTACT.email}` : PAGES.contact.url;
+}
+
+/** True once every contact method is real, used to drop the "to be confirmed" note. */
+export const hasContactDetails = Boolean(CONTACT.phone && CONTACT.whatsapp && CONTACT.email);
+
 export const SITE = {
   name: 'Lapid Aviation',
   url: 'https://www.lapidaviation.com',

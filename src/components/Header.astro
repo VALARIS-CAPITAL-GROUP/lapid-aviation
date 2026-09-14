@@ -1,5 +1,14 @@
 ---
-import { NAV, PAGES } from '~/data/site';
+import { NAV, PAGES, CONTACT, contactHref } from '~/data/site';
+
+// Falls back to the contact page for any method not supplied yet, so the strip
+// is never a dead `tel:` link. Fill in CONTACT in site.ts and these become
+// real click-to-call / WhatsApp / mail links with no change here.
+const quickContact = [
+  { label: 'Call', method: 'phone' as const, set: Boolean(CONTACT.phone) },
+  { label: 'WhatsApp', method: 'whatsapp' as const, set: Boolean(CONTACT.whatsapp) },
+  { label: 'Email', method: 'email' as const, set: Boolean(CONTACT.email) },
+];
 
 // Trailing-slash-insensitive compare so /private-jets and /private-jets/ both match.
 const here = '/' + Astro.url.pathname.replace(/^\/|\/$/g, '');
@@ -11,14 +20,20 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
   transition:animate="none"
   class="sticky top-0 z-50 border-b border-white/8 bg-obsidian/90 backdrop-blur-xl"
 >
-  <!-- Contact strip. Real phone/WhatsApp/email are still "to be confirmed" in
-       the design, so these point at the contact page rather than at invented
-       details. -->
+  <!-- Contact strip. Driven by CONTACT in site.ts: real links once supplied,
+       the contact page until then, never an invented number. -->
   <div class="border-b border-white/6">
     <div class="shell flex h-9 items-center justify-end gap-7 text-[11px] tracking-[0.08em]">
-      <a href="/contact/" class="text-slate transition-colors hover:text-gold-light">Call</a>
-      <a href="/contact/" class="text-slate transition-colors hover:text-gold-light">WhatsApp</a>
-      <a href="/contact/" class="text-slate transition-colors hover:text-gold-light">Email</a>
+      {
+        quickContact.map((item) => (
+          <a
+            href={contactHref(item.method)}
+            class="text-slate transition-colors hover:text-gold-light"
+          >
+            {item.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 

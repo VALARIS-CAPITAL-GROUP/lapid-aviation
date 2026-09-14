@@ -2,10 +2,18 @@
 /**
  * The full charter enquiry form.
  *
- * Posts to `PUBLIC_ENQUIRY_ENDPOINT` so the site stays a static build — most
- * form services (Formspark, Formspree, Basin, Netlify Forms) accept a plain
- * POST of form-encoded fields. Swap that env var and nothing here changes.
- * If we later move to a server adapter, this becomes an Astro action.
+ * Two modes, so the form is never a dead end:
+ *
+ * 1. Netlify Forms (the default). The site already deploys on Netlify, so
+ *    this needs no third-party account and no API key — Netlify's build step
+ *    detects `data-netlify="true"` in the deployed HTML and captures
+ *    submissions itself. Requires Forms to be enabled once in the Netlify
+ *    dashboard for the site.
+ * 2. `PUBLIC_ENQUIRY_ENDPOINT`, which overrides mode 1 if we later move to
+ *    Formspark, Formspree, Basin or similar.
+ *
+ * Either way it is a plain HTML POST, so it works with JavaScript disabled.
+ * If we ever adopt a server adapter, this becomes an Astro action.
  *
  * Pre-fills from the query string so the four-field opener on the home page
  * carries straight through. That has to happen client-side: this is a static
@@ -13,7 +21,6 @@
  * script at the bottom is the whole of it — without JS the form simply starts
  * empty, which is a fine fallback.
  */
-import { PAGES } from '~/data/site';
 
 interface Props {
   /** Submit label. The concierge pages ask for a journey, not just a charter. */
@@ -22,18 +29,50 @@ interface Props {
 
 const { submitLabel = 'Request a Charter' }: Props = Astro.props;
 
-const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT;
+/**
+ * An explicit endpoint wins; otherwise fall back to Netlify Forms, which
+ * posts to the form's own page and is captured at the edge.
+ */
+const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT as string | undefined;
+const useNetlify = !endpoint;
+const FORM_NAME = 'charter-enquiry';
 
 const fieldClass =
   'min-h-11 w-full border-0 border-b border-white/20 bg-transparent py-[9px] text-[16px] text-paper outline-none focus:border-gold';
 const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercase';
 ---
 
+{/*
+  `data-astro-reload` opts this form out of client-side routing. ClientRouter
+  intercepts form submissions and swaps the response in, which would stop the
+  POST from ever reaching Netlify's form handler.
+*/}
 <form
   method="POST"
-  action={endpoint}
+  name={FORM_NAME}
+  action={endpoint ?? '/enquiry-received/'}
+  data-netlify={useNetlify ? 'true' : undefined}
+  data-netlify-honeypot={useNetlify ? 'bot-field' : undefined}
+  data-astro-reload
   class="rounded-[3px] border border-white/12 bg-charcoal p-[clamp(20px,3vw,34px)]"
 >
+  {
+    useNetlify && (
+      <>
+        {/* Netlify injects this itself for static HTML, but sending it
+            explicitly makes the POST work identically either way. */}
+        <input type="hidden" name="form-name" value={FORM_NAME} />
+        {/* Honeypot: named in data-netlify-honeypot above. Hidden from sight
+            and from the accessibility tree; a bot filling it is discarded. */}
+        <p class="hidden" aria-hidden="true">
+          <label>
+            Leave this field empty
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+      </>
+    )
+  }
   <h2 class="font-display text-[26px] text-paper">Where would you like to be?</h2>
   <p class="mt-2 text-[13.5px] text-ash">
     The four fields we need to start. Everything around the flight can come later.
@@ -178,7 +217,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     </div>
   </details>
 
-  <button type="submit" disabled={!endpoint} class="cta mt-9 w-full cursor-pointer disabled:pointer-events-none disabled:opacity-40 sm:w-auto">
+  <button type="submit" class="cta mt-9 w-full cursor-pointer sm:w-auto">
     {submitLabel}
   </button>
 
@@ -187,18 +226,17 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
   </p>
 
   {
-    /* Shown in production too, not just dev. Without an endpoint the form
-       would POST to its own URL and silently lose the enquiry, so say so
-       loudly and disable submit rather than appear to work. */
-    !endpoint && (
-      <p class="mt-4 rounded-[3px] border border-gold/50 bg-gold/6 p-4 text-[12.5px] leading-[1.6] text-ash">
-        <strong>This form is not connected yet.</strong> Set
-        <code>PUBLIC_ENQUIRY_ENDPOINT</code> to a form endpoint (see
-        <code>.env.example</code>) and rebuild. In the meantime, please
-        <a href={PAGES.contact.url} class="text-gold-light underline">
-          contact a broker directly
-        </a>
-        .
+    /* Dev-only reminder of the one manual step Netlify Forms needs. Not shown
+       in production: the form does work there, provided Forms is enabled for
+       the site, and warning live visitors that it might not would cost more
+       enquiries than it saves. */
+    useNetlify && import.meta.env.DEV && (
+      <p class="mt-4 rounded-[3px] border border-dashed border-gold/50 bg-gold/5 p-4 text-[12.5px] leading-[1.6] text-ash">
+        <strong>Netlify Forms mode.</strong> Submissions are captured by Netlify on the
+        deployed site, which requires Forms to be enabled once for this site in the
+        Netlify dashboard. Posting from localhost will not work — test on a deploy
+        preview. To use a different provider instead, set
+        <code>PUBLIC_ENQUIRY_ENDPOINT</code> (see <code>.env.example</code>).
       </p>
     )
   }

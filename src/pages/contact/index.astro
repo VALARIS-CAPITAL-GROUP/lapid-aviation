@@ -4,18 +4,29 @@ import Breadcrumb from '~/components/Breadcrumb.astro';
 import Hero from '~/components/Hero.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import ResearchNote from '~/components/ResearchNote.astro';
-import { PAGES } from '~/data/site';
+import { PAGES, CONTACT, contactHref, hasContactDetails } from '~/data/site';
 import heroImage from '~/assets/london-hero.jpg';
 
 const meta = PAGES.contact;
 
-// Deliberately not invented. The design carried "to be confirmed" against all
-// three, flagged as RESEARCH · CONTACT DETAIL. Fill these in and the header
-// strip and footer can point at them directly.
+// Driven by CONTACT in site.ts, which is the one place these are defined. Any
+// method still unset renders "to be confirmed" rather than an invented number.
 const channels = [
-  { label: 'Phone', value: 'Number to be confirmed', href: null },
-  { label: 'WhatsApp', value: 'Number to be confirmed', href: null },
-  { label: 'Email', value: 'Address to be confirmed', href: null },
+  {
+    label: 'Phone',
+    value: CONTACT.phone ?? 'Number to be confirmed',
+    href: CONTACT.phone ? contactHref('phone') : null,
+  },
+  {
+    label: 'WhatsApp',
+    value: CONTACT.whatsapp ?? 'Number to be confirmed',
+    href: CONTACT.whatsapp ? contactHref('whatsapp') : null,
+  },
+  {
+    label: 'Email',
+    value: CONTACT.email ?? 'Address to be confirmed',
+    href: CONTACT.email ? contactHref('email') : null,
+  },
 ];
 ---
 
@@ -51,10 +62,18 @@ const channels = [
           ))
         }
       </ul>
-      <ResearchNote>
-        Phone, WhatsApp and email all still read "to be confirmed" in the approved design. Supply
-        the real details and wire them here, in the header contact strip, and in the footer.
-      </ResearchNote>
+      {
+        /* Dev-only reminder, and only while something is actually missing.
+           Set CONTACT in src/data/site.ts — this page, the header strip and
+           the schema all read from there. */
+        !hasContactDetails && (
+          <ResearchNote>
+            One or more contact methods is still unset. Fill in <code>CONTACT</code> in
+            <code>src/data/site.ts</code> and this page, the header contact strip and the
+            click-to-call links all populate at once. Nothing else needs editing.
+          </ResearchNote>
+        )
+      }
     </div>
   </section>
 
