@@ -123,37 +123,30 @@
   --dur-mid: 750ms;
 
   /* ------------------------------------------------------------------------
-     Semantic layer.
+     Semantic layer — the only colours markup should reference.
 
-     These are the only colours markup should reference. Each resolves against
-     the surface it sits on, so a block flips from light to dark by gaining a
-     single `on-dark` class rather than by rewriting every colour utility
-     inside it. Defined as @theme colours so Tailwind generates the usual
-     `text-*` / `bg-*` / `border-*` utilities for them.
+     These hold the LIGHT context, which is the page default; `.on-dark`
+     below redefines the same names for dark blocks.
 
-     Defaults here are the light context; `.on-dark` below overrides them.
+     They must be declared directly as `--color-*` with literal values, not
+     as `--color-x: var(--c-x)` indirection. A custom property is substituted
+     when its own value is computed on the element that declares it, so
+     `--color-title: var(--color-title)` resolves once at :root and inherits that
+     literal — redefining `--c-title` deeper cannot reach it, and every
+     `text-title` on the page stays light. That bug shipped once already:
+     hero headings rendered near-black on a dark photograph.
      ------------------------------------------------------------------------ */
-  --color-surface: var(--c-surface);
-  --color-surface-2: var(--c-surface-2);
-  --color-title: var(--c-title);
-  --color-body: var(--c-body);
-  --color-muted: var(--c-muted);
-  --color-accent: var(--c-accent);
-  --color-rule: var(--c-rule);
-}
-
-/* The light context, and therefore the page default. */
-:root {
-  --c-surface: #faf9f7; /* bone */
-  --c-surface-2: #f1eee9; /* a touch warmer and deeper than bone */
-  --c-title: #14110f;
-  --c-body: #4a4441;
-  /* Both of these are set against the *tinted* surface, not bone: it is the
-     harder case, and both carry small text (11px uppercase eyebrows, tertiary
-     captions) so they need 4.5:1 rather than the 3:1 large-text allowance. */
-  --c-muted: #6e655f; /* 5.4:1 on bone, 4.9:1 on tint */
-  --c-accent: #836337; /* brass, darkened for light surfaces — 4.8:1 on tint */
-  --c-rule: #e2ddd5;
+  --color-surface: #faf9f7; /* bone */
+  --color-surface-2: #f1eee9; /* a touch warmer and deeper than bone */
+  --color-title: #14110f;
+  --color-body: #4a4441;
+  /* Muted and accent are set against the *tinted* surface, not bone: it is
+     the harder case, and both carry small text (11px uppercase eyebrows,
+     tertiary captions), so they need 4.5:1 rather than the 3:1 large-text
+     allowance. */
+  --color-muted: #6e655f; /* 5.4:1 on bone, 4.9:1 on tint */
+  --color-accent: #836337; /* brass, darkened for light — 4.8:1 on tint */
+  --color-rule: #e2ddd5;
 }
 
 /*
@@ -163,13 +156,13 @@
  * Also sets `color-scheme` so form controls and scrollbars inside it follow.
  */
 .on-dark {
-  --c-surface: #0c0a09; /* obsidian */
-  --c-surface-2: #1c1917; /* charcoal */
-  --c-title: #fafaf9;
-  --c-body: #b8b2ad;
-  --c-muted: #8a827c;
-  --c-accent: #cdb389; /* champagne, lightened for contrast on dark */
-  --c-rule: #2f2a27;
+  --color-surface: #0c0a09; /* obsidian */
+  --color-surface-2: #1c1917; /* charcoal */
+  --color-title: #fafaf9;
+  --color-body: #b8b2ad;
+  --color-muted: #8a827c;
+  --color-accent: #cdb389; /* champagne, lightened for contrast on dark */
+  --color-rule: #2f2a27;
   color-scheme: dark;
 }
 
@@ -181,12 +174,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background-color: var(--c-surface);
+    background-color: var(--color-surface);
   }
 
   body {
-    background-color: var(--c-surface);
-    color: var(--c-body);
+    background-color: var(--color-surface);
+    color: var(--color-body);
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 1.65;
@@ -198,7 +191,7 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    color: var(--c-title);
+    color: var(--color-title);
     font-weight: 400;
     text-wrap: balance;
   }
@@ -208,11 +201,11 @@
   }
 
   ::placeholder {
-    color: var(--c-muted);
+    color: var(--color-muted);
   }
 
   :focus-visible {
-    outline: 2px solid var(--c-accent);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -258,7 +251,7 @@
   line-height: 1;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--c-accent);
+  color: var(--color-accent);
 }
 
 /* A short brass rule, used under eyebrows and headings. 1px, not 2px — at two
@@ -267,7 +260,7 @@
   display: block;
   width: 64px;
   height: 1px;
-  background: var(--c-accent);
+  background: var(--color-accent);
 }
 
 /* ---------------------------------------------------------------------------
@@ -301,8 +294,8 @@
 
   /* Primary: inverted against its surface. */
   .cta {
-    background: var(--c-title);
-    color: var(--c-surface);
+    background: var(--color-title);
+    color: var(--color-surface);
   }
 
   /* Text stays inverted against the surface rather than going white: on a
@@ -310,35 +303,35 @@
      unreadable. */
   .cta:hover {
     transform: translateY(-2px);
-    background: var(--c-accent);
-    color: var(--c-surface);
+    background: var(--color-accent);
+    color: var(--color-surface);
     box-shadow: 0 18px 44px rgb(0 0 0 / 0.22);
   }
 
   .cta-ghost {
-    border: 1px solid var(--c-rule);
-    color: var(--c-title);
+    border: 1px solid var(--color-rule);
+    color: var(--color-title);
   }
 
   .cta-ghost:hover {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   /* Tertiary: a text link with a rule that darkens on hover. */
   .cta-text {
     display: inline-block;
-    border-bottom: 1px solid var(--c-rule);
+    border-bottom: 1px solid var(--color-rule);
     padding-bottom: 2px;
     font-size: 13px;
     letter-spacing: 0.02em;
-    color: var(--c-accent);
+    color: var(--color-accent);
     transition: all var(--dur-mid) var(--ease-out-expo);
   }
 
   .cta-text:hover {
-    border-color: var(--c-accent);
-    color: var(--c-title);
+    border-color: var(--color-accent);
+    color: var(--color-title);
   }
 }
 

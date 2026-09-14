@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "og": "node scripts/make-og.mjs"
+    "og": "node scripts/make-og.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "verify": "astro check && astro build && node scripts/check-contrast.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
