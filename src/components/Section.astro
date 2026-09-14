@@ -1,16 +1,22 @@
 ---
 /**
- * Page section: optional eyebrow, gold rule, heading and standfirst.
+ * Page section: optional eyebrow, brass rule, heading and standfirst.
  *
- * The palette is dark-dominant, so `surface` now means how dark rather than
- * which hue. `bone` is the single light surface and is used sparingly, so it
- * reads as a deliberate break rather than an alternating stripe.
+ * The palette is light-dominant, so `surface` means which light tone by
+ * default, with `dark` reserved for the occasional cinematic break. Because
+ * every colour inside resolves through the semantic tokens, `dark` needs only
+ * to add `on-dark` — nothing in the slot content has to change.
  */
 interface Props {
   eyebrow?: string;
   heading?: string;
   standfirst?: string;
-  surface?: 'obsidian' | 'charcoal' | 'bone';
+  /**
+   * `light` is bone, `tint` is the warmer deeper bone used to alternate, and
+   * `dark` is near-black for punctuation. Used sparingly — the point of a
+   * light site is that the dark blocks land.
+   */
+  surface?: 'light' | 'tint' | 'dark';
   /** Heading level — only one h1 per page. */
   as?: 'h1' | 'h2';
   /** Constrain the heading block to a readable measure. */
@@ -20,39 +26,31 @@ interface Props {
 }
 
 const surfaces = {
-  obsidian: 'bg-obsidian',
-  charcoal: 'bg-charcoal',
-  bone: 'bg-bone',
+  light: 'bg-surface',
+  tint: 'bg-surface-2',
+  dark: 'on-dark bg-surface',
 } as const;
 
 const {
   eyebrow,
   heading,
   standfirst,
-  surface = 'obsidian',
+  surface = 'light',
   as: Heading = 'h2',
   narrow = true,
   id,
   class: className,
 }: Props = Astro.props;
-
-const light = surface === 'bone';
 ---
 
-{/* `on-light` flips the shared .cta / .cta-ghost / .cta-text styles to their
-    dark-on-light variants. Without it a primary CTA inside a bone section
-    would render bone-on-bone. */}
-<section
-  id={id}
-  class:list={[surfaces[surface], light && 'on-light', 'py-[clamp(72px,10vw,150px)]', className]}
->
+<section id={id} class:list={[surfaces[surface], 'py-[clamp(72px,10vw,150px)]', className]}>
   <div class="shell">
     {
       (eyebrow || heading || standfirst) && (
         <div data-reveal class:list={['max-w-[820px]', narrow && 'mb-[clamp(44px,5.5vw,80px)]']}>
           {eyebrow && (
             <>
-              <p class:list={['eyebrow', light && '!text-gold']}>{eyebrow}</p>
+              <p class="eyebrow">{eyebrow}</p>
               <span class="gold-rule mt-5" aria-hidden="true" />
             </>
           )}
@@ -61,21 +59,13 @@ const light = surface === 'bone';
               class:list={[
                 eyebrow && 'mt-7',
                 Heading === 'h1' ? 'text-display' : 'text-heading',
-                light && '!text-ink',
               ]}
             >
               {heading}
             </Heading>
           )}
           {standfirst && (
-            <p
-              class:list={[
-                'mt-6 max-w-measure text-[17px] leading-[1.7]',
-                light ? 'text-ink-soft' : 'text-ash',
-              ]}
-            >
-              {standfirst}
-            </p>
+            <p class="mt-6 max-w-measure text-[17px] leading-[1.7] text-body">{standfirst}</p>
           )}
         </div>
       )

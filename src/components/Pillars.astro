@@ -8,46 +8,27 @@ import { PILLARS } from '~/data/content';
  * the house style of every SaaS landing page, and the brief rules out both
  * that and excessive icons — so the hierarchy here is carried by a numeral,
  * a hairline and the display face.
+ *
+ * Took a `light` prop before the semantic tokens existed; colours now resolve
+ * against whichever surface it is placed on, so there is nothing to pass.
  */
-interface Props {
-  /** Light surface variant, for use inside a bone section. */
-  light?: boolean;
-}
-
-const { light = false }: Props = Astro.props;
 ---
 
-<ol class="grid gap-x-10 gap-y-[clamp(40px,5vw,64px)] sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
+<ol
+  class="grid gap-x-10 gap-y-[clamp(40px,5vw,64px)] sm:grid-cols-2 lg:grid-cols-4"
+  data-reveal-group
+>
   {
     PILLARS.map((pillar, i) => (
-      <li class:list={['border-t pt-7', light ? 'border-hair-light' : 'border-white/12']}>
-        <span
-          class:list={[
-            'font-display text-[13px] tabular-nums',
-            light ? 'text-ink-soft' : 'text-slate',
-          ]}
-        >
+      <li class="border-t border-rule pt-7">
+        <span class="font-display text-[13px] tabular-nums text-muted">
           {String(i + 1).padStart(2, '0')}
         </span>
-        <h3
-          class:list={[
-            'mt-5 font-display text-[clamp(24px,2.3vw,30px)] leading-[1.15]',
-            light && '!text-ink',
-          ]}
-        >
+        <h3 class="mt-5 font-display text-[clamp(24px,2.3vw,30px)] leading-[1.15]">
           {pillar.name}
         </h3>
-        <p class:list={['mt-3 text-[14px] italic', light ? 'text-ink-soft' : 'text-gold-light']}>
-          {pillar.line}
-        </p>
-        <p
-          class:list={[
-            'mt-4 text-[14.5px] leading-[1.7]',
-            light ? 'text-ink-soft' : 'text-ash',
-          ]}
-        >
-          {pillar.body}
-        </p>
+        <p class="mt-3 text-[14px] text-accent italic">{pillar.line}</p>
+        <p class="mt-4 text-[14.5px] leading-[1.7] text-body">{pillar.body}</p>
       </li>
     ))
   }

@@ -52,11 +52,18 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Design tokens — black and gold.
+   Design tokens — warm light, with dark as punctuation.
 
-   Dark-dominant: near-black is the default surface and photography is the
-   luminous relief against it. `bone` is the one light surface, used sparingly
-   so it reads as a deliberate break rather than an alternating stripe.
+   Light-dominant. The photography this brand sells is high-key — alpine snow,
+   Mediterranean sea, sunlit terraces — and near-black surfaces made those read
+   heavy. Editorial luxury hospitality is overwhelmingly light, so bone is the
+   default surface and near-black is reserved for cinematic moments: heroes
+   over imagery, the closing CTA band, the footer.
+
+   Never pure #fff. It reads clinical and blows out against a photograph.
+
+   The raw palette below stays constant. Anything that must adapt to its
+   surface goes through the semantic layer further down instead.
    --------------------------------------------------------------------------- */
 
 @theme {
@@ -114,6 +121,56 @@
   --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
   --dur-slow: 1100ms;
   --dur-mid: 750ms;
+
+  /* ------------------------------------------------------------------------
+     Semantic layer.
+
+     These are the only colours markup should reference. Each resolves against
+     the surface it sits on, so a block flips from light to dark by gaining a
+     single `on-dark` class rather than by rewriting every colour utility
+     inside it. Defined as @theme colours so Tailwind generates the usual
+     `text-*` / `bg-*` / `border-*` utilities for them.
+
+     Defaults here are the light context; `.on-dark` below overrides them.
+     ------------------------------------------------------------------------ */
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-title: var(--c-title);
+  --color-body: var(--c-body);
+  --color-muted: var(--c-muted);
+  --color-accent: var(--c-accent);
+  --color-rule: var(--c-rule);
+}
+
+/* The light context, and therefore the page default. */
+:root {
+  --c-surface: #faf9f7; /* bone */
+  --c-surface-2: #f1eee9; /* a touch warmer and deeper than bone */
+  --c-title: #14110f;
+  --c-body: #4a4441;
+  /* Both of these are set against the *tinted* surface, not bone: it is the
+     harder case, and both carry small text (11px uppercase eyebrows, tertiary
+     captions) so they need 4.5:1 rather than the 3:1 large-text allowance. */
+  --c-muted: #6e655f; /* 5.4:1 on bone, 4.9:1 on tint */
+  --c-accent: #836337; /* brass, darkened for light surfaces — 4.8:1 on tint */
+  --c-rule: #e2ddd5;
+}
+
+/*
+ * The dark context. Applied to heroes, the CTA band, the footer and any
+ * section deliberately used as cinematic punctuation.
+ *
+ * Also sets `color-scheme` so form controls and scrollbars inside it follow.
+ */
+.on-dark {
+  --c-surface: #0c0a09; /* obsidian */
+  --c-surface-2: #1c1917; /* charcoal */
+  --c-title: #fafaf9;
+  --c-body: #b8b2ad;
+  --c-muted: #8a827c;
+  --c-accent: #cdb389; /* champagne, lightened for contrast on dark */
+  --c-rule: #2f2a27;
+  color-scheme: dark;
 }
 
 /* ---------------------------------------------------------------------------
@@ -124,12 +181,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background-color: var(--color-obsidian);
+    background-color: var(--c-surface);
   }
 
   body {
-    background-color: var(--color-obsidian);
-    color: var(--color-ash);
+    background-color: var(--c-surface);
+    color: var(--c-body);
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 1.65;
@@ -141,7 +198,7 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    color: var(--color-paper);
+    color: var(--c-title);
     font-weight: 400;
     text-wrap: balance;
   }
@@ -151,11 +208,11 @@
   }
 
   ::placeholder {
-    color: var(--color-slate);
+    color: var(--c-muted);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-gold-light);
+    outline: 2px solid var(--c-accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -193,7 +250,7 @@
   }
 }
 
-/* Small uppercase label. Gold on dark, gold on light — same token both ways. */
+/* Small uppercase label. Resolves against its surface via the accent token. */
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 11px;
@@ -201,7 +258,7 @@
   line-height: 1;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-gold-light);
+  color: var(--c-accent);
 }
 
 /* A short brass rule, used under eyebrows and headings. 1px, not 2px — at two
@@ -210,19 +267,21 @@
   display: block;
   width: 64px;
   height: 1px;
-  background: var(--color-gold);
+  background: var(--c-accent);
 }
 
 /* ---------------------------------------------------------------------------
    Calls to action
 
-   Three levels, defined once. Previously every page re-specified its own
-   button classes inline, which is how one of them ended up with a hover state
-   that put near-white text on a near-white background.
+   Three levels, defined once, all resolving against the surface they sit on.
+   Every page used to re-specify its own button classes inline, which is how
+   one ended up with a hover state that put near-white text on a near-white
+   background.
 
-   `cta` is the primary: bone fill, ink text. Deliberately not a brass fill —
-   white-on-brass fails contrast at the small uppercase size these use, and a
-   large gold block is exactly the "cheap gold" the brief rules out.
+   `cta` is the primary and is always the highest-contrast element available:
+   near-black on light, bone on dark. Deliberately never a brass fill — white
+   on brass fails contrast at the small uppercase size these use, and a large
+   gold block is exactly the "cheap gold" the brief rules out.
    --------------------------------------------------------------------------- */
 
 @layer components {
@@ -240,74 +299,46 @@
     transition: all var(--dur-mid) var(--ease-out-expo);
   }
 
+  /* Primary: inverted against its surface. */
   .cta {
-    background: var(--color-bone);
-    color: var(--color-ink);
+    background: var(--c-title);
+    color: var(--c-surface);
   }
 
+  /* Text stays inverted against the surface rather than going white: on a
+     dark surface the accent is champagne, and white on champagne is
+     unreadable. */
   .cta:hover {
     transform: translateY(-2px);
-    background: #fff;
-    box-shadow: 0 18px 44px rgb(0 0 0 / 0.45);
-  }
-
-  /* On a light surface the primary inverts, so it stays the darkest element. */
-  .on-light .cta {
-    background: var(--color-ink);
-    color: var(--color-bone);
-  }
-
-  .on-light .cta:hover {
-    background: #000;
-    box-shadow: 0 18px 44px rgb(0 0 0 / 0.18);
+    background: var(--c-accent);
+    color: var(--c-surface);
+    box-shadow: 0 18px 44px rgb(0 0 0 / 0.22);
   }
 
   .cta-ghost {
-    border: 1px solid color-mix(in srgb, var(--color-gold) 60%, transparent);
-    color: var(--color-gold-light);
+    border: 1px solid var(--c-rule);
+    color: var(--c-title);
   }
 
   .cta-ghost:hover {
-    border-color: var(--color-gold);
-    background: color-mix(in srgb, var(--color-gold) 12%, transparent);
-    color: var(--color-paper);
+    border-color: var(--c-accent);
+    color: var(--c-accent);
   }
 
-  .on-light .cta-ghost {
-    border-color: color-mix(in srgb, var(--color-ink) 25%, transparent);
-    color: var(--color-ink);
-  }
-
-  .on-light .cta-ghost:hover {
-    border-color: var(--color-ink);
-    background: color-mix(in srgb, var(--color-ink) 5%, transparent);
-    color: var(--color-ink);
-  }
-
-  /* Tertiary: a text link with a rule that fills in on hover. */
+  /* Tertiary: a text link with a rule that darkens on hover. */
   .cta-text {
     display: inline-block;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+    border-bottom: 1px solid var(--c-rule);
     padding-bottom: 2px;
     font-size: 13px;
     letter-spacing: 0.02em;
-    color: var(--color-gold-light);
+    color: var(--c-accent);
     transition: all var(--dur-mid) var(--ease-out-expo);
   }
 
   .cta-text:hover {
-    border-color: var(--color-gold);
-    color: var(--color-paper);
-  }
-
-  .on-light .cta-text {
-    border-color: color-mix(in srgb, var(--color-ink) 30%, transparent);
-    color: var(--color-ink-soft);
-  }
-
-  .on-light .cta-text:hover {
-    border-color: var(--color-ink);
-    color: var(--color-ink);
+    border-color: var(--c-accent);
+    color: var(--c-title);
   }
 }
 

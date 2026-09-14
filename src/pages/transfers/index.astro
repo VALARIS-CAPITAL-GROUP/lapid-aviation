@@ -79,11 +79,11 @@ const schema = [
     <dl class="grid gap-x-10 gap-y-9 sm:grid-cols-2" data-reveal-group>
       {
         GROUND_USES.map((item) => (
-          <div class="border-t border-white/12 pt-6">
-            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-paper">
+          <div class="border-t border-rule pt-6">
+            <dt class="font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25] text-title">
               {item.name}
             </dt>
-            <dd class="mt-3 text-[14.5px] leading-[1.7] text-ash">{item.body}</dd>
+            <dd class="mt-3 text-[14.5px] leading-[1.7] text-body">{item.body}</dd>
           </div>
         ))
       }
@@ -95,7 +95,7 @@ const schema = [
     alt="The London skyline and the River Thames"
     eyebrow="The London runs"
     heading="Which airport is a ground question."
-    surface="charcoal"
+    surface="tint"
     flip
   >
     <p>
@@ -113,12 +113,12 @@ const schema = [
 
   <Section eyebrow="Driving yourself" heading="If the road is the point, hire rather than transfer.">
     <div class="grid gap-10 lg:grid-cols-2">
-      <p class="text-[16px] leading-[1.78] text-ash">
+      <p class="text-[16px] leading-[1.78] text-body">
         A chauffeur removes the last hour of a journey. It is the right answer for
         business travel, late arrivals and anywhere you would rather be reading than
         navigating.
       </p>
-      <p class="text-[16px] leading-[1.78] text-ash">
+      <p class="text-[16px] leading-[1.78] text-body">
         Where the drive is part of why you went — an Alpine pass, the coast road east
         of Nice — a car waiting at the terminal makes more sense than a driver. We
         arrange either, or both across the same trip.
@@ -129,8 +129,8 @@ const schema = [
     </div>
   </Section>
 
-  <Section surface="charcoal" heading="Common questions">
-    <Faq items={faqs} surface="charcoal" />
+  <Section surface="tint" heading="Common questions">
+    <Faq items={faqs} />
   </Section>
 
   <Section eyebrow="The rest of the journey" heading="One arrangement, not four.">

@@ -25,22 +25,22 @@ const areaHref = (name: string) => (name === 'Mayfair' ? PAGES.mayfair.url : nul
 
   <Breadcrumb trail={[{ name: 'London', url: meta.url }]} />
 
-  <Section surface="charcoal" heading="Areas we cover">
+  <Section surface="tint" heading="Areas we cover">
     <ul class="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
       {
         LONDON_AREAS.map((area) => {
           const href = areaHref(area);
           return (
-            <li class="border-t border-white/12 pt-4">
+            <li class="border-t border-rule pt-4">
               {href ? (
                 <a
                   href={href}
-                  class="font-display text-[19px] text-paper transition-colors hover:text-gold-light"
+                  class="font-display text-[19px] text-title transition-colors hover:text-accent"
                 >
                   {area} &rarr;
                 </a>
               ) : (
-                <span class="font-display text-[19px] text-slate">{area}</span>
+                <span class="font-display text-[19px] text-muted">{area}</span>
               )}
             </li>
           );

@@ -38,8 +38,8 @@ const useNetlify = !endpoint;
 const FORM_NAME = 'charter-enquiry';
 
 const fieldClass =
-  'min-h-11 w-full border-0 border-b border-white/20 bg-transparent py-[9px] text-[16px] text-paper outline-none focus:border-gold';
-const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercase';
+  'min-h-11 w-full border-0 border-b border-rule bg-transparent py-[9px] text-[16px] text-title outline-none focus:border-accent';
+const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-body uppercase';
 ---
 
 {/*
@@ -54,7 +54,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
   data-netlify={useNetlify ? 'true' : undefined}
   data-netlify-honeypot={useNetlify ? 'bot-field' : undefined}
   data-astro-reload
-  class="rounded-[3px] border border-white/12 bg-charcoal p-[clamp(20px,3vw,34px)]"
+  class="rounded-[3px] border border-rule bg-surface-2 p-[clamp(20px,3vw,34px)]"
 >
   {
     useNetlify && (
@@ -73,8 +73,8 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
       </>
     )
   }
-  <h2 class="font-display text-[26px] text-paper">Where would you like to be?</h2>
-  <p class="mt-2 text-[13.5px] text-ash">
+  <h2 class="font-display text-[26px] text-title">Where would you like to be?</h2>
+  <p class="mt-2 text-[13.5px] text-body">
     The four fields we need to start. Everything around the flight can come later.
   </p>
 
@@ -95,12 +95,12 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
             class="peer sr-only"
           />
           {/*
-            Checked state was `bg-charcoal` on a `bg-charcoal` form, so the
+            Checked state was `bg-surface-2` on a `bg-surface-2` form, so the
             selected pill was invisible. Graphite is the next surface up.
           */}
           <label
             for={`req-trip-${option.value}`}
-            class="block cursor-pointer rounded-[20px] border border-transparent px-[14px] py-[6px] text-[11.5px] font-semibold text-ash transition-colors peer-checked:border-gold/40 peer-checked:bg-graphite peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
+            class="block cursor-pointer rounded-[20px] border border-transparent px-[14px] py-[6px] text-[11.5px] font-semibold text-body transition-colors peer-checked:border-accent/40 peer-checked:bg-surface-2 peer-checked:text-title peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
           >
             {option.label}
           </label>
@@ -180,7 +180,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
       and look as though the link had been ignored. */}
   <details class="group mt-7" id="req-more">
     <summary
-      class="inline-flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-gold-light [&::-webkit-details-marker]:hidden"
+      class="inline-flex cursor-pointer list-none items-center gap-2 text-[13px] font-medium text-accent [&::-webkit-details-marker]:hidden"
     >
       <span class="group-open:hidden">Add onward legs, a stay, anything unusual</span>
       <span class="hidden group-open:inline">Hide extra detail</span>
@@ -221,7 +221,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     {submitLabel}
   </button>
 
-  <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-ash">
+  <p id="enquiry-hint" class="mt-5 text-[12.5px] leading-[1.6] text-body">
     No commitment. We reply with options, not a hard sell.
   </p>
 
@@ -231,7 +231,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
        the site, and warning live visitors that it might not would cost more
        enquiries than it saves. */
     useNetlify && import.meta.env.DEV && (
-      <p class="mt-4 rounded-[3px] border border-dashed border-gold/50 bg-gold/5 p-4 text-[12.5px] leading-[1.6] text-ash">
+      <p class="mt-4 rounded-[3px] border border-dashed border-accent/50 bg-accent/5 p-4 text-[12.5px] leading-[1.6] text-body">
         <strong>Netlify Forms mode.</strong> Submissions are captured by Netlify on the
         deployed site, which requires Forms to be enabled once for this site in the
         Netlify dashboard. Posting from localhost will not work — test on a deploy

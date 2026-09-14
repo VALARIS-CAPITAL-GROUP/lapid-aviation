@@ -9,14 +9,14 @@ import { PAGES } from '~/data/site';
  * control is a radio group styled with peer-checked — also zero JS.
  */
 const fieldClass =
-  'min-h-11 border-0 border-b border-white/20 bg-transparent py-[9px] text-[16px] text-paper outline-none focus:border-gold';
-const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercase';
+  'min-h-11 border-0 border-b border-rule bg-transparent py-[9px] text-[16px] text-title outline-none focus:border-accent';
+const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-body uppercase';
 ---
 
 <form
   method="get"
   action={PAGES.request.url}
-  class="rounded-[3px] border border-white/12 bg-charcoal p-[26px_clamp(17px,4vw,28px)]"
+  class="rounded-[3px] border border-rule bg-surface-2 p-[26px_clamp(17px,4vw,28px)]"
 >
   <fieldset class="mb-[18px] flex gap-[6px]">
     <legend class="sr-only">Trip type</legend>
@@ -34,11 +34,11 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
             checked={option.checked}
             class="peer sr-only"
           />
-          {/* Checked state was `bg-charcoal` on a `bg-charcoal` form, so the
+          {/* Checked state was `bg-surface-2` on a `bg-surface-2` form, so the
               selected pill was invisible. Graphite is the next surface up. */}
           <label
             for={`trip-${option.value}`}
-            class="block cursor-pointer rounded-[20px] border border-transparent px-[14px] py-[6px] text-[11.5px] font-semibold text-ash transition-colors peer-checked:border-gold/40 peer-checked:bg-graphite peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
+            class="block cursor-pointer rounded-[20px] border border-transparent px-[14px] py-[6px] text-[11.5px] font-semibold text-body transition-colors peer-checked:border-accent/40 peer-checked:bg-surface-2 peer-checked:text-title peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold peer-focus-visible:outline-offset-2"
           >
             {option.label}
           </label>
@@ -80,7 +80,7 @@ const labelClass = 'text-[10px] font-semibold tracking-[0.2em] text-ash uppercas
     </button>
   </div>
 
-  <p class="mt-5 text-[12.5px] text-ash">
+  <p class="mt-5 text-[12.5px] text-body">
     Four fields to open an enquiry. Everything else — the car, the stay, the reason you are
     going — is handled in conversation, not in a form.
   </p>

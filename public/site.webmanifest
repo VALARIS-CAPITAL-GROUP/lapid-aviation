@@ -4,8 +4,8 @@
   "description": "Independent private jet and helicopter charter broker, London.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0C0A09",
-  "theme_color": "#0C0A09",
+  "background_color": "#FAF9F7",
+  "theme_color": "#FAF9F7",
   "icons": [
     {
       "src": "/icon-192.png",
