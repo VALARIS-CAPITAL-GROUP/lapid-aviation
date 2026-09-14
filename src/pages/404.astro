@@ -35,17 +35,17 @@ const popular = [
   />
 
   <Section heading="Where you were probably going">
-    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-hair sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-px overflow-hidden rounded-[3px] bg-rule sm:grid-cols-2 lg:grid-cols-3">
       {
         popular.map((item) => (
-          <li class="bg-obsidian">
+          <li class="bg-surface">
             <a
               href={item.href}
-              class="group flex h-full items-center justify-between gap-4 p-6 transition-colors hover:bg-charcoal"
+              class="group flex h-full items-center justify-between gap-4 p-6 transition-colors hover:bg-surface-2"
             >
-              <span class="font-display text-[19px] text-paper">{item.label}</span>
+              <span class="font-display text-[19px] text-title">{item.label}</span>
               <span
-                class="text-gold-light transition-transform group-hover:translate-x-1"
+                class="text-accent transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               >
                 &rarr;
@@ -57,7 +57,7 @@ const popular = [
     </ul>
   </Section>
 
-  <Section surface="charcoal" heading="Or start from the top">
+  <Section surface="tint" heading="Or start from the top">
     <ul class="flex flex-wrap gap-x-8 gap-y-3">
       {
         NAV.map((item) => (

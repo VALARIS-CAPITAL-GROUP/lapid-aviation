@@ -36,7 +36,7 @@ const { steps, class: className }: Props = Astro.props;
         <span
           aria-hidden="true"
           class:list={[
-            'absolute bg-gold/30',
+            'absolute bg-accent/30',
             'left-[5px] top-3 h-full w-px sm:left-0 sm:top-[5px] sm:h-px sm:w-full',
             i === steps.length - 1 && 'hidden',
           ]}
@@ -44,14 +44,14 @@ const { steps, class: className }: Props = Astro.props;
 
         <span
           aria-hidden="true"
-          class="relative mt-[7px] size-[11px] shrink-0 rotate-45 border border-gold-light/70 bg-obsidian sm:mt-0"
+          class="relative mt-[7px] size-[11px] shrink-0 rotate-45 border border-accent bg-surface sm:mt-0"
         ></span>
 
         <div class="sm:mt-7 sm:pr-6">
-          <p class="font-display text-[clamp(17px,1.4vw,20px)] leading-[1.25] text-paper">
+          <p class="font-display text-[clamp(17px,1.4vw,20px)] leading-[1.25] text-title">
             {step.label}
           </p>
-          <p class="mt-2 text-[13px] leading-[1.6] text-ash">{step.note}</p>
+          <p class="mt-2 text-[13px] leading-[1.6] text-body">{step.note}</p>
         </div>
       </li>
     ))

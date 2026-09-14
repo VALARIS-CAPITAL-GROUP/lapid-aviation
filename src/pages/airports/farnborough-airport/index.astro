@@ -58,13 +58,13 @@ const schema = [faqSchema(faqs)];
     ]}
   />
 
-  <Section surface="charcoal" heading="What the airport suits">
+  <Section surface="tint" heading="What the airport suits">
     <ul class="grid gap-x-10 gap-y-9 lg:grid-cols-3">
       {
         reasons.map((reason) => (
-          <li class="border-t border-white/12 pt-5">
+          <li class="border-t border-rule pt-5">
             <h3 class="font-display text-[21px] leading-[1.3]">{reason.title}</h3>
-            <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">{reason.body}</p>
+            <p class="mt-3 text-[14.5px] leading-[1.65] text-body">{reason.body}</p>
           </li>
         ))
       }
@@ -73,26 +73,26 @@ const schema = [faqSchema(faqs)];
 
   <Section heading="Aircraft and ground transfer">
     <div class="grid gap-10 lg:grid-cols-2">
-      <div class="border-t border-hair pt-5">
+      <div class="border-t border-rule pt-5">
         <h3 class="font-display text-[21px]">Suitable aircraft</h3>
-        <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-body">
           Farnborough handles everything from light jets to large long-range aircraft.
         </p>
         <a
           href={PAGES.aircraft.url}
-          class="mt-3 inline-block text-[13px] font-medium text-gold-light transition-colors hover:text-paper"
+          class="mt-3 inline-block text-[13px] font-medium text-accent transition-colors hover:text-title"
         >
           See categories &rarr;
         </a>
       </div>
-      <div class="border-t border-hair pt-5">
+      <div class="border-t border-rule pt-5">
         <h3 class="font-display text-[21px]">Ground transfer</h3>
-        <p class="mt-3 text-[14.5px] leading-[1.65] text-ash">
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-body">
           Farnborough sits close to the M3, with routes into central and west London.
         </p>
         <a
           href={PAGES.transfers.url}
-          class="mt-3 inline-block text-[13px] font-medium text-gold-light transition-colors hover:text-paper"
+          class="mt-3 inline-block text-[13px] font-medium text-accent transition-colors hover:text-title"
         >
           See our airport transfer service &rarr;
         </a>
@@ -104,7 +104,7 @@ const schema = [faqSchema(faqs)];
     </ResearchNote>
   </Section>
 
-  <Section surface="charcoal" heading="Common questions">
+  <Section surface="tint" heading="Common questions">
     <Faq items={faqs} />
   </Section>
 

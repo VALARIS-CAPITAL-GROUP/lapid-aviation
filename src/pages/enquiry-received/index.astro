@@ -52,23 +52,23 @@ const next = [
     <ol class="grid gap-x-10 gap-y-9 lg:grid-cols-3" data-reveal-group>
       {
         next.map((step) => (
-          <li class="border-t border-white/12 pt-6">
-            <span class="font-display text-[13px] tabular-nums text-slate">{step.n}</span>
+          <li class="border-t border-rule pt-6">
+            <span class="font-display text-[13px] tabular-nums text-muted">{step.n}</span>
             <h3 class="mt-5 font-display text-[clamp(20px,1.8vw,24px)] leading-[1.25]">
               {step.name}
             </h3>
-            <p class="mt-3 text-[14.5px] leading-[1.7] text-ash">{step.body}</p>
+            <p class="mt-3 text-[14.5px] leading-[1.7] text-body">{step.body}</p>
           </li>
         ))
       }
     </ol>
   </Section>
 
-  <Section surface="charcoal" eyebrow="If it is urgent" heading="Calling is faster than waiting.">
+  <Section surface="tint" eyebrow="If it is urgent" heading="Calling is faster than waiting.">
     <div class="max-w-measure">
       {
         CONTACT.phone ? (
-          <p class="text-[16px] leading-[1.78] text-ash">
+          <p class="text-[16px] leading-[1.78] text-body">
             For a departure inside 24 hours, speak to a broker directly on{' '}
             <a href={contactHref('phone')} class="cta-text">
               {CONTACT.phone}
@@ -76,7 +76,7 @@ const next = [
             .
           </p>
         ) : (
-          <p class="text-[16px] leading-[1.78] text-ash">
+          <p class="text-[16px] leading-[1.78] text-body">
             For a departure inside 24 hours, a call is faster than a written exchange.
             Our direct line is on the contact page.
           </p>

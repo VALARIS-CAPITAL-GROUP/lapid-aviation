@@ -18,17 +18,17 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
 <header
   transition:name="site-header"
   transition:animate="none"
-  class="sticky top-0 z-50 border-b border-white/8 bg-obsidian/90 backdrop-blur-xl"
+  class="sticky top-0 z-50 border-b border-rule bg-surface/90 backdrop-blur-xl"
 >
   <!-- Contact strip. Driven by CONTACT in site.ts: real links once supplied,
        the contact page until then, never an invented number. -->
-  <div class="border-b border-white/6">
+  <div class="border-b border-rule">
     <div class="shell flex h-9 items-center justify-end gap-7 text-[11px] tracking-[0.08em]">
       {
         quickContact.map((item) => (
           <a
             href={contactHref(item.method)}
-            class="text-slate transition-colors hover:text-gold-light"
+            class="text-muted transition-colors hover:text-accent"
           >
             {item.label}
           </a>
@@ -39,8 +39,8 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
 
   <div class="shell flex h-20 items-center gap-[clamp(16px,3.5vw,44px)]">
     <a href="/" class="mr-auto flex flex-col gap-1" aria-label="Lapid Aviation — home">
-      <span class="font-display text-[26px] leading-none tracking-[0.01em] text-paper">Lapid</span>
-      <span class="text-[8px] font-semibold tracking-[0.42em] text-gold-light">AVIATION</span>
+      <span class="font-display text-[26px] leading-none tracking-[0.01em] text-title">Lapid</span>
+      <span class="text-[8px] font-semibold tracking-[0.42em] text-accent">AVIATION</span>
     </a>
 
     <nav aria-label="Primary" class="hidden lg:block">
@@ -53,10 +53,10 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
                 aria-current={isCurrent(item.href) ? 'page' : undefined}
                 class:list={[
                   'relative block py-2 text-[13px] tracking-[0.02em] transition-colors duration-300',
-                  'after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:bg-gold-light after:transition-transform after:duration-500 after:ease-(--ease-out-expo)',
+                  'after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:bg-accent after:transition-transform after:duration-500 after:ease-(--ease-out-expo)',
                   isCurrent(item.href)
-                    ? 'text-paper after:scale-x-100'
-                    : 'text-ash after:scale-x-0 hover:text-paper hover:after:scale-x-100',
+                    ? 'text-title after:scale-x-100'
+                    : 'text-body after:scale-x-0 hover:text-title hover:after:scale-x-100',
                 ]}
               >
                 {item.label}
@@ -74,7 +74,7 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
     <!-- Mobile menu: a disclosure, so it works with JS disabled -->
     <details class="group lg:hidden [&[open]_.menu-open]:hidden [&[open]_.menu-close]:block">
       <summary
-        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-[1px] border border-white/20 text-paper [&::-webkit-details-marker]:hidden"
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-[1px] border border-rule text-title [&::-webkit-details-marker]:hidden"
         aria-label="Open menu"
       >
         <svg class="menu-open size-5" viewBox="0 0 20 20" aria-hidden="true" fill="none">
@@ -87,9 +87,9 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
 
       <nav
         aria-label="Primary (mobile)"
-        class="absolute inset-x-0 top-full border-b border-white/10 bg-obsidian shadow-[0_24px_48px_rgba(0,0,0,0.6)]"
+        class="absolute inset-x-0 top-full border-b border-rule bg-surface shadow-[0_24px_48px_rgba(20,17,15,0.14)]"
       >
-        <ul class="shell divide-y divide-white/8 py-2">
+        <ul class="shell divide-y divide-rule py-2">
           {
             NAV.map((item) => (
               <li>
@@ -98,7 +98,7 @@ const isCurrent = (href: string) => '/' + href.replace(/^\/|\/$/g, '') === here;
                   aria-current={isCurrent(item.href) ? 'page' : undefined}
                   class:list={[
                     'block py-4 text-[15px]',
-                    isCurrent(item.href) ? 'text-gold-light' : 'text-ash',
+                    isCurrent(item.href) ? 'text-accent' : 'text-body',
                   ]}
                 >
                   {item.label}

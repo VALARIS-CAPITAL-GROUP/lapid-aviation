@@ -46,17 +46,17 @@ const channels = [
       <ul class="grid gap-6 sm:grid-cols-3">
         {
           channels.map((channel) => (
-            <li class="rounded-[3px] border border-white/10 p-7">
+            <li class="rounded-[3px] border border-rule p-7">
               <p class="eyebrow">{channel.label}</p>
               {channel.href ? (
                 <a
                   href={channel.href}
-                  class="mt-4 block font-display text-[21px] text-gold-light transition-colors hover:text-paper"
+                  class="mt-4 block font-display text-[21px] text-accent transition-colors hover:text-title"
                 >
                   {channel.value}
                 </a>
               ) : (
-                <p class="mt-4 font-display text-[21px] text-slate">{channel.value}</p>
+                <p class="mt-4 font-display text-[21px] text-muted">{channel.value}</p>
               )}
             </li>
           ))

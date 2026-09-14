@@ -47,7 +47,9 @@ const heights =
 const widths = [640, 1024, 1600, 2200];
 ---
 
-<section class:list={['relative isolate flex items-end overflow-hidden bg-charcoal', heights]}>
+<section
+  class:list={['on-dark relative isolate flex items-end overflow-hidden bg-surface', heights]}
+>
   <Image
     src={image}
     alt={alt}
@@ -63,8 +65,12 @@ const widths = [640, 1024, 1600, 2200];
 
   <!--
     Scrim: near-opaque at the bottom where the type sits, clearing toward the
-    top. Heavy enough that the gold eyebrow reads against a bright sky — a
+    top. Heavy enough that the brass eyebrow reads against a bright sky — a
     lighter gradient left it washed out over pale cloud.
+
+    These reference `obsidian` directly rather than the semantic surface
+    token: the scrim must be dark whatever the surrounding page does, since
+    its whole job is to hold white type over a photograph.
   -->
   <div
     class="absolute inset-0 -z-10 bg-gradient-to-t from-obsidian via-obsidian/80 to-obsidian/40"
@@ -87,7 +93,7 @@ const widths = [640, 1024, 1600, 2200];
       aria-hidden="true"></span>
     <Heading
       class:list={[
-        'mt-8 max-w-[14ch] text-balance !text-paper',
+        'mt-8 max-w-[14ch] text-balance !text-title',
         size === 'full' ? 'text-mega' : 'text-display',
       ]}
     >
@@ -98,7 +104,7 @@ const widths = [640, 1024, 1600, 2200];
         <p
           data-animate="rise"
           style="--animate-delay:340ms"
-          class="mt-8 max-w-[50ch] text-[17px] leading-[1.75] text-ash"
+          class="mt-8 max-w-[50ch] text-[17px] leading-[1.75] text-body"
         >
           {standfirst}
         </p>
@@ -119,7 +125,7 @@ const widths = [640, 1024, 1600, 2200];
           {secondary && (
             <a
               href={secondary.href}
-              class="border-b border-white/30 pb-1 text-[13px] tracking-[0.02em] text-paper transition-colors duration-500 hover:border-gold-light hover:text-gold-light"
+              class="border-b border-rule pb-1 text-[13px] tracking-[0.02em] text-title transition-colors duration-500 hover:border-accent hover:text-accent"
             >
               {secondary.label} &rarr;
             </a>

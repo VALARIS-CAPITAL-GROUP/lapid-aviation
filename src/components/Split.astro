@@ -15,14 +15,15 @@ interface Props {
   eyebrow?: string;
   heading: string;
   flip?: boolean;
-  surface?: 'obsidian' | 'charcoal' | 'bone';
+  /** `light` bone, `tint` the deeper bone, `dark` for a cinematic break. */
+  surface?: 'light' | 'tint' | 'dark';
   position?: string;
 }
 
 const surfaces = {
-  obsidian: 'bg-obsidian',
-  charcoal: 'bg-charcoal',
-  bone: 'bg-bone',
+  light: 'bg-surface',
+  tint: 'bg-surface-2',
+  dark: 'on-dark bg-surface',
 } as const;
 
 const {
@@ -31,15 +32,13 @@ const {
   eyebrow,
   heading,
   flip = false,
-  surface = 'charcoal',
+  surface = 'tint',
   position = 'center',
 }: Props = Astro.props;
 
-const light = surface === 'bone';
 ---
 
-{/* `on-light` flips the shared CTA styles to their dark-on-light variants. */}
-<section class:list={[surfaces[surface], light && 'on-light', 'overflow-hidden']}>
+<section class:list={[surfaces[surface], 'overflow-hidden']}>
   <div class="grid items-stretch lg:grid-cols-2">
     <div
       data-reveal
@@ -74,18 +73,13 @@ const light = surface === 'bone';
         {
           eyebrow && (
             <>
-              <p class:list={['eyebrow', light && '!text-gold']}>{eyebrow}</p>
+              <p class="eyebrow">{eyebrow}</p>
               <span class="gold-rule mt-5" aria-hidden="true" />
             </>
           )
         }
-        <h2 class:list={['mt-7 text-heading', light && '!text-ink']}>{heading}</h2>
-        <div
-          class:list={[
-            'mt-7 space-y-6 text-[16px] leading-[1.78]',
-            light ? 'text-ink-soft' : 'text-ash',
-          ]}
-        >
+        <h2 class="mt-7 text-heading">{heading}</h2>
+        <div class="mt-7 space-y-6 text-[16px] leading-[1.78] text-body">
           <slot />
         </div>
       </div>
