@@ -15,20 +15,20 @@ const last = items.length - 1;
 ---
 
 <nav aria-label="Breadcrumb" class="shell pt-7">
-  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11.5px] text-muted">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11.5px] text-ash">
     {
       items.map((item, i) => (
         <li class="flex items-center gap-2">
           {i === last ? (
-            <span aria-current="page" class="text-navy">
+            <span aria-current="page" class="text-paper">
               {item.name}
             </span>
           ) : (
             <>
-              <a href={item.url} class="transition-colors hover:text-copper">
+              <a href={item.url} class="transition-colors hover:text-gold-light">
                 {item.name}
               </a>
-              <span aria-hidden="true" class="text-line-strong">
+              <span aria-hidden="true" class="text-slate">
                 &rarr;
               </span>
             </>

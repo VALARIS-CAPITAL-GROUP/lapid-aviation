@@ -5,7 +5,7 @@ import { PAGES } from '~/data/site';
 
 /**
  * The closing call to action. Pass an `image` for the full-bleed treatment;
- * without one it falls back to a flat navy band.
+ * without one it falls back to a flat charcoal band.
  */
 interface Props {
   heading: string;
@@ -26,7 +26,7 @@ const {
 }: Props = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-navy">
+<section class="relative isolate overflow-hidden bg-charcoal">
   {
     image && (
       <>
@@ -40,7 +40,7 @@ const {
           class="absolute inset-0 -z-20 size-full object-cover"
           style={`object-position:${position}`}
         />
-        <div class="absolute inset-0 -z-10 bg-navy/78" aria-hidden="true" />
+        <div class="absolute inset-0 -z-10 bg-charcoal/78" aria-hidden="true" />
       </>
     )
   }
@@ -54,7 +54,7 @@ const {
     }
     <a
       href={cta.href}
-      class="mt-9 inline-block rounded-[2px] bg-copper px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-white hover:text-navy hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+      class="mt-9 inline-block rounded-[2px] bg-gold px-8 py-4 text-[11.5px] font-semibold tracking-[0.13em] text-white uppercase transition-all duration-200 ease-(--ease-out-expo) hover:-translate-y-[2px] hover:bg-bone hover:text-ink hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
     >
       {cta.label}
     </a>

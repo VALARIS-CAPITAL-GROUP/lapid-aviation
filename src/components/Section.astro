@@ -1,14 +1,16 @@
 ---
 /**
- * The page section wrapper used throughout the design: optional eyebrow label,
- * heading, and standfirst, on one of three surfaces.
+ * Page section: optional eyebrow, gold rule, heading and standfirst.
+ *
+ * The palette is dark-dominant, so `surface` now means how dark rather than
+ * which hue. `bone` is the single light surface and is used sparingly, so it
+ * reads as a deliberate break rather than an alternating stripe.
  */
 interface Props {
   eyebrow?: string;
   heading?: string;
   standfirst?: string;
-  /** Surface colour. `navy` inverts the type colours. */
-  surface?: 'sand' | 'cream' | 'navy';
+  surface?: 'obsidian' | 'charcoal' | 'bone';
   /** Heading level — only one h1 per page. */
   as?: 'h1' | 'h2';
   /** Constrain the heading block to a readable measure. */
@@ -18,37 +20,42 @@ interface Props {
 }
 
 const surfaces = {
-  sand: 'bg-sand',
-  cream: 'bg-cream',
-  navy: 'bg-navy',
+  obsidian: 'bg-obsidian',
+  charcoal: 'bg-charcoal',
+  bone: 'bg-bone',
 } as const;
 
 const {
   eyebrow,
   heading,
   standfirst,
-  surface = 'sand',
+  surface = 'obsidian',
   as: Heading = 'h2',
   narrow = true,
   id,
   class: className,
 }: Props = Astro.props;
 
-const dark = surface === 'navy';
+const light = surface === 'bone';
 ---
 
-<section id={id} class:list={[surfaces[surface], 'py-[clamp(52px,7vw,96px)]', className]}>
+<section id={id} class:list={[surfaces[surface], 'py-[clamp(72px,10vw,150px)]', className]}>
   <div class="shell">
     {
       (eyebrow || heading || standfirst) && (
-        <div data-reveal class:list={['max-w-[760px]', narrow && 'mb-[clamp(32px,4vw,56px)]']}>
-          {eyebrow && <p class:list={['eyebrow', dark && '!text-copper-light']}>{eyebrow}</p>}
+        <div data-reveal class:list={['max-w-[820px]', narrow && 'mb-[clamp(44px,5.5vw,80px)]']}>
+          {eyebrow && (
+            <>
+              <p class:list={['eyebrow', light && '!text-gold']}>{eyebrow}</p>
+              <span class="gold-rule mt-5" aria-hidden="true" />
+            </>
+          )}
           {heading && (
             <Heading
               class:list={[
-                'mt-4',
+                eyebrow && 'mt-7',
                 Heading === 'h1' ? 'text-display' : 'text-heading',
-                dark && '!text-sand',
+                light && '!text-ink',
               ]}
             >
               {heading}
@@ -57,8 +64,8 @@ const dark = surface === 'navy';
           {standfirst && (
             <p
               class:list={[
-                'mt-5 max-w-measure text-[17px] leading-[1.62]',
-                dark ? 'text-[#a9b2bf]' : 'text-muted',
+                'mt-6 max-w-measure text-[17px] leading-[1.7]',
+                light ? 'text-ink-soft' : 'text-ash',
               ]}
             >
               {standfirst}
@@ -67,7 +74,7 @@ const dark = surface === 'navy';
         </div>
       )
     }
-    <div data-reveal style="--reveal-delay:90ms">
+    <div data-reveal style="--reveal-delay:120ms">
       <slot />
     </div>
   </div>

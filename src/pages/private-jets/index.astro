@@ -45,7 +45,7 @@ const schema = [
   <Breadcrumb trail={[{ name: 'Private jets', url: meta.url }]} />
 
   <Section
-    surface="cream"
+    surface="charcoal"
     heading="Which aircraft, and why it matters"
     standfirst="Category determines range, cabin size and luggage more than anything else. The right answer depends on the sector, the group and how much of the day you want back."
   >
@@ -56,7 +56,7 @@ const schema = [
     </ResearchNote>
     <a
       href={PAGES.aircraft.url}
-      class="mt-8 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+      class="mt-8 inline-block text-[13px] font-medium text-gold-light transition-colors hover:text-paper"
     >
       Every category we can source &rarr;
     </a>
@@ -70,22 +70,22 @@ const schema = [
     <ul class="grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
       {
         AIRPORTS.map((airport) => (
-          <li class="border-t border-line pt-5">
-            <h3 class="font-serif text-[20px]">{airport.name}</h3>
-            <p class="mt-2 text-[14.5px] leading-[1.65] text-muted">{airport.note}</p>
+          <li class="border-t border-hair pt-5">
+            <h3 class="font-display text-[20px]">{airport.name}</h3>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-ash">{airport.note}</p>
           </li>
         ))
       }
     </ul>
     <a
       href={PAGES.airportsHub.url}
-      class="mt-10 inline-block text-[13px] font-medium text-copper transition-colors hover:text-navy"
+      class="mt-10 inline-block text-[13px] font-medium text-gold-light transition-colors hover:text-paper"
     >
       All airports &rarr;
     </a>
   </Section>
 
-  <Section surface="cream" heading="Common questions">
+  <Section surface="charcoal" heading="Common questions">
     <Faq items={JET_FAQS} />
   </Section>
 

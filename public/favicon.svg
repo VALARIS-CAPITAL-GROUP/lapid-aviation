@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#101B2D"/>
-  <text x="16" y="23" font-family="Georgia,serif" font-size="20" fill="#EDE7DC" text-anchor="middle">L</text>
+  <rect width="32" height="32" fill="#0C0A09"/>
+  <text x="16" y="23" font-family="Playfair Display, Georgia, serif" font-size="21" fill="#FAFAF9" text-anchor="middle">L</text>
+  <rect x="10" y="26" width="12" height="1.5" fill="#A16207"/>
 </svg>

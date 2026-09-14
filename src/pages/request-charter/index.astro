@@ -18,32 +18,32 @@ const meta = PAGES.request;
         <div>
           <p class="eyebrow">Request a charter</p>
           <h1 class="mt-5 text-display">Every detail handled before you leave.</h1>
-          <p class="mt-6 max-w-measure text-[17px] leading-[1.62] text-muted">
+          <p class="mt-6 max-w-measure text-[17px] leading-[1.62] text-ash">
             Four fields to start. A broker replies with the realistic options for your route and
             date, including the ones we would not recommend and why.
           </p>
 
           <h2 class="eyebrow mt-12">What happens next</h2>
-          <ol class="mt-6 border-t border-line">
+          <ol class="mt-6 border-t border-hair">
             {
               NEXT_STEPS.map((step) => (
-                <li class="grid grid-cols-[auto_1fr] gap-x-5 border-b border-line py-5">
+                <li class="grid grid-cols-[auto_1fr] gap-x-5 border-b border-hair py-5">
                   <span
-                    class="font-serif text-[14px] tabular-nums text-copper"
+                    class="font-display text-[14px] tabular-nums text-gold-light"
                     aria-hidden="true"
                   >
                     {step.n}
                   </span>
                   <div>
-                    <h3 class="font-serif text-[19px] leading-[1.3]">{step.name}</h3>
-                    <p class="mt-1 text-[14px] leading-[1.6] text-muted">{step.body}</p>
+                    <h3 class="font-display text-[19px] leading-[1.3]">{step.name}</h3>
+                    <p class="mt-1 text-[14px] leading-[1.6] text-ash">{step.body}</p>
                   </div>
                 </li>
               ))
             }
           </ol>
 
-          <p class="mt-8 max-w-measure text-[12.5px] leading-[1.65] text-faint">
+          <p class="mt-8 max-w-measure text-[12.5px] leading-[1.65] text-slate">
             Lapid Aviation arranges private jet and helicopter charter through appropriately
             licensed third-party aircraft operators. We do not own or operate aircraft. Aircraft
             availability is subject to operator availability, routing and dates.
@@ -58,13 +58,13 @@ const meta = PAGES.request;
   </section>
 
   <Section
-    surface="cream"
+    surface="charcoal"
     heading="Would rather talk it through?"
     standfirst="For an urgent departure, calling is faster than the form."
   >
     <a
       href={PAGES.contact.url}
-      class="text-[15px] text-copper transition-colors hover:text-navy"
+      class="text-[15px] text-gold-light transition-colors hover:text-paper"
     >
       Contact a broker &rarr;
     </a>

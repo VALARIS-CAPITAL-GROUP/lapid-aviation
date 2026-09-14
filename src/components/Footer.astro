@@ -4,13 +4,13 @@ import { FOOTER_GROUPS, PAGES, SITE } from '~/data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-auto bg-navy text-[#a9b2bf]">
+<footer class="mt-auto bg-charcoal text-ash">
   <div class="shell py-[clamp(48px,7vw,84px)]">
     <div class="grid gap-12 lg:grid-cols-[1.2fr_repeat(4,1fr)]">
       <div class="max-w-[300px]">
         <a href="/" class="flex flex-col gap-[3px]" aria-label="Lapid Aviation — home">
-          <span class="font-serif text-[23px] leading-none tracking-[0.02em] text-sand">Lapid</span>
-          <span class="text-[8.5px] font-semibold tracking-[0.34em] text-copper-light"
+          <span class="font-display text-[23px] leading-none tracking-[0.02em] text-paper">Lapid</span>
+          <span class="text-[8.5px] font-semibold tracking-[0.34em] text-gold-light"
             >AVIATION</span
           >
         </a>
@@ -20,7 +20,7 @@ const year = new Date().getFullYear();
         </p>
         <a
           href={PAGES.vetting.url}
-          class="mt-4 inline-block border-b border-copper-light/40 pb-px text-[13px] text-copper-light transition-colors hover:border-copper-light hover:text-sand"
+          class="mt-4 inline-block border-b border-gold-light/40 pb-px text-[13px] text-gold-light transition-colors hover:border-gold-light hover:text-paper"
         >
           How we vet operators
         </a>
@@ -29,13 +29,13 @@ const year = new Date().getFullYear();
       {
         FOOTER_GROUPS.map((group) => (
           <nav aria-label={group.heading}>
-            <h2 class="eyebrow !text-copper-light">{group.heading}</h2>
+            <h2 class="eyebrow !text-gold-light">{group.heading}</h2>
             <ul class="mt-5 space-y-[11px]">
               {group.links.map((link) => (
                 <li>
                   <a
                     href={link.href}
-                    class="text-[13.5px] transition-colors hover:text-sand"
+                    class="text-[13.5px] transition-colors hover:text-paper"
                   >
                     {link.label}
                   </a>
@@ -48,7 +48,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div
-      class="mt-[clamp(40px,5vw,64px)] flex flex-col gap-4 border-t border-white/10 pt-8 text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between"
+      class="mt-[clamp(40px,5vw,64px)] flex flex-col gap-4 border-t border-white/10 pt-8 text-[11.5px] text-slate sm:flex-row sm:items-center sm:justify-between"
     >
       <p>&copy; {year} {SITE.name}. All rights reserved.</p>
       <p class="max-w-[520px] sm:text-right">
