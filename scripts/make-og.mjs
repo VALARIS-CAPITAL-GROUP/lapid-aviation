@@ -44,6 +44,7 @@ const PAGES = {
   'london-mayfair-private-jet-charter': ['london-hero', 'Private jet charter for Mayfair'],
   terms: ['hangar', 'Terms & Conditions'],
   privacy: ['hangar', 'Privacy Policy'],
+  'enquiry-received': ['jets-apron', 'Enquiry received'],
   404: ['jets-apron', 'That page has already departed'],
   default: ['home-hero', 'Independent private jet charter, London'],
 };
